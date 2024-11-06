@@ -16,7 +16,7 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 
-@(hasMessages: Boolean, unreadMessageCount: Long)(messages: Messages)
+@(hasMessages: Boolean, unreadMessageCount: Long)(implicit request: RequestHeader, messages: Messages)
 
 <div id="messagesCard" class="card">
     <div class="card-body">
