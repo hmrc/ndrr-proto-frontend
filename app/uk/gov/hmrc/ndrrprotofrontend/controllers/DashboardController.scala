@@ -16,20 +16,20 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
-import uk.gov.hmrc.ndrrprotofrontend.views.html.HelloWorldPage
+import uk.gov.hmrc.ndrrprotofrontend.views.html.DashboardView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
 @Singleton
-class HelloWorldController @Inject()(
-  mcc: MessagesControllerComponents,
-  helloWorldPage: HelloWorldPage)
-    extends FrontendController(mcc) {
+class DashboardController @Inject()(
+                                     mcc: MessagesControllerComponents,
+                                     dashboardView: DashboardView)
+  extends FrontendController(mcc) {
 
-  val helloWorld: Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(helloWorldPage()))
+  val show: Action[AnyContent] = Action.async { implicit request =>
+    Future.successful(Ok(dashboardView(hasMessages = true, unreadMessageCount = 1L)))
   }
 
 }

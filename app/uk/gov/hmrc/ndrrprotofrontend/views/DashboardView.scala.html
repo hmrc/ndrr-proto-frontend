@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package uk.gov.hmrc.ndrrprotofrontend.config
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard
 
-import com.google.inject.AbstractModule
+@this(layout: Layout)
 
-class Module extends AbstractModule {
+@(hasMessages: Boolean, unreadMessageCount: Long)(implicit request: RequestHeader, messages: Messages)
 
-  override def configure(): Unit = {
+@layout(pageTitle = Some("ndrr-proto-frontend")) {
 
-    bind(classOf[AppConfig]).asEagerSingleton()
-  }
+  @messagesCard(hasMessages, unreadMessageCount)
+
 }
+
