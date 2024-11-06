@@ -1,6 +1,14 @@
 service.name = ndrr-proto-frontend
 service.text = This is your new service
 
+#CardMessages
+home.messagesCard.title=Your messages
+home.messagesCard.caption=Read secure messages from us
+home.messagesCard.none=You have no new messages
+home.messagesCard.single=You have {0} new message
+home.messagesCard.multiple=You have {0} new messages
+home.messagesCard.viewAllMessages=Go to your messages
+
 voa.address.title = Address
 voa.reference.title = Reference
 voa.trn.title = TRN

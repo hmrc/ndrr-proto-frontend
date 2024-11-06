@@ -1,0 +1,53 @@
+@*
+ * Copyright 2023 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components._
+
+@(hasMessages: Boolean, unreadMessageCount: Long)(messages: Messages)
+
+<div id="messagesCard" class="card">
+    <div class="card-body">
+        <h2 class="govuk-heading-s card-heading">@messages("home.messagesCard.title")</h2>
+        <p class="govuk-body">@messages("home.messagesCard.caption")</p>
+    </div>
+    <div class="card-action">
+        <ul class="govuk-list">
+            <li>
+                @if(unreadMessageCount == 0L) {
+                    <p class="govuk-body" id="no-messages">@messages("home.messagesCard.none")</p>
+                }
+                @if(unreadMessageCount == 1L) {
+                    <a class="govuk-link" id="new-messages-link" href="">
+                    @Html(messages("home.messagesCard.single", """<span class="govuk-!-font-weight-bold">1</span>"""))
+                    </a>
+                }
+                @if(unreadMessageCount > 1L) {
+                    <a class="govuk-link" id="new-messages-link" href="">
+                    @Html(messages("home.messagesCard.multiple", s"""<span class="govuk-!-font-weight-bold">$unreadMessageCount</span>"""))
+                    </a>
+                }
+            </li>
+
+            @if(hasMessages) {
+                <li>
+                    <a class="govuk-link" id="go-to-messages-link" href="">
+                    @messages("home.messagesCard.viewAllMessages")
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
