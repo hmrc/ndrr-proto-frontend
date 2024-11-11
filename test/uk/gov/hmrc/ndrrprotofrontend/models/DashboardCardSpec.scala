@@ -81,14 +81,54 @@ class DashboardCardSpec extends BaseSpec {
         ))))
     }
 
-    "Given a Title key will generate a card with a welsh title" in{
+    "Given a Title key will generate a card with a [WELSH] title" in{
       implicit val messages: Messages = messagesApi.preferred(fakeGetRequestInWelsh)
       val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, None, None)
       val result = DashboardCard.card(dashboardCard)
 
       result shouldBe Card(titleKey = Some(CardTitle(content = Text("You have no new messages [WELSH]"))))
     }
+    "Given a Title key and Caption Key will generate a card with a [WELSH] title and caption" in {
+      implicit val messages: Messages = messagesApi.preferred(fakeGetRequestInWelsh)
+      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, Some(cardCaption), None)
+      val result = DashboardCard.card(dashboardCard)
 
+      result shouldBe Card(
+        titleKey = Some(CardTitle(content = Text("You have no new messages [WELSH]"))),
+        captionKey =Some(CardCaption(content = Text("Read secure messages from us. [WELSH]"))),
+        None)
+    }
+    "Given a Title Key, Caption Key and Action generate a [WELSH] card with a title, caption and action" in {
+      implicit val messages: Messages = messagesApi.preferred(fakeGetRequestInWelsh)
+      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, Some(cardCaption),
+        Some(Seq(
+          ActionItem(
+            href       = "http://SomeLink1",
+            attributes     = Map("id" -> "direct-debit-link-both-primary"),
+            content = Text(Messages("home.messagesCard.single")),
+          ),ActionItem(
+            href       = "http://SomeLink2",
+            attributes     = Map("id" -> "direct-debit-link-both-primary"),
+            content = Text(Messages("home.messagesCard.viewAllMessages")),
+          ))
+        ))
+      val result = DashboardCard.card(dashboardCard)
+
+      result shouldBe Card(
+        titleKey =  Some(CardTitle(content = Text("You have no new messages [WELSH]"))),
+        captionKey =  Some(CardCaption(content = Text("Read secure messages from us. [WELSH]"))),
+        links = Some(Actions(classes = "", items = Seq(
+          ActionItem(
+            href       = "http://SomeLink1",
+            attributes     = Map("id" -> "direct-debit-link-both-primary"),
+            content = Text(Messages("You have {0} new message [WELSH]")),
+          ),ActionItem(
+            href       = "http://SomeLink2",
+            attributes     = Map("id" -> "direct-debit-link-both-primary"),
+            content = Text(Messages("Go to your messages [WELSH]")),
+          )
+        ))))
+    }
   }
 }
 
