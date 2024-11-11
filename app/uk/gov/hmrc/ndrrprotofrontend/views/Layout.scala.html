@@ -17,6 +17,7 @@
 @import uk.gov.hmrc.ndrrprotofrontend.config.AppConfig
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.styling.stylesheets
+@import uk.gov.hmrc.govukfrontend.views.Aliases.BackLink
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.HmrcStandardPageParams
 
 @this(
@@ -24,15 +25,22 @@
   hmrcStandardPage: HmrcStandardPage
 )
 
-@(pageTitle: Option[String] = None)(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
+@(
+    pageTitle: Option[String] = None,
+    showBackLink: Boolean = true,
+    backLinkOverride: Option[BackLink] = None
+)(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
+
 @stylesheets()
 @hmrcStandardPage(
-  HmrcStandardPageParams(
-    pageTitle = pageTitle,
-    isWelshTranslationAvailable = appConfig.welshLanguageSupportEnabled
-  )
+    HmrcStandardPageParams(
+        pageTitle = pageTitle,
+        isWelshTranslationAvailable = true,
+        backLink = {
+            if (showBackLink) {
+                if (backLinkOverride.isDefined) backLinkOverride else Some(BackLink.mimicsBrowserBackButtonViaJavaScript)
+            }
+            else None
+        }
+    )
 )(contentBlock)
-
-@{
-    //$COVERAGE-OFF$
-}

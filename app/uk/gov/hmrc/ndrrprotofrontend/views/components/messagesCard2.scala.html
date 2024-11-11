@@ -1,0 +1,70 @@
+@*
+ * Copyright 2023 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.ndrrprotofrontend.controllers._
+@import uk.gov.hmrc.ndrrprotofrontend.models.Card
+
+@(dashboardCard: Card)()
+
+<div id="messagesCard" class="card">
+
+    <div class="card-body">
+        @dashboardCard.titleKey.map { cardTitle =>
+            <h@{cardTitle.headingLevel.getOrElse(2)} class="@toClasses("govuk-summary-card__title", cardTitle.classes)">
+            @cardTitle.content.asHtml
+            </h@{cardTitle.headingLevel.getOrElse(2)}>
+        }
+
+        @dashboardCard.captionKey.map { cardTitle =>
+        <h@{cardTitle.headingLevel.getOrElse(2)} class="@toClasses("govuk-body", cardTitle.classes)">
+        @cardTitle.content.asHtml
+        </h@{cardTitle.headingLevel.getOrElse(2)}>
+        }
+    </div>
+
+    <div class="card-action">
+        <ul class="govuk-list">
+    @dashboardCard.links match {
+        case None => {}
+        case Some(cardAction) => {
+            @if(cardAction.items.nonEmpty) {
+                @if(cardAction.items.length == 1) {
+                    <div class="@toClasses("govuk-link", cardAction.classes)">
+                        @actionLink(cardAction.items.head, Some(cardAction.items.head.content))
+                    </div>
+                } else {
+                <ul class="govuk-list">
+                    <a>
+                        @cardAction.items.map { item =>
+                            <li class="govuk-link">
+                                @actionLink(item, Some(item.content))
+                            </li>
+                        }
+                    </a>
+                </ul>
+            }
+        }
+    }
+}
+
+@actionLink(action: ActionItem, cardTitle: Option[Content]) = {
+<a class="@toClasses("govuk-link", action.classes)" href="@action.href"@toAttributes(action.attributes)>@action.content.asHtml@visuallyHiddenText(action, cardTitle)</a>}
+
+@visuallyHiddenText(action: ActionItem, cardTitle: Option[Content]) = {@if(action.visuallyHiddenText.exists(_.nonEmpty) || cardTitle.isDefined) {<span class="govuk-visually-hidden"> @{action.visuallyHiddenText.map(_.strip)}@if(cardTitle.isDefined){@cardTitle.map {content => (@content.asHtml)}}</span>}}
+
+
+</div>

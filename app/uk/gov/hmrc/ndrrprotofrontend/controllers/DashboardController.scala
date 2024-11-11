@@ -16,20 +16,43 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.ndrrprotofrontend.models.DashboardCard
 import uk.gov.hmrc.ndrrprotofrontend.views.html.DashboardView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
-@Singleton
-class DashboardController @Inject()(
-                                     mcc: MessagesControllerComponents,
-                                     dashboardView: DashboardView)
-  extends FrontendController(mcc) {
 
-  val show: Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(dashboardView(hasMessages = true, unreadMessageCount = 1L)))
-  }
+
+
+
+class YourMessages {
+
+}
+
+//ALL THE INFO WE NEED FOR ALL THE CARDS
+
+//What happens with zero messages?
+// - Do we show the card
+// - if we show the card what content do we show on that page
+
+  @Singleton
+  class DashboardController @Inject()(
+                                       mcc: MessagesControllerComponents,
+                                       dashboardView: DashboardView)
+    extends FrontendController(mcc) {
+
+    val show: Action[AnyContent] = Action.async { implicit request =>
+      Future.successful(
+        Ok(
+          dashboardView(
+            hasMessages = true,
+            unreadMessageCount = 1L,
+            card = DashboardCard.card(DashboardCard.testData()))
+        )
+      )
+    }
 
 }

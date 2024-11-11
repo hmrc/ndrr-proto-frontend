@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,23 +12,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard2
-@import uk.gov.hmrc.ndrrprotofrontend.models.Card
+package uk.gov.hmrc.ndrrprotofrontend.models
 
+import play.api.libs.json.{Json, OFormat}
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{Content, Empty}
 
-@this(
- layout: Layout
-)
+case class CardCaption(
+                      content: Content = Empty,
+                      headingLevel: Option[Int] = None,
+                      classes: String = ""
+                    )
+object CardCaption {
 
-@(hasMessages: Boolean, unreadMessageCount: Long, card:Card)(implicit request: RequestHeader, messages: Messages)
+  def defaultObject: CardCaption = CardCaption()
 
-@layout(pageTitle = Some("ndrr-proto-frontend"), showBackLink = false) {
-
-  @messagesCard(hasMessages, unreadMessageCount)
-  @messagesCard2(card)
+  implicit def jsonFormats: OFormat[CardCaption] =
+    Json.using[Json.WithDefaultValues].format[CardCaption]
 
 }
-
