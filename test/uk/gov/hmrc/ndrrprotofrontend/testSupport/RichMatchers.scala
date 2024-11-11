@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,23 +12,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard2
-@import uk.gov.hmrc.ndrrprotofrontend.models.Card
+package uk.gov.hmrc.ndrrprotofrontend.testSupport
 
+import org.scalatest._
+import org.scalatest.concurrent.{Eventually, IntegrationPatience, ScalaFutures}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.diagrams.Diagrams
 
-@this(
- layout: Layout
-)
+object RichMatchers extends RichMatchers
 
-@(hasMessages: Boolean, unreadMessageCount: Long, card:Card)(implicit request: RequestHeader, messages: Messages)
-
-@layout(pageTitle = Some("ndrr-proto-frontend"), showBackLink = false) {
-
-  @messagesCard(hasMessages, unreadMessageCount)
-  @messagesCard2(card)
-
-}
+trait RichMatchers
+  extends Matchers
+    with Diagrams
+    with TryValues
+    with EitherValues
+    with OptionValues
+    with AppendedClues
+    with ScalaFutures
+    with Inside
+    with Eventually
+    with IntegrationPatience
 

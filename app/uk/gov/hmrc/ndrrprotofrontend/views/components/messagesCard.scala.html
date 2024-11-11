@@ -31,12 +31,12 @@
                 }
                 @if(unreadMessageCount == 1L) {
                     <a class="govuk-link" id="new-messages-link" href="">
-                    @Html(messages("home.messagesCard.single", """<span class="govuk-!-font-weight-bold">1</span>"""))
+                        @Html(messages("home.messagesCard.single", """<span class="govuk-!-font-weight-bold">1</span>"""))
                     </a>
                 }
                 @if(unreadMessageCount > 1L) {
                     <a class="govuk-link" id="new-messages-link" href="">
-                    @Html(messages("home.messagesCard.multiple", s"""<span class="govuk-!-font-weight-bold">$unreadMessageCount</span>"""))
+                        @Html(messages("home.messagesCard.multiple", s"""<span class="govuk-!-font-weight-bold">$unreadMessageCount</span>"""))
                     </a>
                 }
             </li>
