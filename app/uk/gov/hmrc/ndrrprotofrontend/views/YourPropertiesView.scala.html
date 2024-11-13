@@ -14,16 +14,15 @@
  * limitations under the License.
  *@
 
-@this(layout: Layout)
+@import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.govukfrontend.views.Aliases.Table
 
-@()(implicit request: RequestHeader, messages: Messages)
+@this(layout: Layout, govukTable : GovukTable)
 
-@layout(pageTitle = Some("ndrr-proto-frontend")) {
-    <h1 class="govuk-heading-xl">ndrr-proto-frontend</h1>
-    <p class="govuk-body">@{messages("service.text")}</p>
+@(propertiesTable: Table)(implicit request: RequestHeader, messages: Messages)
 
-}
-
-@{
-    //$COVERAGE-OFF$
+@layout(pageTitle = Some("Your properties")) {
+    <h1 class="govuk-heading-xl">Your properties</h1>
+    <p class="govuk-body">@{messages("All of your claimed properties are listed here, including any claims that have not yet been approved.")}</p>
+    @govukTable(propertiesTable)
 }
