@@ -38,6 +38,7 @@ import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, CardTitle}
 case class Card(
                  titleKey: Option[CardTitle] = None,
                  captionKey: Option[CardCaption] = None,
+                 captionKey2: Option[CardCaption] = None,
                  links: Option[Actions] = None,
                  classes: String = ""
                )

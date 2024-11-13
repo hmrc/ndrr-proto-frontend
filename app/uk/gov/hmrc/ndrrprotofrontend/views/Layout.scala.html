@@ -14,15 +14,19 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.config.AppConfig
+@import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.styling.stylesheets
+@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage._
 @import uk.gov.hmrc.govukfrontend.views.Aliases.BackLink
-@import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage.HmrcStandardPageParams
+@import uk.gov.hmrc.ndrrprotofrontend.config.AppConfig
+@import resources._
 
 @this(
   appConfig: AppConfig,
-  hmrcStandardPage: HmrcStandardPage
+  standardBetaBanner: StandardBetaBanner,
+  hmrcStandardPage: HmrcStandardPage,
+  stylesheets: Stylesheets,
+  fullWidthMainContent: FullWidthMainContentLayout,
 )
 
 @(
@@ -31,11 +35,27 @@
     backLinkOverride: Option[BackLink] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
-@stylesheets()
+@headScripts = {
+    @stylesheets()
+}
+
+@content = {
+    <div id="content">
+        @contentBlock
+    </div>
+}
+
 @hmrcStandardPage(
     HmrcStandardPageParams(
         pageTitle = pageTitle,
-        isWelshTranslationAvailable = true,
+        isWelshTranslationAvailable = false,
+        templateOverrides = TemplateOverrides(
+            mainContentLayout = Some(fullWidthMainContent(_)),
+            additionalHeadBlock = Some(headScripts)
+        ),
+        banners = Banners(
+        phaseBanner = Some(standardBetaBanner("appConfig.betaFeedbackUrl")),
+        ),
         backLink = {
             if (showBackLink) {
                 if (backLinkOverride.isDefined) backLinkOverride else Some(BackLink.mimicsBrowserBackButtonViaJavaScript)
@@ -43,4 +63,4 @@
             else None
         }
     )
-)(contentBlock)
+)(content)

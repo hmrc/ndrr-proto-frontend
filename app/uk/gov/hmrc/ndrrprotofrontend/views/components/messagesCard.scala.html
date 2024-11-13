@@ -15,39 +15,61 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.ndrrprotofrontend.controllers._
+@import uk.gov.hmrc.ndrrprotofrontend.models.Card
 
-@(hasMessages: Boolean, unreadMessageCount: Long)(implicit request: RequestHeader, messages: Messages)
+@(dashboardCard: Card)()
 
-<div id="messagesCard" class="card">
-    <div class="card-body">
-        <h2 class="govuk-heading-s card-heading">@messages("home.messagesCard.title")</h2>
-        <p class="govuk-body">@messages("home.messagesCard.caption")</p>
+<div id="" class="card">
+
+    <div class="card-body active min-height">
+        @dashboardCard.titleKey.map { cardTitle =>
+            <h@{cardTitle.headingLevel.getOrElse(2)} class="@toClasses("govuk-heading-s card-heading", cardTitle.classes)">
+            @cardTitle.content.asHtml
+            </h@{cardTitle.headingLevel.getOrElse(2)}>
+        }
+
+        @dashboardCard.captionKey.map { cardCaption =>
+            <h@{cardCaption.headingLevel.getOrElse(2)} class="@toClasses("govuk-body", cardCaption.classes)">
+            @cardCaption.content.asHtml
+            </h@{cardCaption.headingLevel.getOrElse(2)}>
+        }
+
+        @dashboardCard.captionKey2.map { cardCaption =>
+        <h@{cardCaption.headingLevel.getOrElse(2)} class="@toClasses("govuk-body", cardCaption.classes)">
+        @cardCaption.content.asHtml
+        </h@{cardCaption.headingLevel.getOrElse(2)}>
+        }
     </div>
-    <div class="card-action">
-        <ul class="govuk-list">
-            <li>
-                @if(unreadMessageCount == 0L) {
-                    <p class="govuk-body" id="no-messages">@messages("home.messagesCard.none")</p>
-                }
-                @if(unreadMessageCount == 1L) {
-                    <a class="govuk-link" id="new-messages-link" href="">
-                        @Html(messages("home.messagesCard.single", """<span class="govuk-!-font-weight-bold">1</span>"""))
-                    </a>
-                }
-                @if(unreadMessageCount > 1L) {
-                    <a class="govuk-link" id="new-messages-link" href="">
-                        @Html(messages("home.messagesCard.multiple", s"""<span class="govuk-!-font-weight-bold">$unreadMessageCount</span>"""))
-                    </a>
-                }
-            </li>
 
-            @if(hasMessages) {
-                <li>
-                    <a class="govuk-link" id="go-to-messages-link" href="">
-                    @messages("home.messagesCard.viewAllMessages")
-                    </a>
-                </li>
+    <div class="card-action">
+        @dashboardCard.links match {
+            case None => {}
+            case Some(cardAction) => {
+                @if(cardAction.items.nonEmpty) {
+                    @if(cardAction.items.length == 1) {
+                        <div class="@toClasses("govuk-link", cardAction.classes)">
+                        @actionLink(cardAction.items.head, Some(cardAction.items.head.content))
+                        </div>
+                    } else {
+                        <ul class="govuk-list">
+                            <a class="govuk-link">
+                                @cardAction.items.map { item =>
+                                <li>
+                                    @actionLink(item, Some(item.content))
+                                </li>
+                                }
+                            </a>
+                        </ul>
+                    }
+                }
             }
-        </ul>
+        }
     </div>
 </div>
+
+        @actionLink(action: ActionItem, cardTitle: Option[Content]) = {
+        <a class="@toClasses("govuk-link", action.classes)" href="@action.href"@toAttributes(action.attributes)>@action.content.asHtml@visuallyHiddenText(action, cardTitle)</a>}
+
+        @visuallyHiddenText(action: ActionItem, cardTitle: Option[Content]) = {@if(action.visuallyHiddenText.exists(_.nonEmpty) || cardTitle.isDefined) {<span class="govuk-visually-hidden"> @{action.visuallyHiddenText.map(_.strip)}@if(cardTitle.isDefined){@cardTitle.map {content => (@content.asHtml)}}</span>}}
+

@@ -1,10 +1,25 @@
 service.name = ndrr-proto-frontend
 service.text = This is your new service
 
-#CardMessages
+#Dashboard
+home.heading =Your business rates valuation account
+home.caption =Account home
+#propertiesCard
+home.propertiesCard.title=Properties
+home.propertiesCard.caption=Add and manage properties you have a connection with.
+home.propertiesCard.caption2=You must tell us within 60 days of becoming the ratepayer. Do this by adding the property to your account.
+home.propertiesCard.addProperty=Add a property
+#messageCard
 home.messagesCard.title=Your messages
 home.messagesCard.caption=Read secure messages from us.
 home.messagesCard.none=You have no new messages
 home.messagesCard.single=You have {0} new message
 home.messagesCard.multiple=You have {0} new messages
 home.messagesCard.viewAllMessages=Go to your messages
+#helpCard
+home.helpAndGuidanceCard.title=Help
+home.helpAndGuidanceCard.link1=Help with adding and managing properties
+home.helpAndGuidanceCard.link2=Help with Check and Challenge cases
+home.helpAndGuidanceCard.link3=Help with appointing and managing agents
+home.helpAndGuidanceCard.link4=How business properties are valued
+home.helpAndGuidanceCard.link5=More help with business rates

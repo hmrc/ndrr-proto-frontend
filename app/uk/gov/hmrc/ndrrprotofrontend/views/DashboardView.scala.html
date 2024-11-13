@@ -15,23 +15,33 @@
  *@
 
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard2
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBar
+
 @import uk.gov.hmrc.ndrrprotofrontend.models.Card
 
 
 @this(
- layout: Layout
+ layout: Layout,
 )
 
-@(hasMessages: Boolean, unreadMessageCount: Long, card:Card)(implicit request: RequestHeader, messages: Messages)
+@(user:String,card:Card)(implicit request: RequestHeader, messages: Messages)
 
-@layout(pageTitle = Some("ndrr-proto-frontend"), showBackLink = false) {
+@heading = @{messages("home.heading")}
+@layout(pageTitle = Some(heading), showBackLink = false) {
 
- <div class="flex-container govuk-grid-row">
-  @messagesCard2(card)
-  @messagesCard2(card)
-  @messagesCard2(card)
+@navigationBar()
+ <div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+   <span class="govuk-caption-m">@{messages("home.caption")}</span>
+   <h1 class="govuk-heading-l">
+    @user
+   </h1>
+  </div>
  </div>
 
+ <div class="flex-container govuk-grid-row">
+  @messagesCard(card)
+ </div>
 }
 

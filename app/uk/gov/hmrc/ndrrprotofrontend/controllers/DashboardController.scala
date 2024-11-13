@@ -24,14 +24,6 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
-
-
-
-
-class YourMessages {
-
-}
-
 //ALL THE INFO WE NEED FOR ALL THE CARDS
 
 //What happens with zero messages?
@@ -44,13 +36,12 @@ class YourMessages {
                                        dashboardView: DashboardView)
     extends FrontendController(mcc) {
 
+    lazy val testUser: String = "Jake Reid"
+
     val show: Action[AnyContent] = Action.async { implicit request =>
       Future.successful(
         Ok(
-          dashboardView(
-            hasMessages = true,
-            unreadMessageCount = 1L,
-            card = DashboardCard.card(DashboardCard.testData()))
+          dashboardView(user = testUser,card = DashboardCard.card(DashboardCard.testPropertiesCard())) //todo make this a sequence
         )
       )
     }

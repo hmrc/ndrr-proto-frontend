@@ -28,104 +28,171 @@ class DashboardCardSpec extends BaseSpec {
   val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/dashboard")
   val fakeGetRequestInWelsh: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/dashboard").withCookies(Cookie("PLAY_LANG", "cy"))
 
-  lazy val cardTittleKey = "home.messagesCard.none"
-  lazy val cardCaption = "home.messagesCard.caption"
+  lazy val cardTittleKey = "home.propertiesCard.title"
+  lazy val cardCaptionKey = "home.propertiesCard.caption"
+  lazy val cardCaption2Key = "home.propertiesCard.caption2"
+  lazy val cardLinkMessage1 = "home.propertiesCard.addProperty"
+  lazy val cardLinkMessage2 = "home.propertiesCard.addProperty"
+
+  lazy val cardTittleKeyExpected = "Properties"
+  lazy val cardCaptionKeyExpected = "Add and manage properties you have a connection with."
+  lazy val cardCaption2KeyExpected = "You must tell us within 60 days of becoming the ratepayer. Do this by adding the property to your account."
+  lazy val cardLinkMessage1Expected = "Add a property"
+  lazy val cardLinkMessage2Expected = "Add a property"
+
+  lazy val cardTittleKeyExpectedWelsh = "Properties[WELSH]"
+  lazy val cardCaptionKeyExpectedWelsh = "Add and manage properties you have a connection with.[WELSH]"
+  lazy val cardCaption2KeyExpectedWelsh = "You must tell us within 60 days of becoming the ratepayer. Do this by adding the property to your account.[WELSH]"
+  lazy val cardLinkMessage1ExpectedWelsh = "Add a property[WELSH]"
+  lazy val cardLinkMessage2ExpectedWelsh = "Add a property[WELSH]"
 
   "Card" - {
     "Given a Title key will generate a card with a title" in {
       implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
-      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, None, None)
+      val dashboardCard: DashboardCard =
+        DashboardCard(
+        titleKey = cardTittleKey,
+        captionKey = None,
+        links = None)
       val result = DashboardCard.card(dashboardCard)
 
-      result shouldBe Card(titleKey = Some(CardTitle(content = Text("You have no new messages"))))
+      result shouldBe Card(titleKey = Some(CardTitle(content = Text(cardTittleKeyExpected))))
     }
     "Given a Title key and Caption Key will generate a card with a title and caption" in {
       implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
-      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, Some(cardCaption), None)
+      val dashboardCard: DashboardCard =
+        DashboardCard(
+          titleKey =cardTittleKey,
+          captionKey = Some(cardCaptionKey),
+          links = None)
       val result = DashboardCard.card(dashboardCard)
 
       result shouldBe Card(
-        titleKey = Some(CardTitle(content = Text("You have no new messages"))),
-        captionKey =Some(CardCaption(content = Text("Read secure messages from us."))),
+        titleKey = Some(CardTitle(content = Text(cardTittleKeyExpected))),
+        captionKey =Some(CardCaption(content = Text(cardCaptionKeyExpected))),
         None)
     }
     "Given a Title Key, Caption Key and Action generate a card with a title, caption and action" in {
       implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
-      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, Some(cardCaption),
+      val dashboardCard: DashboardCard =
+        DashboardCard(
+          titleKey = cardTittleKey,
+          captionKey = Some(cardCaptionKey),
+          links =
         Some(Seq(
         ActionItem(
           href       = "http://SomeLink1",
           attributes     = Map("id" -> "direct-debit-link-both-primary"),
-          content = Text(Messages("home.messagesCard.single")),
+          content = Text(Messages(cardLinkMessage1)),
         ),ActionItem(
           href       = "http://SomeLink2",
           attributes     = Map("id" -> "direct-debit-link-both-primary"),
-          content = Text(Messages("home.messagesCard.viewAllMessages")),
+          content = Text(Messages(cardLinkMessage2)),
         ))
       ))
       val result = DashboardCard.card(dashboardCard)
 
       result shouldBe Card(
-        titleKey =  Some(CardTitle(content = Text("You have no new messages"))),
-        captionKey =  Some(CardCaption(content = Text("Read secure messages from us."))),
+        titleKey =  Some(CardTitle(content = Text(cardTittleKeyExpected))),
+        captionKey =  Some(CardCaption(content = Text(cardCaptionKeyExpected))),
         links = Some(Actions(classes = "", items = Seq(
           ActionItem(
             href       = "http://SomeLink1",
             attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages("You have {0} new message")),
+            content = Text(Messages(cardLinkMessage1Expected)),
           ),ActionItem(
             href       = "http://SomeLink2",
             attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages("Go to your messages")),
+            content = Text(Messages(cardLinkMessage2Expected)),
+          )
+        ))))
+    }
+
+    "Given a Title Key, Caption Key, Second Caption Key and Action generate a card with a title, caption and action" in {
+      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      val dashboardCard: DashboardCard =
+        DashboardCard(
+          titleKey = cardTittleKey,
+          captionKey = Some(cardCaptionKey),
+          captionKey2 = Some(cardCaption2Key),
+          links =
+            Some(Seq(
+              ActionItem(
+                href       = "http://SomeLink1",
+                attributes     = Map("id" -> "direct-debit-link-both-primary"),
+                content = Text(Messages(cardLinkMessage1)),
+              ))
+            ))
+      val result = DashboardCard.card(dashboardCard)
+
+      result shouldBe Card(
+        titleKey =  Some(CardTitle(content = Text(cardTittleKeyExpected))),
+        captionKey =  Some(CardCaption(content = Text(cardCaptionKeyExpected))),
+        captionKey2 =  Some(CardCaption(content = Text(cardCaption2KeyExpected))),
+        links = Some(Actions(classes = "", items = Seq(
+          ActionItem(
+            href       = "http://SomeLink1",
+            attributes     = Map("id" -> "direct-debit-link-both-primary"),
+            content = Text(Messages(cardLinkMessage1Expected)),
           )
         ))))
     }
 
     "Given a Title key will generate a card with a [WELSH] title" in{
       implicit val messages: Messages = messagesApi.preferred(fakeGetRequestInWelsh)
-      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, None, None)
+      val dashboardCard: DashboardCard =
+        DashboardCard(
+          titleKey = cardTittleKey,
+          captionKey = None,
+          links =  None)
       val result = DashboardCard.card(dashboardCard)
 
-      result shouldBe Card(titleKey = Some(CardTitle(content = Text("You have no new messages [WELSH]"))))
+      result shouldBe Card(titleKey = Some(CardTitle(content = Text(cardTittleKeyExpectedWelsh))))
     }
     "Given a Title key and Caption Key will generate a card with a [WELSH] title and caption" in {
       implicit val messages: Messages = messagesApi.preferred(fakeGetRequestInWelsh)
-      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, Some(cardCaption), None)
+      val dashboardCard: DashboardCard =
+        DashboardCard(
+          titleKey = cardTittleKey,
+          captionKey =  Some(cardCaptionKey),
+          links = None)
       val result = DashboardCard.card(dashboardCard)
 
       result shouldBe Card(
-        titleKey = Some(CardTitle(content = Text("You have no new messages [WELSH]"))),
-        captionKey =Some(CardCaption(content = Text("Read secure messages from us. [WELSH]"))),
+        titleKey = Some(CardTitle(content = Text(cardTittleKeyExpectedWelsh))),
+        captionKey =Some(CardCaption(content = Text(cardCaptionKeyExpectedWelsh))),
         None)
     }
     "Given a Title Key, Caption Key and Action generate a [WELSH] card with a title, caption and action" in {
       implicit val messages: Messages = messagesApi.preferred(fakeGetRequestInWelsh)
-      val dashboardCard: DashboardCard = DashboardCard(cardTittleKey, Some(cardCaption),
-        Some(Seq(
+      val dashboardCard: DashboardCard = DashboardCard(
+        titleKey = cardTittleKey,
+        captionKey = Some(cardCaptionKey),
+        links = Some(Seq(
           ActionItem(
             href       = "http://SomeLink1",
             attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages("home.messagesCard.single")),
+            content = Text(Messages(cardLinkMessage1)),
           ),ActionItem(
             href       = "http://SomeLink2",
             attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages("home.messagesCard.viewAllMessages")),
+            content = Text(Messages(cardLinkMessage2)),
           ))
         ))
       val result = DashboardCard.card(dashboardCard)
 
       result shouldBe Card(
-        titleKey =  Some(CardTitle(content = Text("You have no new messages [WELSH]"))),
-        captionKey =  Some(CardCaption(content = Text("Read secure messages from us. [WELSH]"))),
+        titleKey =  Some(CardTitle(content = Text(cardTittleKeyExpectedWelsh))),
+        captionKey =  Some(CardCaption(content = Text(cardCaptionKeyExpectedWelsh))),
         links = Some(Actions(classes = "", items = Seq(
           ActionItem(
             href       = "http://SomeLink1",
             attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages("You have {0} new message [WELSH]")),
+            content = Text(Messages(cardLinkMessage1ExpectedWelsh)),
           ),ActionItem(
             href       = "http://SomeLink2",
             attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages("Go to your messages [WELSH]")),
+            content = Text(Messages(cardLinkMessage2ExpectedWelsh)),
           )
         ))))
     }
