@@ -19,10 +19,10 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.govukfrontend.views.Aliases
-import uk.gov.hmrc.govukfrontend.views.Aliases.TableRow
+import uk.gov.hmrc.govukfrontend.views.Aliases.{Table, TableRow}
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
 import uk.gov.hmrc.govukfrontend.views.viewmodels.table.HeadCell
-import uk.gov.hmrc.ndrrprotofrontend.models.TableBuilder
+import uk.gov.hmrc.ndrrprotofrontend.models.{Address, MessageKey, Postcode, Reference, Row, TableBuilder, VoaTable}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.{HelloWorldPage, YourPropertiesView}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -49,6 +49,37 @@ class YourPropertiesController @Inject()(
 
   def yourProperties: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(Ok(yourPropertiesView(table)))
+  }
+
+  def makeAVisibleTable() = throwAway().toVisibleTable()
+
+  def throwAway(): VoaTable = {
+    val headers = Seq(MessageKey("voa.address.title"), MessageKey("voa.reference.title"))
+
+    val address0 = Address(
+      line1 = "99",
+      line2 = Some("Wibble Rd"),
+      town = "Worthing",
+      county = Some("West Sussex"),
+      postcode = Postcode("BN110AA"))
+
+    val reference0 = Reference("987765JK99")
+
+    val address1 = Address(
+      line1 = "87a",
+      line2 = Some("High St"),
+      town = "Hythe",
+      county = Some("Kent"),
+      postcode = Postcode("HY270AA")
+    )
+
+    val reference1 = Reference("WillIAm")
+
+    val row0 = Row(Seq(address0, reference0))
+    val row1 = Row(Seq(address1, reference1))
+
+    VoaTable(headers, Seq(row0, row1))
+
   }
 
 }

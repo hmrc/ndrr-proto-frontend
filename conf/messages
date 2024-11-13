@@ -1,2 +1,5 @@
 service.name = ndrr-proto-frontend
 service.text = This is your new service
+
+voa.address.title = Address
+voa.reference.title = Reference
