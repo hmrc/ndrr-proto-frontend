@@ -22,15 +22,29 @@ import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{ActionItem, CardT
 
 final case class DashboardCard(
                                 titleKey: String,
-                                caption: Option[String],
+                                captionKey:  Option[String] = None,
+                                captionKey2: Option[String] = None,
                                 links: Option[Seq[ActionItem]]
                               )(implicit messages: Messages)
 
 object DashboardCard {
 
-  def testData()(implicit messages: Messages): DashboardCard = { DashboardCard(
+  def testPropertiesCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.propertiesCard.title",
+    captionKey =  Some("home.propertiesCard.caption"),
+    captionKey2 =  Some("home.propertiesCard.caption2"),
+    links = Some(Seq(
+      ActionItem(
+        href       = "http://SomeLink1",
+        attributes     = Map("id" -> "propertiesCard-addProperty"),
+        content = Text(Messages("home.propertiesCard.addProperty")),
+      ))
+    ))
+  }
+
+  def testDataMessageCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
     titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
-    caption =  Some("home.messagesCard.caption"),
+    captionKey =  Some("home.messagesCard.caption"),
     links = Some(Seq(
       ActionItem(
       href       = "http://SomeLink1",
@@ -43,14 +57,60 @@ object DashboardCard {
     ))
     ))
   }
+  def testDataHelpCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.helpAndGuidanceCard.title",
+    links = Some(Seq(
+      ActionItem(
+        href       = "http://SomeLink1",
+        attributes     = Map("id" -> "direct-debit-link-both-primary"),
+        content = Text(Messages("home.helpAndGuidanceCard.link1")),
+      ),ActionItem(
+        href       = "http://SomeLink2",
+        attributes     = Map("id" -> "direct-debit-link-both-primary"),
+        content = Text(Messages("home.helpAndGuidanceCard.link2")),
+      ),ActionItem(
+        href       = "http://SomeLink2",
+        attributes     = Map("id" -> "direct-debit-link-both-primary"),
+        content = Text(Messages("home.helpAndGuidanceCard.link3")),
+      ),ActionItem(
+        href       = "http://SomeLink2",
+        attributes     = Map("id" -> "direct-debit-link-both-primary"),
+        content = Text(Messages("home.helpAndGuidanceCard.link4")),
+      ),ActionItem(
+        href       = "http://SomeLink2",
+        attributes     = Map("id" -> "direct-debit-link-both-primary"),
+        content = Text(Messages("home.helpAndGuidanceCard.link5")),
+      ))
+    ))
+  }
+
+  def testData()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
+    captionKey =  Some("home.messagesCard.caption"),
+    links = Some(Seq(
+      ActionItem(
+        href       = "http://SomeLink1",
+        attributes     = Map("id" -> "direct-debit-link-both-primary"),
+        content = Text(Messages("home.messagesCard.single")),
+      ),ActionItem(
+        href       = "http://SomeLink2",
+        attributes     = Map("id" -> "direct-debit-link-both-primary"),
+        content = Text(Messages("home.messagesCard.viewAllMessages")),
+      ))
+    ))
+  }
 
   def card(dashboardCard: DashboardCard)(implicit messages: Messages): Card = {
     Card(
       titleKey = Some(CardTitle(content = Text(Messages(dashboardCard.titleKey)))),
-      captionKey = dashboardCard.caption match{
+      captionKey = dashboardCard.captionKey match{
           case Some(caption) => Some(CardCaption(content = Text(Messages(caption))))
           case _ => None
         },
+      captionKey2 = dashboardCard.captionKey2 match{
+        case Some(caption2) => Some(CardCaption(content = Text(Messages(caption2))))
+        case _ => None
+      },
       links = dashboardCard.links match {
         case Some(link) => Some(Actions(classes = "",items = link))
         case None => None

@@ -1,3 +1,4 @@
+//THIS IS THE STYLE FOR CARDS:
 .card {
   flex-grow: 0;
   flex-basis: 100%;
@@ -46,6 +47,7 @@ html[data-useragent*='MSIE 10.0'] .flex-container {
 
   .card-heading {
     margin-top: 0;
+    color: #005EA5;
   }
 
   .card-body {
@@ -126,34 +128,45 @@ html[data-useragent*='MSIE 10.0'] .flex-container {
   }
 }
 
-.js {
-  .card-body.active {
-    &:hover {
-      background-color: $link-colour;
-      color: $page-colour;
-      cursor: pointer;
-      transition: .1s ease-in-out;
-      transition-delay: .25s;
-
-      .card-heading, p {
-        color: $page-colour;
-        transition: .1s ease-in-out;
-        transition-delay: .25s;
-      }
-
-      .card-heading a{
-        color: $page-colour;
-        transition-delay: .25s;
-      }
-
-      .detail-large {
-        color: $page-colour;
-        transition-delay: .25s;
-      }
-    }
-
-    a {
-      text-decoration: none;
-    }
+//THIS IS THE TRANSITION ON HOVER FOR CARDS:
+  .js-enabled .card-body.active:hover {
+    background-color: #1d70b8;
+    color: #ffffff;
+    cursor: pointer;
   }
-}
+
+  .js-enabled .card-body.active:hover p, .js-enabled .card-body.active:hover h2 {
+    color: #ffffff;
+  }
+
+  .js-enabled .card-body.active:hover .card-heading a {
+    color: #ffffff;
+  }
+
+  .js-enabled .card-body.active:hover .status-low {
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    transition-delay: .25s;
+  }
+
+  .js-enabled .card-body.active:hover .status-med {
+    background-color: #005EA5;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    transition-delay: .25s;
+  }
+
+  .js-enabled .card-body.active:hover .status-high {
+    border: 1px solid #FFFFFF;
+    transition-delay: .25s;
+  }
+
+  .js-enabled .card-body.active:hover .detail-large {
+    color: #FFFFFF;
+    transition-delay: .25s;
+  }
+
+  .js-enabled .card-body.active a {
+    display: inline-block;
+    text-decoration: none;
+  }

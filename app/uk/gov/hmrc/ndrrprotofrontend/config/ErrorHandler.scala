@@ -16,10 +16,12 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.config
 
-import javax.inject.{Inject, Singleton}
+import play.api.Logging
+import play.api.http.HttpErrorHandler
 
-import play.api.i18n.MessagesApi
-import play.api.mvc.RequestHeader
+import javax.inject.{Inject, Singleton}
+import play.api.i18n.{I18nSupport, Messages, MessagesApi}
+import play.api.mvc.{Request, RequestHeader}
 import play.twirl.api.Html
 import uk.gov.hmrc.play.bootstrap.frontend.http.FrontendErrorHandler
 import uk.gov.hmrc.ndrrprotofrontend.views.html.ErrorTemplate
