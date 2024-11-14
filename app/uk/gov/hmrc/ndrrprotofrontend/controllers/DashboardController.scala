@@ -16,19 +16,15 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
+import play.api.i18n.Messages
+import uk.gov.hmrc.auth.delegation.Link
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.DashboardCard
+import uk.gov.hmrc.ndrrprotofrontend.models.{Card, DashboardCard}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.DashboardView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
-
-//ALL THE INFO WE NEED FOR ALL THE CARDS
-
-//What happens with zero messages?
-// - Do we show the card
-// - if we show the card what content do we show on that page
 
   @Singleton
   class DashboardController @Inject()(
@@ -38,12 +34,35 @@ import scala.concurrent.Future
 
     lazy val testUser: String = "Jake Reid"
 
+    private def hasPropertyCheck(userProperty: Option[Int])(implicit messages: Messages):Seq[Card] = {
+      userProperty match {
+        case Some(properties) => Seq(
+          DashboardCard.card(DashboardCard.propertiesCard(
+            link = Link(
+              text = Some("home.propertiesCard.manageProperties"),
+              url = "/ndrr-proto-frontend/what-you-will-need"))),
+          DashboardCard.card(DashboardCard.reportChangeCard()),
+        )
+        case _ => Seq(
+          DashboardCard.card(
+            DashboardCard.propertiesCard(
+              link = Link(
+                text = Some("home.propertiesCard.addProperty"),
+                url = "/ndrr-proto-frontend/what-you-will-need"),
+                tag = Some("home.propertiesCard.tag"))
+          )
+        )
+      }
+    }
+
     val show: Action[AnyContent] = Action.async { implicit request =>
       Future.successful(
         Ok(
-          dashboardView(user = testUser,card = DashboardCard.card(DashboardCard.testPropertiesCard())) //todo make this a sequence
+          dashboardView(
+            user = testUser,
+            cards = hasPropertyCheck(Some(1))
+          )
         )
       )
     }
-
 }

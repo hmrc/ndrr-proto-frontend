@@ -33,12 +33,13 @@ package uk.gov.hmrc.ndrrprotofrontend.models
  */
 
 import play.api.libs.json.{Json, OFormat}
-import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, CardTitle}
+import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, CardTitle, Tag}
 
 case class Card(
                  titleKey: Option[CardTitle] = None,
                  captionKey: Option[CardCaption] = None,
                  captionKey2: Option[CardCaption] = None,
+                 tag: Option[Tag] = None,
                  links: Option[Actions] = None,
                  classes: String = ""
                )

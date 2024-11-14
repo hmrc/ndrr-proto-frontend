@@ -14,6 +14,7 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBar
 @import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage._
@@ -41,6 +42,7 @@
 
 @content = {
     <div id="content">
+        @navigationBar()
         @contentBlock
     </div>
 }
