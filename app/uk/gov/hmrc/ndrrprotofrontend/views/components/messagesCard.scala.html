@@ -40,6 +40,15 @@
         @cardCaption.content.asHtml
         </h@{cardCaption.headingLevel.getOrElse(2)}>
         }
+
+        @dashboardCard.tag.map { tag =>
+        <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--red">
+                @tag.content.asHtml
+            </strong>
+        </td>
+        }
+
     </div>
 
     <div class="card-action">

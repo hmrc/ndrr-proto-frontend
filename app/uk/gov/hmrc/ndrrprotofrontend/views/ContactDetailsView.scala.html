@@ -14,33 +14,12 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBar
-@import uk.gov.hmrc.ndrrprotofrontend.models.Card
-
-
 @this(
- layout: Layout
+layout: Layout
 )
-
-@(user:String,cards:Seq[Card])(implicit request: RequestHeader, messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
 @layout(pageTitle = Some(heading), showBackLink = false) {
 
- <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-   <span class="govuk-caption-m">@{messages("home.caption")}</span>
-   <h1 class="govuk-heading-l">
-    @user
-   </h1>
-  </div>
- </div>
-
- <div class="flex-container govuk-grid-row">
-  @cards.map{ card =>
-   @messagesCard(card)
-  }
- </div>
 }
-

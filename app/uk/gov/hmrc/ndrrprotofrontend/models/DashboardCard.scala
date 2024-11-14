@@ -17,27 +17,52 @@
 package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.i18n.Messages
-import uk.gov.hmrc.govukfrontend.views.Aliases.{Text, Actions}
+import uk.gov.hmrc.auth.delegation.Link
+import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, Text}
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Empty
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{ActionItem, CardTitle}
+import uk.gov.hmrc.govukfrontend.views.viewmodels.tag.Tag
 
 final case class DashboardCard(
                                 titleKey: String,
                                 captionKey:  Option[String] = None,
                                 captionKey2: Option[String] = None,
-                                links: Option[Seq[ActionItem]]
+                                tag: Option[String] = None,
+                                links: Option[Seq[ActionItem]] = None
                               )(implicit messages: Messages)
 
 object DashboardCard {
 
-  def testPropertiesCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
-    titleKey = "home.propertiesCard.title",
-    captionKey =  Some("home.propertiesCard.caption"),
-    captionKey2 =  Some("home.propertiesCard.caption2"),
+  def reportChangeCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.reportChangeCard.title",
+    captionKey =  Some("home.reportChangeCard.caption"),
+    captionKey2 =  Some("home.reportChangeCard.caption2"),
     links = Some(Seq(
       ActionItem(
         href       = "http://SomeLink1",
+        attributes     = Map("id" -> "report-change-link1"),
+        content = Text(Messages("home.reportChangeCard.link1")),
+      ),ActionItem(
+        href       = "http://SomeLink1",
+        attributes     = Map("id" -> "report-change-link2"),
+        content = Text(Messages("home.reportChangeCard.link2")),
+      ))
+    ))
+  }
+
+  def propertiesCard(link:Link, tag: Option[String] = None)(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.propertiesCard.title",
+    captionKey =  Some("home.propertiesCard.caption"),
+    captionKey2 =  Some("home.propertiesCard.caption2"),
+    tag = tag,
+    links = Some(Seq(
+      ActionItem(
+        href       = link.url,
         attributes     = Map("id" -> "propertiesCard-addProperty"),
-        content = Text(Messages("home.propertiesCard.addProperty")),
+        content = link.text match {
+          case Some(text) => Text(Messages(text))
+          case None => Empty
+        }
       ))
     ))
   }
@@ -110,6 +135,10 @@ object DashboardCard {
       captionKey2 = dashboardCard.captionKey2 match{
         case Some(caption2) => Some(CardCaption(content = Text(Messages(caption2))))
         case _ => None
+      },
+      tag = dashboardCard.tag match{
+        case Some(tag) => Some(Tag(content = Text(Messages(tag))))
+        case None => None
       },
       links = dashboardCard.links match {
         case Some(link) => Some(Actions(classes = "",items = link))
