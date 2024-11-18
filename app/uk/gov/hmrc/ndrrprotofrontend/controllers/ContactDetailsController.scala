@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.DashboardCard
+import uk.gov.hmrc.ndrrprotofrontend.models.{DashboardCard, Link, NavigationBarContent}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.ContactDetailsView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -29,10 +29,15 @@ class ContactDetailsController @Inject()(
                                           mcc: MessagesControllerComponents,
                                           contactDetailsView: ContactDetailsView)
   extends FrontendController(mcc) {
+
+  private def testNavBar: NavigationBarContent = NavigationBarContent(
+    AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", Some("nav.home"))),
+    NavigationButtons = Some(Seq(Link(url = "/ndrr-proto-frontend/dashboard", Some("nav.home")))))
+
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        contactDetailsView() //todo make this a sequence
+        contactDetailsView(navigationBarContent = testNavBar)
       )
     )
   }

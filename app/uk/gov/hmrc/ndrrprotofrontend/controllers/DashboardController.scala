@@ -17,9 +17,8 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
-import uk.gov.hmrc.auth.delegation.Link
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Card, DashboardCard}
+import uk.gov.hmrc.ndrrprotofrontend.models.{Card, DashboardCard, NavigationBarContent, Link}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.DashboardView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -34,13 +33,22 @@ import scala.concurrent.Future
 
     lazy val testUser: String = "Jake Reid"
 
+    private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
+      AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.home")))),
+      NavigationButtons = Some(Seq(
+        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.messages")), Some(3)),
+        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.actionNeeded")), Some(1)),
+        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.profileAndSettings"))),
+        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.signOut"))),
+      )))
+
     private def hasPropertyCheck(userProperty: Option[Int])(implicit messages: Messages):Seq[Card] = {
       userProperty match {
         case Some(properties) => Seq(
           DashboardCard.card(DashboardCard.propertiesCard(
             link = Link(
               text = Some("home.propertiesCard.manageProperties"),
-              url = "/ndrr-proto-frontend/what-you-will-need"))),
+              url = "/ndrr-proto-frontend/ratepayer-properties"))),
           DashboardCard.card(DashboardCard.reportChangeCard()),
         )
         case _ => Seq(
@@ -60,7 +68,8 @@ import scala.concurrent.Future
         Ok(
           dashboardView(
             user = testUser,
-            cards = hasPropertyCheck(Some(1))
+            cards = hasPropertyCheck(Some(1)),
+            navigationBarContent = testNavBar
           )
         )
       )

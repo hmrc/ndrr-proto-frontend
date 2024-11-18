@@ -14,7 +14,8 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBar
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBarComponent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage._
@@ -33,6 +34,7 @@
 @(
     pageTitle: Option[String] = None,
     showBackLink: Boolean = true,
+    navigationBarContent: NavigationBarContent,
     backLinkOverride: Option[BackLink] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
@@ -42,7 +44,7 @@
 
 @content = {
     <div id="content">
-        @navigationBar()
+        @navigationBarComponent(navigationBarContent)
         @contentBlock
     </div>
 }

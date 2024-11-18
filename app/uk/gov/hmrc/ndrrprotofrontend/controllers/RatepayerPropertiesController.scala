@@ -19,27 +19,25 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent}
-import uk.gov.hmrc.ndrrprotofrontend.views.html.WhatYouWillNeedView
+import uk.gov.hmrc.ndrrprotofrontend.views.html.RatepayerPropertiesView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
 
 @Singleton
-class WhatYouWillNeedController @Inject()(
-                                          mcc: MessagesControllerComponents,
-                                          whatYouWillNeedView: WhatYouWillNeedView)
+class RatepayerPropertiesController @Inject()(
+                                           mcc: MessagesControllerComponents,
+                                           ratepayerPropertiesView: RatepayerPropertiesView)
   extends FrontendController(mcc) {
   private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
     AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.home")))),
-    NavigationButtons = Some(Seq(Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.home"))
-    )))
-  )
+    NavigationButtons = Some(Seq(Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.home"))))))
 
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        whatYouWillNeedView(navigationBarContent = testNavBar)
+        ratepayerPropertiesView(navigationBarContent = testNavBar)
       )
     )
   }
