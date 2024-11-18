@@ -16,8 +16,4 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-import play.api.libs.json.{Json, OFormat}
-
-final case class Postcode(value: String) {
-  override def toString: String = value
-}
+final case class VoaHeader(messageKey: MessageKey)

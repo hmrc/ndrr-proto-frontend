@@ -15,10 +15,38 @@
  */
 
 package uk.gov.hmrc.ndrrprotofrontend.models
+import play.api.i18n._
+import uk.gov.hmrc.govukfrontend.views.Aliases.Table
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+import uk.gov.hmrc.govukfrontend.views.viewmodels.table.{HeadCell, TableRow}
 
-import play.api.libs.json.{Json, OFormat}
 
+final case class VoaTable(headings: Seq[MessageKey], rows: Seq[VoaRow]) {
+  private def columnEntries(columnEntry: ColumnEntry): TableRow = {
+    val text: Text = columnEntry match {
+      case Reference(value) => Text(value)
+      case address: VoaAddress => Text(address.toString)
+      case TrnNumber(value) => Text(value.toString)
+    }
+    TableRow(content = text)
+  }
 
-final case class VoaTable(header: Seq[MessageKey], rows: Seq[VoaRow]) {
-  def toVisibleTable(): VoaTable = ???
+  private def toHeadCell(tableHeading: MessageKey)(implicit messages: Messages): HeadCell = {
+    val headingText = tableHeading.key
+    HeadCell(content = Text(Messages(headingText)))
+  }
+
+  private def tableRows(entries: VoaRow) : Seq[TableRow] = {
+    entries.columnEntries.map(columnEntries)
+  }
+
+  def buildTable()(implicit messages: Messages): Table = {
+    Table(
+     rows = rows.map(tableRows),
+      head = headings match {
+        case header if header.isEmpty => None
+        case header => Some(header.map(toHeadCell))
+      }
+    )
+  }
 }

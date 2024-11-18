@@ -16,10 +16,11 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
+import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.govukfrontend.views.Aliases
-import uk.gov.hmrc.ndrrprotofrontend.models.{MessageKey, Postcode, Reference, VoaRow, TableBuilder, VoaAddress,  VoaTable}
-import uk.gov.hmrc.ndrrprotofrontend.views.html.{HelloWorldPage, YourPropertiesView}
+import uk.gov.hmrc.govukfrontend.views.Aliases._
+import uk.gov.hmrc.ndrrprotofrontend.models._
+import uk.gov.hmrc.ndrrprotofrontend.views.html.YourPropertiesView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.{Inject, Singleton}
@@ -31,26 +32,14 @@ class YourPropertiesController @Inject()(
   yourPropertiesView: YourPropertiesView)
     extends FrontendController(mcc) {
 
-  private val data = Seq(
-    Seq("Unit 1, New Road Trading Estate, New Road, Brixham, Devon, TQ5 9BF", "873321005112", "Approved", "Edwin and Son and Son"),
-    Seq("5 Brixham Marina, Berry Head Road, Brixham, Devon, TQ5 9BW", "321929991849999963A", "Approved", "Karens Company")
-  )
-
-  private val headers = Seq(
-    "Address", "Local authority reference", "Status", "Appointed agents"
-  )
-
-  private val table: Aliases.Table = TableBuilder.buildTable(tableBuilder = TableBuilder(
-    tableRows = TableBuilder.createRows(data),headCells = TableBuilder.createHeadCells(headers), caption = None))
-
   def yourProperties: Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(yourPropertiesView(table)))
+    Future.successful(Ok(yourPropertiesView(makeAVisibleTable())))
   }
 
-  def makeAVisibleTable() = throwAway().toVisibleTable()
+  def makeAVisibleTable()(implicit messages: Messages): Table = createVoaTable().buildTable()
 
-  def throwAway(): VoaTable = {
-    val headers = Seq(MessageKey("voa.address.title"), MessageKey("voa.reference.title"))
+  def createVoaTable(): VoaTable = {
+    val headers = Seq(MessageKey("voa.address.title"), MessageKey("voa.reference.title"), MessageKey("voa.trn.title"))
 
     val address0 = VoaAddress(
       line1 = "99",
@@ -71,8 +60,8 @@ class YourPropertiesController @Inject()(
 
     val reference1 = Reference("WillIAm")
 
-    val row0 = VoaRow(Seq(address0, reference0))
-    val row1 = VoaRow(Seq(address1, reference1))
+    val row0 = VoaRow(Seq(address0, reference0, TrnNumber(75)))
+    val row1 = VoaRow(Seq(address1, reference1, TrnNumber(75)))
 
     VoaTable(headers, Seq(row0, row1))
 
