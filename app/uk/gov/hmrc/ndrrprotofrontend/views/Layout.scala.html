@@ -34,7 +34,7 @@
 @(
     pageTitle: Option[String] = None,
     showBackLink: Boolean = true,
-    navigationBarContent: NavigationBarContent,
+    navigationBarContent: Option[NavigationBarContent] = None,
     backLinkOverride: Option[BackLink] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
@@ -44,7 +44,9 @@
 
 @content = {
     <div id="content">
-        @navigationBarComponent(navigationBarContent)
+        @navigationBarContent.map{ content =>
+            @navigationBarComponent(content)
+        }
         @contentBlock
     </div>
 }

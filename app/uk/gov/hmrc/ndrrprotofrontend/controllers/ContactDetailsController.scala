@@ -37,7 +37,7 @@ class ContactDetailsController @Inject()(
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        contactDetailsView(navigationBarContent = testNavBar)
+        contactDetailsView()
       )
     )
   }
