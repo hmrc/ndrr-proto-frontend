@@ -31,7 +31,7 @@ import scala.concurrent.Future
                                        dashboardView: DashboardView)
     extends FrontendController(mcc) {
 
-    lazy val testUser: String = "Jake Reid"
+    lazy val testUser: String = "Rob Best"
 
     private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
       AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.home")))),
