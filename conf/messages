@@ -1,6 +1,13 @@
 service.name = ndrr-proto-frontend
 service.text = This is your new service
 
+#NavigationBar
+nav.home=Account home
+nav.signOut=Sign out
+nav.messages=Messages
+nav.actionNeeded=Action needed
+nav.profileAndSettings=Profile and settings
+
 #Dashboard
 home.heading =Your business rates valuation account
 home.caption =Account home

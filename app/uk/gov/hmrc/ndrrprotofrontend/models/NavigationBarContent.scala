@@ -16,6 +16,14 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-class NavigationBar {
+import play.api.libs.json.{Json, OFormat}
 
+final case class NavigationBarContent(
+                          AccountHome:Option[Link],
+                          NavigationButtons:Option[Seq[Link]]
+                        )
+
+object NavigationBarContent{
+    implicit def jsonFormats: OFormat[NavigationBarContent] =
+    Json.using[Json.WithDefaultValues].format[NavigationBarContent]
 }

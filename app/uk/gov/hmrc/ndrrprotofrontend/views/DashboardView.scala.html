@@ -14,19 +14,19 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.messagesCard
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBar
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.CardComponent
 @import uk.gov.hmrc.ndrrprotofrontend.models.Card
+@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 
 
 @this(
  layout: Layout
 )
 
-@(user:String,cards:Seq[Card])(implicit request: RequestHeader, messages: Messages)
+@(user:String, cards:Seq[Card], navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
-@layout(pageTitle = Some(heading), showBackLink = false) {
+@layout(pageTitle = Some(heading), showBackLink = false, navigationBarContent) {
 
  <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -39,7 +39,7 @@
 
  <div class="flex-container govuk-grid-row">
   @cards.map{ card =>
-   @messagesCard(card)
+   @CardComponent(card)
   }
  </div>
 }

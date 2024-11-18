@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.i18n.Messages
-import uk.gov.hmrc.auth.delegation.Link
+import uk.gov.hmrc.ndrrprotofrontend.models.Link
 import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, Text}
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Empty
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{ActionItem, CardTitle}

@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2024 HM Revenue & Customs
  *
@@ -16,6 +17,9 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-import play.api.mvc.Call
+import play.api.libs.json.{Json, OFormat}
 
-case class Link(href: Call, linkId: String, messageKey: String, visuallyHiddenMessageKey: Option[String] = None)
+case class Link(url: String, text: Option[String], notification: Option[Int] = None)
+object Link {
+  implicit val format: OFormat[Link] = Json.format[Link]
+}

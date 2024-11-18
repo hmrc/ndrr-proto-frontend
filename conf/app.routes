@@ -7,4 +7,5 @@ GET        /assets/*file            controllers.Assets.versioned(path = "/public
 
 GET        /dashboard                       uk.gov.hmrc.ndrrprotofrontend.controllers.DashboardController.show
 GET        /what-you-will-need              uk.gov.hmrc.ndrrprotofrontend.controllers.WhatYouWillNeedController.show
+GET        /ratepayer-properties            uk.gov.hmrc.ndrrprotofrontend.controllers.RatepayerPropertiesController.show
 GET        /confirm-your-contact-details     uk.gov.hmrc.ndrrprotofrontend.controllers.ContactDetailsController.show
