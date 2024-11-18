@@ -19,9 +19,9 @@
 @this(
 layout: Layout
 )
-@(navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
+@()(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
-@layout(pageTitle = Some(heading), showBackLink = false, navigationBarContent) {
+@layout(pageTitle = Some(heading), showBackLink = false) {
 
 }

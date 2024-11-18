@@ -21,7 +21,7 @@
 
 @(pageTitle: String, heading: String, message: String, navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
 
-@layout(pageTitle = Some(pageTitle), navigationBarContent = navigationBarContent) {
+@layout(pageTitle = Some(pageTitle), navigationBarContent = Some(navigationBarContent)) {
     <h1 class="govuk-heading-xl">@{Text(heading).asHtml}</h1>
     <p class="govuk-body">@{Text(message).asHtml}</p>
 }
