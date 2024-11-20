@@ -15,14 +15,15 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.govukfrontend.views.Aliases.Table
+@import uk.gov.hmrc.govukfrontend.views.Aliases._
 
-@this(layout: Layout, govukTable : GovukTable)
+@this(layout: Layout, govukTable : GovukTable, govukSummaryList : GovukSummaryList)
 
-@(propertiesTable: Table)(implicit request: RequestHeader, messages: Messages)
+@(propertiesTable: Table, summaryList: SummaryList)(implicit request: RequestHeader, messages: Messages)
 
 @layout(pageTitle = Some("Your properties")) {
     <h1 class="govuk-heading-xl">Your properties</h1>
     <p class="govuk-body">@{messages("All of your claimed properties are listed here, including any claims that have not yet been approved.")}</p>
     @govukTable(propertiesTable)
+    @govukSummaryList(summaryList)
 }

@@ -4,3 +4,9 @@ service.text = This is your new service
 voa.address.title = Address
 voa.reference.title = Reference
 voa.trn.title = TRN
+
+voa.change.link = Change
+voa.name.title = Name
+voa.dob.title = Date of birth
+voa.contactInformation.title = Contact Details
+voa.contactInformation.enterContact = Enter Contact Details
