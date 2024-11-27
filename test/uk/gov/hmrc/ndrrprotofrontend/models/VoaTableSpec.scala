@@ -62,7 +62,6 @@ class VoaTableSpec extends BaseSpec{
         headings = tableHeading, rows = Seq(row0)
       )
       voaTable.buildTable() shouldBe Table(Seq(Seq(TableRow(content = Text("99, Wibble Rd, Worthing, West Sussex, BN110AA")))), head = Some(Seq(HeadCell(content = Text("Address")))))
-
     }
 
     "will generate a Table with two headers and two row values if set in the voa table" in {
