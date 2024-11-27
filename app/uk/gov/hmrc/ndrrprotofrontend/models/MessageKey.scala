@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ndrrprotofrontend.config
+package uk.gov.hmrc.ndrrprotofrontend.models
 
-import com.google.inject.AbstractModule
+import play.api.libs.json.{Json, OFormat}
 
-class Module extends AbstractModule {
-
-  override def configure(): Unit = {
-
-    bind(classOf[AppConfig]).asEagerSingleton()
-  }
-}
+final case class MessageKey(key: String)

@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ndrrprotofrontend.config
+package uk.gov.hmrc.ndrrprotofrontend.models
 
-import com.google.inject.AbstractModule
-
-class Module extends AbstractModule {
-
-  override def configure(): Unit = {
-
-    bind(classOf[AppConfig]).asEagerSingleton()
-  }
+case class FullName (firstName: String,middleName: Option[String] = None, lastName: String) {
+  override def toString: String = Seq(firstName,middleName.getOrElse(""), lastName).mkString(" ")
 }

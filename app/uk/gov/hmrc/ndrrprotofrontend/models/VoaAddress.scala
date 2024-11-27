@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ndrrprotofrontend.config
+package uk.gov.hmrc.ndrrprotofrontend.models
 
-import com.google.inject.AbstractModule
-
-class Module extends AbstractModule {
-
-  override def configure(): Unit = {
-
-    bind(classOf[AppConfig]).asEagerSingleton()
-  }
+final case class VoaAddress(line1: String, line2: Option[String], town: String, county: Option[String], postcode: Postcode) extends ColumnEntry {
+  override def toString: String = Seq(line1, line2.getOrElse(""), town, county.getOrElse(""), postcode.toString).mkString(", ")
 }

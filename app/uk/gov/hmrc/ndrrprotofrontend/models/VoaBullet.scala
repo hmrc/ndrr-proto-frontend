@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ndrrprotofrontend.config
+package uk.gov.hmrc.ndrrprotofrontend.models
 
-import com.google.inject.AbstractModule
+import play.twirl.api.Html
+import uk.gov.hmrc.govukfrontend.views.Aliases.Value
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 
-class Module extends AbstractModule {
+case class VoaBullet (messageKey: Seq[String])
 
-  override def configure(): Unit = {
+object VoaBullet {
 
-    bind(classOf[AppConfig]).asEagerSingleton()
+  def createBullet(voaBullet: VoaBullet) : Seq[Value] = {
+    voaBullet.messageKey.map{ bullet =>
+      Value(HtmlContent(s"""<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6"><li>$bullet</li></ul>"""))
+    }
   }
+
+
 }

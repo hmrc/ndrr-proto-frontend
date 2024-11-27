@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ndrrprotofrontend.config
+package uk.gov.hmrc.ndrrprotofrontend.models
 
-import com.google.inject.AbstractModule
-
-class Module extends AbstractModule {
-
-  override def configure(): Unit = {
-
-    bind(classOf[AppConfig]).asEagerSingleton()
-  }
+case class PhoneNumber (value: String) {
+  override def toString: String = value.substring(0, 5) + " " + value.substring(5)
 }
