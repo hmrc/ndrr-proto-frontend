@@ -16,14 +16,10 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
-import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.govukfrontend.views.Aliases
+import uk.gov.hmrc.ndrrprotofrontend.models._
 import uk.gov.hmrc.ndrrprotofrontend.views.html.registrationConfirmationView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
-import uk.gov.hmrc.ndrrprotofrontend.models.VoaSummaryListRow.buildSummaryListRow
-import uk.gov.hmrc.govukfrontend.views.Aliases._
-import uk.gov.hmrc.ndrrprotofrontend.models._
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future

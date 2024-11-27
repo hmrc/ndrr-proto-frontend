@@ -17,9 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.auth.core.retrieve.Email
-import uk.gov.hmrc.govukfrontend.views.Aliases.SummaryList
-import uk.gov.hmrc.ndrrprotofrontend.models.{ContactDetails, PhoneNumber, Postcode, Reference, SubmissionDetails, VoaAddress}
+import uk.gov.hmrc.ndrrprotofrontend.models._
 import uk.gov.hmrc.ndrrprotofrontend.views.html.RegistrationCheckAnswersView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -57,16 +55,16 @@ class RegistrationCheckAnswersController @Inject()(
       Ok(
         registrationCheckAnswersView(
           userAnswers:ContactDetails,
-          contactSummaryTable = SummaryList(
-            makeSummaryListRow(Seq(
+          contactSummaryTable =
+            makeSummaryList(Seq(
               contactName(userAnswers.contactName),
               emailAddress(userAnswers.emailAddress),
               phoneNumber(userAnswers.phoneNumber.value),
-              address(userAnswers.address.line1)))),
-          taxpayerReferenceSummary = SummaryList(
+              address(userAnswers.address.line1))),
+          taxpayerReferenceSummary =
             makeSummaryListRow(Seq(
               utr(userAnswers.utr),
-              )))
+              ))
         )
       )
     )

@@ -45,7 +45,7 @@ class ConfirmContactDetailsController @Inject()(
     county = Some("Devon"),
     postcode = Postcode("TQ59BW")
   )
-  val row1 = VoaSummaryListRow("Contact name",Seq.empty,Some(Link(Call("GET", "some-href"), "linkId", "voa.contactInformation.enterContact")))
+  val row1 = VoaSummaryListRow("Contact name",Seq.empty,Some(Link(url ="some-href", linkId ="linkId", messageKey ="voa.contactInformation.enterContact")))
 
 
   def confirmYourContactDetails: Action[AnyContent] = Action.async { implicit request =>
