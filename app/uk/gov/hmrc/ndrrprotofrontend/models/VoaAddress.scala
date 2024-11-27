@@ -16,6 +16,12 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
+import play.api.libs.json.{Json, OFormat}
+
 final case class VoaAddress(line1: String, line2: Option[String], town: String, county: Option[String], postcode: Postcode) extends ColumnEntry {
   override def toString: String = Seq(line1, line2.getOrElse(""), town, county.getOrElse(""), postcode.toString).mkString(", ")
+}
+
+object VoaAddress{
+  implicit val format: OFormat[VoaAddress] = Json.format[VoaAddress]
 }

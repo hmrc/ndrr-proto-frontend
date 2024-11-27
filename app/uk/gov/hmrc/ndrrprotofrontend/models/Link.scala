@@ -19,7 +19,7 @@ package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.libs.json.{Json, OFormat}
 
-case class Link(url: String, text: Option[String], notification: Option[Int] = None)
+case class Link(url: String, messageKey: String, linkId: String, visuallyHiddenMessageKey: Option[String] = None, notification: Option[Int] = None)
 object Link {
   implicit val format: OFormat[Link] = Json.format[Link]
 }

@@ -18,7 +18,7 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Card, DashboardCard, NavigationBarContent, Link}
+import uk.gov.hmrc.ndrrprotofrontend.models.{Card, DashboardCard, Link, MessageKey, NavigationBarContent}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.DashboardView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -34,12 +34,12 @@ import scala.concurrent.Future
     lazy val testUser: String = "Rob Best"
 
     private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
-      AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.home")))),
+      AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.home", linkId = "")),
       NavigationButtons = Some(Seq(
-        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.messages")), Some(3)),
-        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.actionNeeded")), Some(1)),
-        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.profileAndSettings"))),
-        Link(url = "/ndrr-proto-frontend/dashboard", Some(messages("nav.signOut"))),
+        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.messages", linkId = "", notification = Some(3)),
+        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
+        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.profileAndSettings", linkId = ""),
+        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.signOut", linkId = ""),
       )))
 
     private def hasPropertyCheck(userProperty: Option[Int])(implicit messages: Messages):Seq[Card] = {
@@ -47,7 +47,8 @@ import scala.concurrent.Future
         case Some(properties) => Seq(
           DashboardCard.card(DashboardCard.propertiesCard(
             link = Link(
-              text = Some("home.propertiesCard.manageProperties"),
+              messageKey = "home.propertiesCard.manageProperties",
+              linkId = "",
               url = "/ndrr-proto-frontend/ratepayer-properties"))),
           DashboardCard.card(DashboardCard.reportChangeCard()),
         )
@@ -55,7 +56,8 @@ import scala.concurrent.Future
           DashboardCard.card(
             DashboardCard.propertiesCard(
               link = Link(
-                text = Some("home.propertiesCard.addProperty"),
+                messageKey = "home.propertiesCard.addProperty",
+                linkId = "",
                 url = "/ndrr-proto-frontend/what-you-will-need"),
                 tag = Some("home.propertiesCard.tag"))
           )

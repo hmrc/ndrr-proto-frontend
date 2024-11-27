@@ -59,10 +59,7 @@ object DashboardCard {
       ActionItem(
         href       = link.url,
         attributes     = Map("id" -> "propertiesCard-addProperty"),
-        content = link.text match {
-          case Some(text) => Text(Messages(text))
-          case None => Empty
-        }
+        content = Text(link.messageKey)
       ))
     ))
   }

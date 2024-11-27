@@ -22,9 +22,7 @@
     @navigationBar.AccountHome.map{ Home =>
     <a href=@Home.url class="hmrc-account-menu__link hmrc-account-menu__link--active  hmrc-account-menu__link--home">
             <span class="hmrc-account-icon hmrc-account-icon--home">
-                @Home.text.map{ message =>
-                    @message
-                }
+                @messages(Home.messageKey)
             </span>
     </a>
     }
@@ -39,9 +37,7 @@
                         @button.notification.map{ notification =>
                             <span class="hmrc-notification-badge">@notification</span>
                         }
-                        @button.text.map{ message =>
-                            @message
-                        }
+                        @messages(button.messageKey)
                     </a>
                 </li>
             }

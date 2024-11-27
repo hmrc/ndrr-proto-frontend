@@ -18,10 +18,11 @@ package uk.gov.hmrc.ndrrprotofrontend.testSupport
 
 import org.apache.pekko.stream.Materializer
 import org.scalatest.freespec.AnyFreeSpecLike
+import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.play.guice.GuiceOneServerPerSuite
-import play.api.{Application, Mode}
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.test.{DefaultTestServerFactory, RunningServer}
+import play.api.{Application, Mode}
 import play.core.server.ServerConfig
 import uk.gov.hmrc.http.test.WireMockSupport
 
@@ -30,7 +31,7 @@ import scala.concurrent.ExecutionContext
 trait BaseSpec extends AnyFreeSpecLike
   with GuiceOneServerPerSuite
   with WireMockSupport
-  with RichMatchers { self =>
+  with Matchers { self =>
 
   implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
   implicit lazy val materializer: Materializer = app.materializer
@@ -67,4 +68,3 @@ trait BaseSpec extends AnyFreeSpecLike
     }
   }
 }
-

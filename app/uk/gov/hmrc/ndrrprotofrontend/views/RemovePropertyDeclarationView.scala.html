@@ -1,0 +1,42 @@
+@*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
+
+@this(
+layout: Layout
+)
+
+@(navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
+
+@heading = @{messages("home.heading")}
+@layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  Some(navigationBarContent)) {
+
+ <h1 class="govuk-heading-l">
+  @messages("removeProperty.declaration")
+ </h1>
+
+ <p class="govuk-body">By submitting this request to remove a  property, you declare that:</p>
+
+ <ul class="govuk-list govuk-list--bullet">
+  <li>to the best of your knowledge and belief, the information given in this form is correct and complete</li>
+  <li>you understand that if you have made a false statement in this form, you may be liable to a penalty, and that false statements may also lead to prosecution</li>
+ </ul>
+
+ <a href="http://localhost:9001/ndrr-proto-frontend/remove-property/submit" role="button" class="govuk-button">@messages("acceptAndSend")</a>
+}
