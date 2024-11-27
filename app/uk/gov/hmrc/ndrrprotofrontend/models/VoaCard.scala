@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-case class FullName (firstName: String,middleName: Option[String] = None, lastName: String) {
-  override def toString: String = Seq(firstName,middleName.getOrElse(""), lastName).mkString(" ")
-}
+import play.api.i18n.Messages
+import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{ActionItem, Actions, Card, CardTitle}
+
+case class VoaCard (titleMessageKey: String, headingLink: Option[Seq[Link]])

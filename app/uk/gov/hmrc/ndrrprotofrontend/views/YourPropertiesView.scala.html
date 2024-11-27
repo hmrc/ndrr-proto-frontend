@@ -21,7 +21,7 @@
 
 @(propertiesTable: Table, summaryList: SummaryList)(implicit request: RequestHeader, messages: Messages)
 
-@layout(pageTitle = Some("Your properties")) {
+@layout(pageTitle = Some("Confirm your contact details")) {
     <h1 class="govuk-heading-xl">Your properties</h1>
     <p class="govuk-body">@{messages("All of your claimed properties are listed here, including any claims that have not yet been approved.")}</p>
     @govukTable(propertiesTable)

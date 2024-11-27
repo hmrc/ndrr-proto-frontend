@@ -10,3 +10,4 @@ voa.name.title = Name
 voa.dob.title = Date of birth
 voa.contactInformation.title = Contact Details
 voa.contactInformation.enterContact = Enter Contact Details
+voa.cardTitle.leadTenant = Lead Tenant

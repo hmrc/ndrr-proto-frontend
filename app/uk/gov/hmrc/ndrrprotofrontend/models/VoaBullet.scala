@@ -16,6 +16,19 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-case class FullName (firstName: String,middleName: Option[String] = None, lastName: String) {
-  override def toString: String = Seq(firstName,middleName.getOrElse(""), lastName).mkString(" ")
+import play.twirl.api.Html
+import uk.gov.hmrc.govukfrontend.views.Aliases.Value
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
+
+case class VoaBullet (messageKey: Seq[String])
+
+object VoaBullet {
+
+  def createBullet(voaBullet: VoaBullet) : Seq[Value] = {
+    voaBullet.messageKey.map{ bullet =>
+      Value(HtmlContent(s"""<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6"><li>$bullet</li></ul>"""))
+    }
+  }
+
+
 }

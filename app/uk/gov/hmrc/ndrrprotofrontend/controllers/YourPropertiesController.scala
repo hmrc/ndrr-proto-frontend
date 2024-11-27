@@ -20,14 +20,13 @@ import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
 import uk.gov.hmrc.govukfrontend.views.Aliases
 import uk.gov.hmrc.govukfrontend.views.Aliases._
-import uk.gov.hmrc.ndrrprotofrontend.models.VoaSummaryListRow.buildSummaryListRow
+import uk.gov.hmrc.ndrrprotofrontend.models.VoaSummaryListRow.buildSummaryList
 import uk.gov.hmrc.ndrrprotofrontend.models._
 import uk.gov.hmrc.ndrrprotofrontend.views.html.YourPropertiesView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.Future
-import scala.reflect.macros.Aliases
 
 @Singleton
 class YourPropertiesController @Inject()(
@@ -36,7 +35,7 @@ class YourPropertiesController @Inject()(
     extends FrontendController(mcc) {
 
   def yourProperties: Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(yourPropertiesView(makeAVisibleTable(), SummaryList(makeSummaryListRow(Seq(row1,row2, row3, row4))))))
+    Future.successful(Ok(yourPropertiesView(makeAVisibleTable(), makeSummaryList(Seq(row1,row2,row3,row4), Some(card)))))
   }
 
   def makeAVisibleTable()(implicit messages: Messages): Table = createVoaTable().buildTable()
@@ -71,8 +70,7 @@ class YourPropertiesController @Inject()(
 
   }
 
-  def makeSummaryListRow(row: Seq[VoaSummaryListRow])(implicit messages: Messages): Seq[Aliases.SummaryListRow] = row.map(rows => buildSummaryListRow(rows))
-
+  private def makeSummaryList(row: Seq[VoaSummaryListRow], card: Option[VoaCard] = None)(implicit messages: Messages): Aliases.SummaryList = buildSummaryList(row,card)
   val address1 = VoaAddress(
     line1 = "87a",
     line2 = Some("High St"),
@@ -80,12 +78,13 @@ class YourPropertiesController @Inject()(
     county = Some("Kent"),
     postcode = Postcode("HY270AA")
   )
-  val fullName: FullName = FullName("Sarah","Philips")
+  val fullName: FullName = FullName("Sarah",None,"Philips")
   val dateOfBirth: DateOfBirth = DateOfBirth(5,"January", 1978)
-  val row1 = VoaSummaryListRow("voa.name.title",Seq(fullName.toString),Some(Link(Call("GET", "some-href"), "linkId", "voa.change.link")))
+  val row1: VoaSummaryListRow = VoaSummaryListRow("voa.name.title",Seq(fullName.toString),Some(Link(Call("GET", "some-href"), "linkId", "voa.change.link")))
   val row2 = VoaSummaryListRow("voa.dob.title",Seq(dateOfBirth.toString),Some(Link(Call("GET", "some-href"), "linkId", "voa.change.link")))
   val row3 = VoaSummaryListRow("voa.address.title",Seq(address1.line1,address1.town,address1.postcode.toString),Some(Link(Call("GET", "some-href"), "linkId", "voa.change.link")))
   val row4 = VoaSummaryListRow("voa.contactInformation.title",Seq.empty,Some(Link(Call("GET", "some-href"), "linkId", "voa.contactInformation.enterContact")))
-
-
+  val card = VoaCard("Contact Info",Some(Seq(link1,link2)))
+  private lazy val link1 = Link(Call("GET", "some-href"), "linkId", "voa.contactInformation.enterContact")
+  private lazy val link2: Link = Link(Call("GET", "some-href"), "linkId", "voa.contactInformation.enterContact")
 }
