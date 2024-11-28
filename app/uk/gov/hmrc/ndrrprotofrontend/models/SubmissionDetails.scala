@@ -18,7 +18,7 @@ package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.libs.json.{Json, OFormat}
 
-case class SubmissionDetails(requestTitleKey: String, requestRefDescriptionKey: String, reference:Reference, userEmail:Option[String] = None)
+final case class SubmissionDetails(requestTitleKey: String, requestRefDescriptionKey: String, reference:Reference, userEmail:Option[String] = None)
 object SubmissionDetails {
   implicit val format: OFormat[SubmissionDetails] = Json.format[SubmissionDetails]
 }

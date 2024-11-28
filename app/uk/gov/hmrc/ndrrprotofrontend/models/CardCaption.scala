@@ -19,7 +19,7 @@ package uk.gov.hmrc.ndrrprotofrontend.models
 import play.api.libs.json.{Json, OFormat}
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{Content, Empty}
 
-case class CardCaption(
+final case class CardCaption(
                       content: Content = Empty,
                       headingLevel: Option[Int] = None,
                       classes: String = ""

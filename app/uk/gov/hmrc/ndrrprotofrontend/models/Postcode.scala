@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.data.Forms.{mapping, text}
 import play.api.libs.json.{Json, OFormat}
 
-case class Postcode(value: String){
+final case class Postcode(value: String){
   override def toString: String = value
 }
 

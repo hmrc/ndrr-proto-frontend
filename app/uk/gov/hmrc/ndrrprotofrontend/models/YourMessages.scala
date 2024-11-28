@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-case class YourMessages(
+final case class YourMessages(
                        titleKey: String = "home.messagesCard.title",
                        hasMessages: Boolean,
                        unreadMessageCount: Long
