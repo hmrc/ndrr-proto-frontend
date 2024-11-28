@@ -35,7 +35,7 @@ object VoaSummaryListRow {
             actions = voaSummaryListRow.changeLink match {
               case Some(changeLink) => Some(
                 Actions(items = Seq(ActionItem(
-                  href               = changeLink.url,
+                  href               = changeLink.href.url,
                   content            = Text(Messages(changeLink.messageKey)),
                   visuallyHiddenText = changeLink.visuallyHiddenMessageKey,
                   attributes         = Map(
@@ -49,7 +49,7 @@ object VoaSummaryListRow {
           case _ => SummaryListRow(
             key   = Key(content = Text(Messages(voaSummaryListRow.titleMessageKey))),
             value = voaSummaryListRow.changeLink match {
-              case Some(link) => Value(HtmlContent(s"""<a id="${link.linkId}" href="${link.url}" class="govuk-link">${messages(link.messageKey)}</a>"""))
+              case Some(link) => Value(HtmlContent(s"""<a id="${link.linkId}" href="${link.href.url}" class="govuk-link">${messages(link.messageKey)}</a>"""))
               case None       => Value()
             }
           )
@@ -64,7 +64,7 @@ object VoaSummaryListRow {
                 Actions(
                   items = links.map { linkOption =>
                       ActionItem(
-                        href = linkOption.url,
+                        href = linkOption.href.url,
                         content = Text(Messages(linkOption.messageKey)),
                         visuallyHiddenText = Some(linkOption.visuallyHiddenMessageKey.getOrElse(""))
                       )

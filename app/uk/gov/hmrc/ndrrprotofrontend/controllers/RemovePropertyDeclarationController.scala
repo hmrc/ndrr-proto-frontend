@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
 import uk.gov.hmrc.ndrrprotofrontend.models.{Link, MessageKey, NavigationBarContent, Reference, SubmissionDetails}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.RemovePropertyDeclarationView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -32,13 +32,13 @@ class RemovePropertyDeclarationController @Inject()(
 extends FrontendController(mcc) {
   private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
     AccountHome = Some(
-      Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.home", linkId = "")
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = "")
     ),
     NavigationButtons = Some(Seq(
-      Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.messages", linkId = "", notification = Some(3)),
-      Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
-      Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.profileAndSettings", linkId = ""),
-      Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.signOut", linkId = ""),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.messages", linkId = "", notification = Some(3)),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.profileAndSettings", linkId = ""),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.signOut", linkId = ""),
     ))
   )
 

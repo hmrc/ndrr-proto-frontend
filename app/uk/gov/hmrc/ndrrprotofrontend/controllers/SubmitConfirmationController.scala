@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
 import uk.gov.hmrc.ndrrprotofrontend.models._
 import uk.gov.hmrc.ndrrprotofrontend.views.html.SubmitConfirmation
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -31,12 +31,12 @@ class SubmitConfirmationController @Inject()(
                                              submitConfirmation: SubmitConfirmation)
 extends FrontendController(mcc) with Common {
   private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.home",linkId = "")),
+    AccountHome = Some(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home",linkId = "")),
       NavigationButtons = Some(Seq(
-        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.messages",linkId = "", notification = Some(3)),
-        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
-        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.profileAndSettings",linkId = ""),
-        Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.signOut",linkId = "")
+        Link(Call("GET","/ndrr-proto-frontend/dashboard"), messageKey = "nav.messages",linkId = "", notification = Some(3)),
+        Link(Call(method = "GET",url = "some-href"), messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
+        Link(Call(method = "GET",url = "some-href"), messageKey = "nav.profileAndSettings",linkId = ""),
+        Link(Call(method = "GET",url = "some-href"), messageKey = "nav.signOut",linkId = "")
     ))
   )
 

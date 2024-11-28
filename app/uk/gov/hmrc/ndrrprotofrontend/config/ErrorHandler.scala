@@ -21,7 +21,7 @@ import play.api.http.HttpErrorHandler
 
 import javax.inject.{Inject, Singleton}
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
-import play.api.mvc.{Request, RequestHeader}
+import play.api.mvc.{Call, Request, RequestHeader}
 import play.twirl.api.Html
 import uk.gov.hmrc.ndrrprotofrontend.models.{Link, MessageKey, NavigationBarContent}
 import uk.gov.hmrc.play.bootstrap.frontend.http.FrontendErrorHandler
@@ -38,8 +38,8 @@ class ErrorHandler @Inject()(
 
 
   private def testNavBar: NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.home", linkId = "")),
-    NavigationButtons = Some(Seq(Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.home", linkId = ""))))
+    AccountHome = Some(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = "")),
+    NavigationButtons = Some(Seq(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = ""))))
 
   override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit request: RequestHeader): Future[Html] =
     Future.successful(errorTemplate(pageTitle, heading, message))

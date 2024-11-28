@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
-import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
 import uk.gov.hmrc.ndrrprotofrontend.models.{Link, MessageKey, NavigationBarContent}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.WhatYouWillNeedView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
@@ -29,11 +29,11 @@ import scala.concurrent.Future
 class WhatYouWillNeedController @Inject()(
                                           mcc: MessagesControllerComponents,
                                           whatYouWillNeedView: WhatYouWillNeedView)
-  extends FrontendController(mcc) {
-  private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.home", linkId = "")),
-    NavigationButtons = Some(Seq(Link(url = "/ndrr-proto-frontend/dashboard", messageKey = "nav.home", linkId = "")))
-  )
+  extends FrontendController(mcc){
+
+  private def testNavBar: NavigationBarContent = NavigationBarContent(
+    AccountHome = Some(Link(Call(method = "GET",url = "controllers.routes.registration.email.url"), messageKey = "nav.home", linkId = "")),
+    NavigationButtons = Some(Seq(Link(Call(method = "GET",url = "controllers.routes.registration.email.url"),messageKey =  "nav.home", linkId = ""))))
 
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(

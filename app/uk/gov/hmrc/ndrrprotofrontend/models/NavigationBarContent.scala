@@ -22,8 +22,3 @@ final case class NavigationBarContent(
                           AccountHome:Option[Link],
                           NavigationButtons:Option[Seq[Link]]
                         )
-
-object NavigationBarContent{
-    implicit def jsonFormats: OFormat[NavigationBarContent] =
-    Json.using[Json.WithDefaultValues].format[NavigationBarContent]
-}

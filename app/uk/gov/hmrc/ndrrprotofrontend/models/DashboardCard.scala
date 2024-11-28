@@ -57,7 +57,7 @@ object DashboardCard {
     tag = tag,
     links = Some(Seq(
       ActionItem(
-        href       = link.url,
+        href       = link.href.url,
         attributes     = Map("id" -> "propertiesCard-addProperty"),
         content = Text(link.messageKey)
       ))
