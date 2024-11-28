@@ -17,8 +17,9 @@
 package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.i18n.Messages
+import play.api.mvc.Call
 import uk.gov.hmrc.ndrrprotofrontend.models.Link
-import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, Text}
+import uk.gov.hmrc.govukfrontend.views.Aliases.Text
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Empty
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{ActionItem, CardTitle}
 import uk.gov.hmrc.govukfrontend.views.viewmodels.tag.Tag
@@ -28,7 +29,7 @@ final case class DashboardCard(
                                 captionKey:  Option[String] = None,
                                 captionKey2: Option[String] = None,
                                 tag: Option[String] = None,
-                                links: Option[Seq[ActionItem]] = None
+                                links: Option[Seq[Link]] = None
                               )(implicit messages: Messages)
 
 object DashboardCard {
@@ -38,14 +39,14 @@ object DashboardCard {
     captionKey =  Some("home.reportChangeCard.caption"),
     captionKey2 =  Some("home.reportChangeCard.caption2"),
     links = Some(Seq(
-      ActionItem(
-        href       = "http://SomeLink1",
-        attributes     = Map("id" -> "report-change-link1"),
-        content = Text(Messages("home.reportChangeCard.link1")),
-      ),ActionItem(
-        href       = "http://SomeLink1",
-        attributes     = Map("id" -> "report-change-link2"),
-        content = Text(Messages("home.reportChangeCard.link2")),
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.reportChangeCard.link1",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.reportChangeCard.link2",
       ))
     ))
   }
@@ -56,10 +57,10 @@ object DashboardCard {
     captionKey2 =  Some("home.propertiesCard.caption2"),
     tag = tag,
     links = Some(Seq(
-      ActionItem(
-        href       = link.href.url,
-        attributes     = Map("id" -> "propertiesCard-addProperty"),
-        content = Text(link.messageKey)
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = link.messageKey
       ))
     ))
   }
@@ -68,40 +69,40 @@ object DashboardCard {
     titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
     captionKey =  Some("home.messagesCard.caption"),
     links = Some(Seq(
-      ActionItem(
-      href       = "http://SomeLink1",
-      attributes     = Map("id" -> "direct-debit-link-both-primary"),
-      content = Text(Messages("home.messagesCard.single")),
-    ),ActionItem(
-      href       = "http://SomeLink2",
-      attributes     = Map("id" -> "direct-debit-link-both-primary"),
-      content = Text(Messages("home.messagesCard.viewAllMessages")),
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.single",
+    ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.viewAllMessages",
     ))
     ))
   }
   def testDataHelpCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
     titleKey = "home.helpAndGuidanceCard.title",
     links = Some(Seq(
-      ActionItem(
-        href       = "http://SomeLink1",
-        attributes     = Map("id" -> "direct-debit-link-both-primary"),
-        content = Text(Messages("home.helpAndGuidanceCard.link1")),
-      ),ActionItem(
-        href       = "http://SomeLink2",
-        attributes     = Map("id" -> "direct-debit-link-both-primary"),
-        content = Text(Messages("home.helpAndGuidanceCard.link2")),
-      ),ActionItem(
-        href       = "http://SomeLink2",
-        attributes     = Map("id" -> "direct-debit-link-both-primary"),
-        content = Text(Messages("home.helpAndGuidanceCard.link3")),
-      ),ActionItem(
-        href       = "http://SomeLink2",
-        attributes     = Map("id" -> "direct-debit-link-both-primary"),
-        content = Text(Messages("home.helpAndGuidanceCard.link4")),
-      ),ActionItem(
-        href       = "http://SomeLink2",
-        attributes     = Map("id" -> "direct-debit-link-both-primary"),
-        content = Text(Messages("home.helpAndGuidanceCard.link5")),
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link1",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link2",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link3",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link4",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link5",
       ))
     ))
   }
@@ -110,14 +111,14 @@ object DashboardCard {
     titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
     captionKey =  Some("home.messagesCard.caption"),
     links = Some(Seq(
-      ActionItem(
-        href       = "http://SomeLink1",
-        attributes     = Map("id" -> "direct-debit-link-both-primary"),
-        content = Text(Messages("home.messagesCard.single")),
-      ),ActionItem(
-        href       = "http://SomeLink2",
-        attributes     = Map("id" -> "direct-debit-link-both-primary"),
-        content = Text(Messages("home.messagesCard.viewAllMessages")),
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.single",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.viewAllMessages",
       ))
     ))
   }
@@ -138,7 +139,7 @@ object DashboardCard {
         case None => None
       },
       links = dashboardCard.links match {
-        case Some(link) => Some(Actions(classes = "",items = link))
+        case Some(link) => Some(Links(classes = "", links = link))
         case None => None
       }
     )

@@ -40,12 +40,7 @@ case class Card(
                  captionKey: Option[CardCaption] = None,
                  captionKey2: Option[CardCaption] = None,
                  tag: Option[Tag] = None,
-                 links: Option[Actions] = None,
+                 links: Option[Links] = None,
                  classes: String = ""
                )
-
-object Card {
-  implicit def jsonFormats: OFormat[Card] =
-    Json.using[Json.WithDefaultValues].format[Card]
-}
 

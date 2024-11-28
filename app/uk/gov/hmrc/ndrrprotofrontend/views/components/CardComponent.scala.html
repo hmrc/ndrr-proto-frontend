@@ -18,7 +18,7 @@
 @import uk.gov.hmrc.ndrrprotofrontend.controllers._
 @import uk.gov.hmrc.ndrrprotofrontend.models.Card
 
-@(dashboardCard: Card)()
+@(dashboardCard: Card)(implicit messages: Messages)
 
 <div id="" class="card">
 
@@ -54,17 +54,17 @@
         @dashboardCard.links match {
             case None => {}
             case Some(cardAction) => {
-                @if(cardAction.items.nonEmpty) {
-                    @if(cardAction.items.length == 1) {
+                @if(cardAction.links.nonEmpty) {
+                    @if(cardAction.links.length == 1) {
                         <div class="@toClasses("govuk-link", cardAction.classes)">
-                        @actionLink(cardAction.items.head, Some(cardAction.items.head.content))
+                            @LinkComponent(cardAction.links.head)
                         </div>
                     } else {
                         <ul class="govuk-list">
                             <a class="govuk-link">
-                                @cardAction.items.map { item =>
+                                @cardAction.links.map { link =>
                                 <li>
-                                    @actionLink(item, Some(item.content))
+                                    @LinkComponent(link)
                                 </li>
                                 }
                             </a>
