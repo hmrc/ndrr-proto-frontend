@@ -17,11 +17,12 @@
 package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.i18n.{Messages, MessagesApi}
-import play.api.mvc.{AnyContentAsEmpty, Cookie}
+import play.api.mvc.{AnyContentAsEmpty, Call, Cookie}
 import play.api.test.FakeRequest
-import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, CardTitle, Text}
+import uk.gov.hmrc.govukfrontend.views.Aliases.{CardTitle, Text}
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.ActionItem
 import uk.gov.hmrc.ndrrprotofrontend.testSupport.BaseSpec
+import uk.gov.hmrc.ndrrprotofrontend.models._
 
 class DashboardCardSpec extends BaseSpec {
   def messagesApi: MessagesApi = app.injector.instanceOf[MessagesApi]
@@ -80,14 +81,14 @@ class DashboardCardSpec extends BaseSpec {
           captionKey = Some(cardCaptionKey),
           links =
         Some(Seq(
-        ActionItem(
-          href       = "http://SomeLink1",
-          attributes     = Map("id" -> "direct-debit-link-both-primary"),
-          content = Text(Messages(cardLinkMessage1)),
-        ),ActionItem(
-          href       = "http://SomeLink2",
-          attributes     = Map("id" -> "direct-debit-link-both-primary"),
-          content = Text(Messages(cardLinkMessage2)),
+          Link(
+            href       = Call(method = "GET",url = "some-href"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage1,
+        ),Link(
+            href       = Call(method = "GET",url = "some-href"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage2,
         ))
       ))
       val result = DashboardCard.card(dashboardCard)
@@ -95,15 +96,15 @@ class DashboardCardSpec extends BaseSpec {
       result shouldBe Card(
         titleKey =  Some(CardTitle(content = Text(cardTittleKeyExpected))),
         captionKey =  Some(CardCaption(content = Text(cardCaptionKeyExpected))),
-        links = Some(Actions(classes = "", items = Seq(
-          ActionItem(
-            href       = "http://SomeLink1",
-            attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages(cardLinkMessage1Expected)),
-          ),ActionItem(
-            href       = "http://SomeLink2",
-            attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages(cardLinkMessage2Expected)),
+        links = Some(Links(classes = "", links = Seq(
+          Link(
+            href       = Call(method = "GET",url = "some-href"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage1,
+          ),Link(
+            href       = Call(method = "GET",url = "some-href"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage2,
           )
         ))))
     }
@@ -117,10 +118,10 @@ class DashboardCardSpec extends BaseSpec {
           captionKey2 = Some(cardCaption2Key),
           links =
             Some(Seq(
-              ActionItem(
-                href       = "http://SomeLink1",
-                attributes     = Map("id" -> "direct-debit-link-both-primary"),
-                content = Text(Messages(cardLinkMessage1)),
+              Link(
+                href       = Call(method = "GET",url = "some-href"),
+                linkId     = "direct-debit-link-both-primary",
+                messageKey = cardLinkMessage1,
               ))
             ))
       val result = DashboardCard.card(dashboardCard)
@@ -129,11 +130,11 @@ class DashboardCardSpec extends BaseSpec {
         titleKey =  Some(CardTitle(content = Text(cardTittleKeyExpected))),
         captionKey =  Some(CardCaption(content = Text(cardCaptionKeyExpected))),
         captionKey2 =  Some(CardCaption(content = Text(cardCaption2KeyExpected))),
-        links = Some(Actions(classes = "", items = Seq(
-          ActionItem(
-            href       = "http://SomeLink1",
-            attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages(cardLinkMessage1Expected)),
+        links = Some(Links(classes = "", links = Seq(
+          Link(
+            href       =  Call(method = "GET",url = "some-href"),
+            linkId     =  "direct-debit-link-both-primary",
+            messageKey    =  cardLinkMessage1,
           )
         ))))
     }
@@ -169,14 +170,14 @@ class DashboardCardSpec extends BaseSpec {
         titleKey = cardTittleKey,
         captionKey = Some(cardCaptionKey),
         links = Some(Seq(
-          ActionItem(
-            href       = "http://SomeLink1",
-            attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages(cardLinkMessage1)),
-          ),ActionItem(
-            href       = "http://SomeLink2",
-            attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages(cardLinkMessage2)),
+          Link(
+            href       =  Call(method = "GET",url = "some-href"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage1,
+          ),Link(
+            href       =  Call(method = "GET",url = "some-href-2"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage2,
           ))
         ))
       val result = DashboardCard.card(dashboardCard)
@@ -184,15 +185,15 @@ class DashboardCardSpec extends BaseSpec {
       result shouldBe Card(
         titleKey =  Some(CardTitle(content = Text(cardTittleKeyExpectedWelsh))),
         captionKey =  Some(CardCaption(content = Text(cardCaptionKeyExpectedWelsh))),
-        links = Some(Actions(classes = "", items = Seq(
-          ActionItem(
-            href       = "http://SomeLink1",
-            attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages(cardLinkMessage1ExpectedWelsh)),
-          ),ActionItem(
-            href       = "http://SomeLink2",
-            attributes     = Map("id" -> "direct-debit-link-both-primary"),
-            content = Text(Messages(cardLinkMessage2ExpectedWelsh)),
+        links = Some(Links(classes = "", links = Seq(
+          Link(
+            href       =  Call(method = "GET",url = "some-href"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage1,
+          ),Link(
+            href       =  Call(method = "GET",url = "some-href-2"),
+            linkId     = "direct-debit-link-both-primary",
+            messageKey = cardLinkMessage2,
           )
         ))))
     }

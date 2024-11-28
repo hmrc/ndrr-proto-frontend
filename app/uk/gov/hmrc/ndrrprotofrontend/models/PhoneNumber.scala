@@ -20,7 +20,7 @@ import play.api.data.Form
 import play.api.data.Forms.{mapping, text}
 import play.api.libs.json.{Json, OFormat}
 
-case class PhoneNumber(value: String)
+final case class PhoneNumber(value: String)
 
 object PhoneNumber extends CommonFormValidators {
 

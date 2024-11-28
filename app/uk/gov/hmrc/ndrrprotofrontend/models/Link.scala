@@ -18,4 +18,10 @@ package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.mvc.Call
 
-final case class Link(href: Call, messageKey: String, linkId: String, visuallyHiddenMessageKey: Option[String] = None, notification: Option[Int] = None)
+final case class Link(
+                       href: Call,
+                       messageKey: String,
+                       linkId: String,
+                       visuallyHiddenMessageKey: Option[String] = None,
+                       notification: Option[Int] = None
+                     )
