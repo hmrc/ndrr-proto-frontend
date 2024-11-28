@@ -4,3 +4,18 @@
 GET        /your-properties         uk.gov.hmrc.ndrrprotofrontend.controllers.YourPropertiesController.yourProperties
 GET        /confirm-your-contact-details        uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmContactDetailsController.confirmYourContactDetails
 GET        /assets/*file            controllers.Assets.versioned(path = "/public", file: Asset)
+
+GET        /dashboard                                      uk.gov.hmrc.ndrrprotofrontend.controllers.DashboardController.show
+GET        /what-you-will-need                             uk.gov.hmrc.ndrrprotofrontend.controllers.WhatYouWillNeedController.show
+GET        /ratepayer-properties                           uk.gov.hmrc.ndrrprotofrontend.controllers.RatepayerPropertiesController.show
+GET        /confirm-your-contact-details                    uk.gov.hmrc.ndrrprotofrontend.controllers.ContactDetailsController.show
+GET        /remove-property/submit                         uk.gov.hmrc.ndrrprotofrontend.controllers.SubmitConfirmationController.show
+GET        /remove-property/decleration                    uk.gov.hmrc.ndrrprotofrontend.controllers.RemovePropertyDeclarationController.show
+GET        /registration/confirmation                       uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationConfirmationController.show
+GET        /registration/phone-number                      uk.gov.hmrc.ndrrprotofrontend.controllers.PhoneNumberController.onPageLoad
+POST       /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.PhoneNumberController.submit
+GET        /registration/email                             uk.gov.hmrc.ndrrprotofrontend.controllers.EmailController.onPageLoad
+POST       /registration/email                             uk.gov.hmrc.ndrrprotofrontend.controllers.EmailController.submit
+GET        /registration/address                           uk.gov.hmrc.ndrrprotofrontend.controllers.AddressController.onPageLoad
+POST       /registration/address                           uk.gov.hmrc.ndrrprotofrontend.controllers.AddressController.submit
+GET        /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationCheckAnswersController.show

@@ -16,8 +16,29 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
+import play.api.data.Form
+import play.api.data.Forms.{mapping, text}
 import play.api.libs.json.{Json, OFormat}
 
-final case class Postcode(value: String) {
+final case class Postcode(value: String){
   override def toString: String = value
+}
+
+object Postcode extends CommonFormValidators {
+
+  implicit val format: OFormat[Postcode] = Json.format[Postcode]
+
+  lazy val postcodeEmptyError    = "registration.postcode.empty.error"
+  lazy val postcodeInvalidFormat = "registration.postcode.invalidFormat.error"
+  val postcode                   = "postcode.value"
+
+  def form(): Form[Postcode] =
+    Form(
+      mapping(
+        postcode -> text()
+          .verifying(postcodeEmptyError, isNonEmpty)
+          .verifying(postcodeInvalidFormat, isValidPostcode)
+      )(Postcode.apply)(Postcode.unapply)
+    )
+
 }

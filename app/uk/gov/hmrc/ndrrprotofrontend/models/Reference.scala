@@ -16,4 +16,9 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
+import play.api.libs.json.{Json, OFormat}
+
 final case class Reference(value: String) extends ColumnEntry
+object Reference {
+  implicit val format: OFormat[Reference] = Json.format[Reference]
+}

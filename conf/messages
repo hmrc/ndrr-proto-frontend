@@ -1,6 +1,123 @@
 service.name = ndrr-proto-frontend
 service.text = This is your new service
 
+#common
+acceptAndSend=Accept and send
+continue=Continue
+printOrSave=Print or save this page
+
+#NavigationBar
+nav.home=Account home
+nav.signOut=Sign out
+nav.messages=Messages
+nav.actionNeeded=Action needed
+nav.profileAndSettings=Profile and settings
+
+#Dashboard
+home.heading=Your business rates valuation account
+home.caption=Account home
+
+#propertiesCard
+home.propertiesCard.title=Properties
+home.propertiesCard.caption=Add and manage properties you have a connection with.
+home.propertiesCard.caption2=You must tell us within 60 days of becoming the ratepayer. Do this by adding the property to your account.
+home.propertiesCard.tag=Action needed
+home.propertiesCard.addProperty=Add a property
+home.propertiesCard.manageProperties=Manage your properties
+
+#ReportChangeCard
+home.reportChangeCard.title=Report a change
+home.reportChangeCard.caption=Tell us about changes to your property, rent or lease.
+home.reportChangeCard.caption2=You must tell us within 60 days of a change.
+home.reportChangeCard.link1=View change reports in progress
+home.reportChangeCard.link2=Report a change
+
+#messageCard
+home.messagesCard.title=Your messages
+home.messagesCard.caption=Read secure messages from us.
+home.messagesCard.none=You have no new messages
+home.messagesCard.single=You have {0} new message
+home.messagesCard.multiple=You have {0} new messages
+home.messagesCard.viewAllMessages=Go to your messages
+
+#helpCard
+home.helpAndGuidanceCard.title=Help
+home.helpAndGuidanceCard.link1=Help with adding and managing properties
+home.helpAndGuidanceCard.link2=Help with Check and Challenge cases
+home.helpAndGuidanceCard.link3=Help with appointing and managing agents
+home.helpAndGuidanceCard.link4=How business properties are valued
+home.helpAndGuidanceCard.link5=More help with business rates
+
+#Submit
+submit.panel.registration.title=Registration successful
+submit.panel.registration.submissionID=Your service recovery number is:
+submit.panel.remove.title=Remove a property request sent
+submit.panel.removesubmissionID=Submission ID
+
+submit.registration.body.1=We’ve sent details about this registration to
+submit.registration.body.2=We’ve also sent a welcome email which has a guide to using your account.
+submit.registration.body.3=You service recovery number is 1ZDBB57. You will need this if you have a problem signing in to the service using Government Gateway.
+submit.registration.subTitle=What happens next
+submit.registration.body.4=Use your Government Gateway ID details next time you sign in to your manage your business rates valuation account.
+submit.registration.button=Go to the dashboard
+
+#Registration
+#CheckYourAnswers
+registration.checkAnswers.caption=Register for the business rates valuation service
+registration.checkAnswers.title=Check your answers
+registration.checkAnswers.contactDetails.title=Contact details
+registration.checkAnswers.contactDetails.body=This account is registered to
+registration.checkAnswers.contactDetails.table.name=Contact name
+registration.checkAnswers.contactDetails.table.emailAddress=Email address
+registration.checkAnswers.contactDetails.table.phoneNumber=Phone number
+registration.checkAnswers.contactDetails.table.address=Address
+registration.checkAnswers.contactDetails.table.address.subheading=We will send letters to this address
+registration.checkAnswers.taxReferenceNumber.title=Tax reference number
+registration.checkAnswers.taxReferenceNumber.table=Self Assessment Unique Taxpayer Reference (UTR)
+registration.checkAnswers.registerToUseService.title=Register to use this service
+registration.checkAnswers.registerToUseService.body=By registering for this service you are confirming that, to the best of your knowledge, the details you are providing are correct.
+registration.checkAnswers.registerToUseService.button=Accept and register
+#PhoneNumber
+registration.phoneNumber.caption=Register for the business rates valuation service
+registration.phoneNumber.heading=Enter phone number
+registration.phoneNumber.body.1=We will send an access code to this phone by text message.
+registration.phoneNumber.body.2=Phone number
+registration.phoneNumber.hint=For international numbers include the country code
+registration.phoneNumber.empty.error=Enter the telephone number of the main contact
+registration.phoneNumber.tooLong.error=Telephone number must be 24 numbers or fewer
+registration.phoneNumber.invalidFormat.error=Enter a telephone number in the correct format
+#Email
+registration.email.caption=Register for the business rates valuation service
+registration.email.heading=Enter email address
+registration.email.body.1=This will be the email we will contact regarding your business rates.
+registration.email.body.2=To confirm it is your email address we will send you a code.
+registration.email.body.3=Email address
+registration.email.hint=For international numbers include the country code
+registration.email.empty.error=Enter an email address
+registration.email.invalidFormat.error=Enter an email address in the correct format
+#Address
+registration.address.caption=Register for the business rates valuation service
+registration.address.heading=Enter email address
+registration.address.body.1=This will be the email we will contact regarding your business rates.
+registration.address.body.2=To confirm it is your email address we will send you a code.
+registration.address.body.3=Email address
+registration.address.hint=For international numbers include the country code
+registration.address.empty.error=Enter an email address
+registration.address.invalidFormat.error=Enter an email address in the correct format
+
+#Decleration
+removeProperty.declaration=Declaration
+
+#Summary
+voa.address.title = Address
+voa.reference.title = Reference
+voa.trn.title = TRN
+voa.change.link = Change
+voa.name.title = Name
+voa.dob.title = Date of birth
+voa.contactInformation.title = Contact Details
+voa.contactInformation.enterContact = Enter Contact Details
+
 voa.address.title = Address
 voa.reference.title = Reference
 voa.trn.title = TRN

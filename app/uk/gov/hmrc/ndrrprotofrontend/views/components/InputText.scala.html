@@ -1,0 +1,70 @@
+@*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@(
+    field: Field,
+    label: Option[String] = None,
+    labelClass: Option[String] = None,
+    labelHtml: Option[Html] = None,
+    inputClass: Option[String] = None,
+    inputType: String = "text",
+    hint: Option[String] = None,
+    maxLength: Int = 1000,
+    inputPurpose: Option[String] = None,
+    headingIsLabel: Boolean = false,
+    captionMsg: Option[String] = None,
+    contentHtml : Option[Html] = None,
+    autocomplete:Boolean = false
+)(implicit messages: Messages)
+
+<div class="govuk-form-group @if(field.hasErrors){govuk-form-group--error}">
+  @if(headingIsLabel){
+    <h1 class="govuk-heading-xl">
+        @captionMsg.map{caption =>
+            <span class="govuk-caption-xl">
+                <span class="govuk-visually-hidden">
+                    @messages("site.sectionIs")
+                </span>
+                @caption
+            </span>
+        }
+        <label class="govuk-label govuk-label--xl" for="@{field.id}">@label</label>
+    </h1>
+  } else {
+    <label class="govuk-label" for="@{field.id}">
+        @label
+    </label>
+  }
+
+  @labelHtml.map { lb => @lb }
+  @contentHtml.map {content => @content}
+  @if(hint.isDefined){
+    <div class="govuk-hint" id="hint-@{field.id}">@hint</div>
+  }
+  @field.errors.map { error =>
+    <span class="govuk-error-message" id="error-message-@{field.id}-input"><span class="govuk-visually-hidden">@messages("error.browser.title.prefix")</span>@messages(error.message, error.args: _*)</span>
+  }
+  <input
+    class="govuk-input govuk-input--width-10 @if(field.hasErrors){govuk-input--error}"
+    type=@inputType
+    maxlength=@maxLength
+    id="@{field.id}"
+    name="@{field.name}"
+    value="@{field.value}"
+    aria-describedby="@if(hint.isDefined){hint-@{field.id}} else if(field.hasErrors){error-message-@{field.id}-input} else {@field.id}"
+    autocomplete=@if(autocomplete){"on"}else{"off"}
+  />
+</div>

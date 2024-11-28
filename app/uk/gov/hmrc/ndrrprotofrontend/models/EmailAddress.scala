@@ -16,4 +16,4 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-case class EmailAddress(value: String)
+final case class EmailAddress(value: String)

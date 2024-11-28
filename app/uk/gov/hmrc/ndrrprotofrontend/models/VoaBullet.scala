@@ -20,7 +20,7 @@ import play.twirl.api.Html
 import uk.gov.hmrc.govukfrontend.views.Aliases.Value
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 
-case class VoaBullet (messageKey: Seq[String])
+final case class VoaBullet (messageKey: Seq[String])
 
 object VoaBullet {
 

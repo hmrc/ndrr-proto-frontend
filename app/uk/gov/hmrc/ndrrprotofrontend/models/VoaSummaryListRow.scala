@@ -21,7 +21,7 @@ import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, CardTitle, Key, Summary
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{ActionItem, Card}
 
-case class VoaSummaryListRow (titleMessageKey: String, value: Seq[String], changeLink: Option[Link])
+final case class VoaSummaryListRow (titleMessageKey: String, value: Seq[String], changeLink: Option[Link])
 
 object VoaSummaryListRow {
 
