@@ -105,6 +105,21 @@ registration.address.hint=For international numbers include the country code
 registration.address.empty.error=Enter an email address
 registration.address.invalidFormat.error=Enter an email address in the correct format
 
+#Provide Tax Reference
+registration.provideTaxRef.caption=Register for the business rates valuation service
+registration.provideTaxRef.heading=Provide your Tax Reference Number
+registration.provideTaxRef.body.1=Your Tax Reference Number (TRN) is used to match your tax data with your property data. This information helps the government provide targeted support and improve business rates compliance.
+registration.provideTaxRef.subheading=Types of Tax Reference Numbers
+registration.provideTaxRef.body.2=The type of TRN you provide will depend on whether you are paying business rates as an individual or organisation.
+registration.provideTaxRef.body.3=Individual rate payers can provide either:
+registration.provideTaxRef.bullet.1=Self-assessment Unique Tax Reference (UTR)
+registration.provideTaxRef.bullet.2=National Insurance Number (NINO)
+registration.provideTaxRef.body.4=Organisations can provide either:
+registration.provideTaxRef.bullet.3=Corporation tax UTR
+registration.provideTaxRef.bullet.4=Partnership UTR
+registration.provideTaxRef.bullet.5=VAT registration number
+registration.provideTaxRef.body.5=It is a legal requirement to provide a TRN. While you can provide one later, we advise you to do so as soon as possible.
+
 #Decleration
 removeProperty.declaration=Declaration
 
