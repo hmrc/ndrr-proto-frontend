@@ -35,7 +35,7 @@ class AreYouAnAgentController @Inject()(
       val show: Action[AnyContent] = Action.async { implicit request =>
         Future.successful(
           Ok(
-            areYouAnAgentView(form)
+            areYouAnAgentView(form())
           )
         )
       }
