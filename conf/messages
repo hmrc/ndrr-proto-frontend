@@ -119,6 +119,7 @@ registration.provideTaxRef.bullet.3=Corporation tax UTR
 registration.provideTaxRef.bullet.4=Partnership UTR
 registration.provideTaxRef.bullet.5=VAT registration number
 registration.provideTaxRef.body.5=It is a legal requirement to provide a TRN. While you can provide one later, we advise you to do so as soon as possible.
+registration.provideTaxRef.continue=Continue
 
 #Decleration
 removeProperty.declaration=Declaration
