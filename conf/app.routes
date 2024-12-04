@@ -19,3 +19,4 @@ POST       /registration/email                             uk.gov.hmrc.ndrrproto
 GET        /registration/address                           uk.gov.hmrc.ndrrprotofrontend.controllers.AddressController.onPageLoad
 POST       /registration/address                           uk.gov.hmrc.ndrrprotofrontend.controllers.AddressController.submit
 GET        /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationCheckAnswersController.show
+GET        /registration/provide-tax-reference             uk.gov.hmrc.ndrrprotofrontend.controllers.ProvideTaxReferenceController.show
