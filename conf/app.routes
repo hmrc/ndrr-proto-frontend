@@ -8,10 +8,10 @@ GET        /assets/*file            controllers.Assets.versioned(path = "/public
 GET        /dashboard                                      uk.gov.hmrc.ndrrprotofrontend.controllers.DashboardController.show
 GET        /what-you-will-need                             uk.gov.hmrc.ndrrprotofrontend.controllers.WhatYouWillNeedController.show
 GET        /ratepayer-properties                           uk.gov.hmrc.ndrrprotofrontend.controllers.RatepayerPropertiesController.show
-GET        /confirm-your-contact-details                    uk.gov.hmrc.ndrrprotofrontend.controllers.ContactDetailsController.show
+GET        /confirm-your-contact-details                   uk.gov.hmrc.ndrrprotofrontend.controllers.ContactDetailsController.show
 GET        /remove-property/submit                         uk.gov.hmrc.ndrrprotofrontend.controllers.SubmitConfirmationController.show
 GET        /remove-property/decleration                    uk.gov.hmrc.ndrrprotofrontend.controllers.RemovePropertyDeclarationController.show
-GET        /registration/confirmation                       uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationConfirmationController.show
+GET        /registration/confirmation                      uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationConfirmationController.show
 GET        /registration/phone-number                      uk.gov.hmrc.ndrrprotofrontend.controllers.PhoneNumberController.onPageLoad
 POST       /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.PhoneNumberController.submit
 GET        /registration/email                             uk.gov.hmrc.ndrrprotofrontend.controllers.EmailController.onPageLoad
@@ -20,3 +20,5 @@ GET        /registration/address                           uk.gov.hmrc.ndrrproto
 POST       /registration/address                           uk.gov.hmrc.ndrrprotofrontend.controllers.AddressController.submit
 GET        /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationCheckAnswersController.show
 GET        /registration/provide-tax-reference             uk.gov.hmrc.ndrrprotofrontend.controllers.ProvideTaxReferenceController.show
+GET        /registration/are-you-a-business-rates-agent    uk.gov.hmrc.ndrrprotofrontend.controllers.AreYouAnAgentController.show
+POST       /registration/are-you-a-business-rates-agent    uk.gov.hmrc.ndrrprotofrontend.controllers.AreYouAnAgentController.submit

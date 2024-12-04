@@ -74,6 +74,9 @@ trait CommonFormValidators {
   val isValidPostcode: String => Boolean = (value: String) =>
     value.isEmpty || isMatchingPattern(value, postcodeRegexPattern)
 
+  val isNonEmptyOptional: Option[AnyVal] => Boolean = (value: Option[AnyVal]) =>
+    value.isDefined
+
   val contains: Seq[String] => String => Boolean = seq => choice => seq.contains(choice)
 
   protected val validatePostcode: Int => String => Boolean =
