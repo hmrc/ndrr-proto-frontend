@@ -121,6 +121,14 @@ registration.provideTaxRef.bullet.5=VAT registration number
 registration.provideTaxRef.body.5=It is a legal requirement to provide a TRN. While you can provide one later, we advise you to do so as soon as possible.
 registration.provideTaxRef.continue=Continue
 
+#Are you an agent
+registration.areYouAnAgent.heading=Are you registering as a rating agent?
+registration.areYouAnAgent.hint=A rating agent, such as professional surveyor, deals with the Valuation Office Agency (VOA) on behalf of the rating agent’s clients.
+registration.areYouAnAgent.yes=Yes
+registration.areYouAnAgent.no=No
+registration.areYouAnAgent.continue=Continue
+registration.areYouAnAgent.noSelection.error="No selection"
+
 #Decleration
 removeProperty.declaration=Declaration
 
