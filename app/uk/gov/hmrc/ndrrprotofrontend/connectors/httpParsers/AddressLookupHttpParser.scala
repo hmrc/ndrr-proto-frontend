@@ -29,7 +29,6 @@ object AddressLookupHttpParser {
   implicit object AddressLookupGetAddressReads extends HttpReads[HttpResult[AlfResponse]] {
 
     override def read(method: String, url: String, response: HttpResponse): HttpResult[AlfResponse] = {
-      println(Console.BLUE + ("AddressLookupGetAddressReads") + Console.RESET)
       response.status match {
         case Status.OK => {
           response.json.validate[AlfResponse](AlfResponse.format).fold(

@@ -30,7 +30,6 @@ class RampOffController @Inject()(
 
   def contactAddressOffRamp(@unused ngrId: String, alfId: String, mode: Mode = NormalMode): Action[AnyContent] = Action.async {
     implicit request =>
-      println(Console.BLUE + ("contactAddressOffRamp") + Console.RESET)
       for {
         alfResponse <- addressLookupController.getAddress(alfId)
         ukAddress = addressLookupController.addressChecker(alfResponse.address, alfId)
