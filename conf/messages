@@ -59,7 +59,6 @@ submit.registration.body.2=We’ve also sent a welcome email which has a guide t
 submit.registration.body.3=You service recovery number is 1ZDBB57. You will need this if you have a problem signing in to the service using Government Gateway.
 submit.registration.subTitle=What happens next
 submit.registration.body.4=Use your Government Gateway ID details next time you sign in to your manage your business rates valuation account.
-submit.registration.button=Go to the dashboard
 
 #Registration
 #CheckYourAnswers
@@ -77,6 +76,7 @@ registration.checkAnswers.taxReferenceNumber.table=Self Assessment Unique Taxpay
 registration.checkAnswers.registerToUseService.title=Register to use this service
 registration.checkAnswers.registerToUseService.body=By registering for this service you are confirming that, to the best of your knowledge, the details you are providing are correct.
 registration.checkAnswers.registerToUseService.button=Accept and register
+registration.dashboard.button=Go to the dashboard
 #PhoneNumber
 registration.phoneNumber.caption=Register for the business rates valuation service
 registration.phoneNumber.heading=Enter phone number
@@ -104,6 +104,17 @@ registration.address.body.3=Email address
 registration.address.hint=For international numbers include the country code
 registration.address.empty.error=Enter an email address
 registration.address.invalidFormat.error=Enter an email address in the correct format
+#AddressLookupFrontend
+
+addressLookupFrontend.contactDetails.lookupPageLabels.title = Find the contact address
+
+addressLookupFrontend.contactDetails.lookupPageLabels.postcodeLabel = Postcode
+addressLookupFrontend.contactDetails.editPageLabels.title = Find the contact address
+addressLookupFrontend.contactDetails.editPageLabels.line1Label = Address line 1
+addressLookupFrontend.contactDetails.editPageLabels.line2Label = Address line 2
+addressLookupFrontend.contactDetails.editPageLabels.line3Label = Address line 3 (optional)
+addressLookupFrontend.contactDetails.editPageLabels.townLabel = Address line 4 (optional)
+addressLookupFrontend.contactDetails.editPageLabels.postcodeLabel = Postcode
 
 #Provide Tax Reference
 registration.provideTaxRef.caption=Register for the business rates valuation service

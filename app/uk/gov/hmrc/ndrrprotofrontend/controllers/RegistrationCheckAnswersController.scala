@@ -26,9 +26,10 @@ import scala.concurrent.Future
 
 class RegistrationCheckAnswersController @Inject()(
                                           mcc: MessagesControllerComponents,
-                                          registrationCheckAnswersView: RegistrationCheckAnswersView)
-  extends FrontendController(mcc) with Common{
-  val show: Action[AnyContent] = Action.async { implicit request =>
+                                          registrationCheckAnswersView: RegistrationCheckAnswersView,
+                                          )
+  extends FrontendController(mcc) with Common {
+  def show(): Action[AnyContent] = Action.async { implicit request =>
     def testSubmitData(): SubmissionDetails = {
       SubmissionDetails(requestTitleKey = "submit.panel.registration.title",
         requestRefDescriptionKey = "submit.panel.registration.submissionID",
@@ -48,8 +49,6 @@ class RegistrationCheckAnswersController @Inject()(
         postcode = Postcode("BN110AA")),
       utr = "Not provided"
     )
-
-
 
     Future.successful(
       Ok(

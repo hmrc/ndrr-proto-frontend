@@ -16,50 +16,54 @@
 
 package uk.gov.hmrc.ndrrprotofrontend
 
-import org.apache.pekko.stream.Materializer
-import org.scalatest.freespec.AnyFreeSpecLike
+
+import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
+import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.should.Matchers
-import org.scalatestplus.play.guice.GuiceOneServerPerSuite
+import org.scalatest.{BeforeAndAfterEach, OptionValues, TryValues}
+import play.api.i18n.{Lang, Messages, MessagesApi, MessagesImpl}
 import play.api.inject.guice.GuiceApplicationBuilder
-import play.api.test.{DefaultTestServerFactory, RunningServer}
-import play.api.{Application, Mode}
+import play.api.mvc.MessagesControllerComponents
+import play.api.test.{DefaultTestServerFactory, FakeRequest}
+import play.api.{Application, Mode, Play}
 import play.core.server.ServerConfig
-import uk.gov.hmrc.http.test.WireMockSupport
+import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.ndrrprotofrontend.config.AppConfig
 
 import scala.concurrent.ExecutionContext
 
-trait BaseSpec extends AnyFreeSpecLike
-  with GuiceOneServerPerSuite
-  with WireMockSupport
-  with Matchers { self =>
+trait BaseSpec extends AnyFreeSpec
+  with Matchers
+  with TryValues
+  with OptionValues
+  with ScalaFutures
+  with IntegrationPatience
+  with BeforeAndAfterEach { self =>
 
-  implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
-  implicit lazy val materializer: Materializer = app.materializer
+  protected def applicationBuilder(): GuiceApplicationBuilder = {
+    new GuiceApplicationBuilder()
+      .overrides()
+  }
+
+  lazy val application: Application = applicationBuilder().build()
+  implicit lazy val messagesAPI: MessagesApi = application.injector.instanceOf[MessagesApi]
+  implicit lazy val messagesProvider: MessagesImpl = MessagesImpl(Lang("en"), messagesAPI)
+  lazy val mcc: MessagesControllerComponents = application.injector.instanceOf[MessagesControllerComponents]
+  def messages(app: Application): Messages = app.injector.instanceOf[MessagesApi].preferred(FakeRequest())
+  implicit lazy val appConfig: AppConfig = application.injector.instanceOf[AppConfig]
+  implicit lazy val ec: ExecutionContext = application.injector.instanceOf[ExecutionContext]
+  implicit val hc: HeaderCarrier = HeaderCarrier()
 
   private val testServerPort: Int = 19001
-
-  protected lazy val configMap: Map[String, Any] = Map[String, Any](
-    "play.http.router" -> "testOnlyDoNotUseInAppConf.Routes",
-    "auditing.consumer.baseUri.port" -> self.wireMockPort,
-    "auditing.enabled" -> false,
-    "auditing.traceRequests" -> false,
-    "microservice.services.pay-api.port" -> self.wireMockPort,
-    "microservice.services.open-banking.port" -> self.wireMockPort
-  )
 
   override def beforeEach(): Unit = {
     super.beforeEach()
   }
 
   override def afterEach(): Unit = {
+    Play.stop(application)
     super.afterEach()
   }
-
-  override def fakeApplication(): Application = new GuiceApplicationBuilder()
-    .configure(configMap).build()
-
-  override implicit protected lazy val runningServer: RunningServer =
-    TestServerFactory.start(app)
 
   object TestServerFactory extends DefaultTestServerFactory {
     override protected def serverConfig(app: Application): ServerConfig = {
