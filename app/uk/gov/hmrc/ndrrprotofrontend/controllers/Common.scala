@@ -20,13 +20,12 @@ import play.api.i18n.Messages
 import play.api.mvc.Call
 import uk.gov.hmrc.govukfrontend.views.Aliases
 import uk.gov.hmrc.govukfrontend.views.Aliases.Table
-import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.Radios
-import uk.gov.hmrc.ndrrprotofrontend.models.{DateOfBirth, FullName, Link, MessageKey, PhoneNumber, Postcode, Reference, TrnNumber, VoaAddress, VoaCard, VoaRadioName, VoaRow, VoaSummaryListRow, VoaTable}
+import uk.gov.hmrc.ndrrprotofrontend.models.{ContactDetails, DashboardCard, DateOfBirth, FullName, Link, MessageKey, NavigationBarContent, PhoneNumber, Postcode, Reference, TrnNumber, VoaAddress, VoaCard, VoaRadioName, VoaRow, VoaSummaryListRow, VoaTable, YourMessages}
 import uk.gov.hmrc.ndrrprotofrontend.models.VoaSummaryListRow.buildSummaryList
 
 trait Common {
 
-  val fullName: FullName = FullName("Sarah",None,"Philips")
+  val fullName: FullName = FullName("Sarah Philips")
   //USER CONTACT DETAILS:
   val userAnswers: ContactDetails = ContactDetails(
     contactName = fullName.toString,
