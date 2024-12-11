@@ -15,6 +15,7 @@
  */
 
 package uk.gov.hmrc.ndrrprotofrontend.models
+
 import play.api.i18n._
 import uk.gov.hmrc.govukfrontend.views.Aliases.Table
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text

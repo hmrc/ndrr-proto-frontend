@@ -16,4 +16,19 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-final case class Links (classes: String, links: Seq[Link])
+import play.api.i18n.Messages
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Text
+import uk.gov.hmrc.govukfrontend.views.viewmodels.tag.Tag
+
+case class VoaTag (messageKey: String, classes: String)
+
+object VoaTag {
+
+  def createTag(voaTag: VoaTag)(implicit messages: Messages): Tag = {
+    Tag(
+      content = Text(Messages(voaTag.messageKey)),
+      classes = voaTag.classes,
+    )
+  }
+
+}

@@ -16,4 +16,13 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-final case class Links (classes: String, links: Seq[Link])
+import play.api.libs.json.{ Format, Json }
+
+case class UkAddress(
+                      lines: List[String],
+                      postCode: String,
+                      alfId: Option[String] = None)
+
+object UkAddress {
+  implicit val ukAddressFormat: Format[UkAddress] = Json.format[UkAddress]
+}

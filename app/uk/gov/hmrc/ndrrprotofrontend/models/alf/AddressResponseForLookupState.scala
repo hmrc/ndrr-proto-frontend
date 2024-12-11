@@ -1,5 +1,5 @@
-@*
- * Copyright 2024 HM Revenue & Customs
+/*
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,16 +12,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+package uk.gov.hmrc.ndrrprotofrontend.models.alf
 
-@this(
-layout: Layout
-)
-@()(implicit request: RequestHeader, messages: Messages)
+import play.api.libs.json.{Json, OFormat}
+import uk.gov.hmrc.ndrrprotofrontend.models.UkAddress
 
-@heading = @{messages("home.heading")}
-@layout(pageTitle = Some(heading), showBackLink = false) {
+case class AddressResponseForLookupState(
+  address: UkAddress,
+  alfId: String)
 
+object AddressResponseForLookupState {
+
+  implicit val format: OFormat[AddressResponseForLookupState] = Json.format[AddressResponseForLookupState]
 }

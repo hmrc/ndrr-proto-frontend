@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models._
+import uk.gov.hmrc.ndrrprotofrontend.models.{ContactDetails, PhoneNumber, Postcode, Reference, SubmissionDetails, VoaAddress, _}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.RegistrationCheckAnswersView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -26,9 +26,10 @@ import scala.concurrent.Future
 
 class RegistrationCheckAnswersController @Inject()(
                                           mcc: MessagesControllerComponents,
-                                          registrationCheckAnswersView: RegistrationCheckAnswersView)
-  extends FrontendController(mcc) with Common{
-  val show: Action[AnyContent] = Action.async { implicit request =>
+                                          registrationCheckAnswersView: RegistrationCheckAnswersView,
+                                          )
+  extends FrontendController(mcc) with Common {
+  def show(): Action[AnyContent] = Action.async { implicit request =>
     def testSubmitData(): SubmissionDetails = {
       SubmissionDetails(requestTitleKey = "submit.panel.registration.title",
         requestRefDescriptionKey = "submit.panel.registration.submissionID",
@@ -48,8 +49,6 @@ class RegistrationCheckAnswersController @Inject()(
         postcode = Postcode("BN110AA")),
       utr = "Not provided"
     )
-
-
 
     Future.successful(
       Ok(

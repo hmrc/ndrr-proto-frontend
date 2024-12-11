@@ -17,8 +17,9 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.ndrrprotofrontend.controllers.routes
 import uk.gov.hmrc.ndrrprotofrontend.models.Postcode
-import uk.gov.hmrc.ndrrprotofrontend.models.Postcode.form
+import Postcode.form
 import uk.gov.hmrc.ndrrprotofrontend.views.html.AddressView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 

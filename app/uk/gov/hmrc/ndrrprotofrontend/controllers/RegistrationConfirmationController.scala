@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models._
+import uk.gov.hmrc.ndrrprotofrontend.models.{Reference, SubmissionDetails, _}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.registrationConfirmationView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -40,7 +40,7 @@ class RegistrationConfirmationController @Inject()(
     Future.successful(
       Ok(
         registrationConfirmationView(
-          submissionDetails = testSubmitData
+          submissionDetails = testSubmitData()
         )
       )
     )

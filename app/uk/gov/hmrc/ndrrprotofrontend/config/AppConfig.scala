@@ -16,11 +16,38 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.config
 
+import com.typesafe.config.Config
+
 import javax.inject.{Inject, Singleton}
 import play.api.Configuration
+import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 @Singleton
-class AppConfig @Inject()(config: Configuration) {
+class AppConfig @Inject()(servicesConfig: ServicesConfig, config: Configuration) {
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(false)
+  val registrationBaseUrl: String = servicesConfig.baseUrl("ndrr-proto-frontend")
+  private val accessibilityHost: String = servicesConfig.getConfString(
+    confKey = "accessibility-statement.host", throw new Exception("missing config accessibility-statement.host")
+  )
+  def accessibilityFooterUrl = s"$accessibilityHost/accessibility-statement/ndrr-proto-frontend"
+  val addressLookupService: String = servicesConfig.baseUrl("address-lookup-frontend")
+  val addressLookUpFrontendTestEnabled: Boolean = servicesConfig.getBoolean("addressLookupFrontendTest.enabled")
+  val addressLookupOffRampUrl: String = servicesConfig.getString(key ="addressLookupOffRampUrl")
 
+  object AddressLookupConfig {
+
+    private val addressLookupInitConfig: Config = config
+      .getOptional[Configuration](s"address-lookup-frontend-init-config")
+      .getOrElse(throw new IllegalArgumentException(s"Configuration for address-lookup-frontend-init-config not found"))
+      .underlying
+
+    val version: Int = addressLookupInitConfig.getInt("version")
+    val selectPageConfigProposalLimit: Int = addressLookupInitConfig.getInt("select-page-config.proposalListLimit")
+
+    object ContactAddress {
+      def offRampUrl(ngrId: String): String = {
+        s"$addressLookupOffRampUrl${uk.gov.hmrc.ndrrprotofrontend.controllers.addressLookupFrontend.routes.RampOffController.contactAddressOffRamp(ngrId, "").url.replace("?id=", "")}"
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ndrrprotofrontend.models
+package uk.gov.hmrc.ndrrprotofrontend.models.core
 
-final case class Links (classes: String, links: Seq[Link])
+import play.api.libs.json.{ Format, Json }
+
+sealed trait Error
+
+object ErrorModel {
+  implicit val format: Format[ErrorModel] = Json.format[ErrorModel]
+}
+
+case class ErrorModel(status: Int, message: String) extends Error
+
+case object AddressValidationError extends Error

@@ -25,12 +25,11 @@ import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{Key, SummaryListR
 import uk.gov.hmrc.ndrrprotofrontend.BaseSpec
 
 class VoaSummaryListRowSpec extends BaseSpec {
-  def messagesApi: MessagesApi = app.injector.instanceOf[MessagesApi]
   val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/your-properties")
   "buildSummaryListRow" - {
 
     "will generate a minimum SummaryListRow from a minimum VoaSummaryListRow" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
 
       val voaSummaryListRow: VoaSummaryListRow = VoaSummaryListRow("", Seq.empty, None)
       val result = VoaSummaryListRow.buildSummaryList(Seq(voaSummaryListRow))
@@ -39,7 +38,7 @@ class VoaSummaryListRowSpec extends BaseSpec {
     }
 
     "will generate a minimum SummaryListRow with a key from English messages if the key is set in VoaSummaryListRow" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
 
       val voaSummaryListRow: VoaSummaryListRow = VoaSummaryListRow("voa.dob.title", Seq.empty, None)
       val result = VoaSummaryListRow.buildSummaryList(Seq(voaSummaryListRow))
@@ -47,7 +46,7 @@ class VoaSummaryListRowSpec extends BaseSpec {
     }
 
     "will generate a SummaryListRow with a value if the value is set in CheckYourAnswersRow" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
 
       val voaSummaryListRow: VoaSummaryListRow = VoaSummaryListRow("voa.dob.title", Seq("5 January 1978"), None)
       val result = VoaSummaryListRow.buildSummaryList(Seq(voaSummaryListRow))
@@ -55,7 +54,7 @@ class VoaSummaryListRowSpec extends BaseSpec {
     }
 
     "will generate a SummaryListRow with a separated lines if the value is set as multiple strings in CheckYourAnswersRow" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
 
       val voaSummaryListRow: VoaSummaryListRow = VoaSummaryListRow("voa.address.title", Seq("Line1", "Line2"), None)
       val result = VoaSummaryListRow.buildSummaryList(Seq(voaSummaryListRow))

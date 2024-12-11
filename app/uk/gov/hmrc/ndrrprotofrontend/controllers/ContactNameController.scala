@@ -17,19 +17,29 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.views.html.YourPropertiesView
+import uk.gov.hmrc.ndrrprotofrontend.models.FullName
+import uk.gov.hmrc.ndrrprotofrontend.views.html.ContactNameView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import javax.inject.{Inject, Singleton}
+import javax.inject.Inject
 import scala.concurrent.Future
 
-@Singleton
-class YourPropertiesController @Inject()(
-  mcc: MessagesControllerComponents,
-  yourPropertiesView: YourPropertiesView)
-    extends FrontendController(mcc) with Common {
+class ContactNameController @Inject()(mcc: MessagesControllerComponents, contactNameView: ContactNameView)  extends FrontendController(mcc){
 
-  def yourProperties: Action[AnyContent] = Action.async { implicit request =>
-    Future.successful(Ok(yourPropertiesView(makeAVisibleTable(), makeSummaryList(Seq(row1,row2,row3,row4), Some(card)))))
+  def onPageLoad: Action[AnyContent] = Action { implicit request =>
+    Ok(contactNameView(FullName.form()))
   }
+
+  def submit(): Action[AnyContent] =
+    Action.async { implicit request =>
+      FullName.form()
+        .bindFromRequest()
+        .fold(
+          formWithErrors => Future.successful(BadRequest(contactNameView(formWithErrors))),
+          fullName => {
+            Future.successful(Redirect(routes.ConfirmContactDetailsController.confirmYourContactDetails))
+          }
+        )
+    }
+
 }

@@ -59,7 +59,6 @@ submit.registration.body.2=We’ve also sent a welcome email which has a guide t
 submit.registration.body.3=You service recovery number is 1ZDBB57. You will need this if you have a problem signing in to the service using Government Gateway.
 submit.registration.subTitle=What happens next
 submit.registration.body.4=Use your Government Gateway ID details next time you sign in to your manage your business rates valuation account.
-submit.registration.button=Go to the dashboard
 
 #Registration
 #CheckYourAnswers
@@ -77,6 +76,7 @@ registration.checkAnswers.taxReferenceNumber.table=Self Assessment Unique Taxpay
 registration.checkAnswers.registerToUseService.title=Register to use this service
 registration.checkAnswers.registerToUseService.body=By registering for this service you are confirming that, to the best of your knowledge, the details you are providing are correct.
 registration.checkAnswers.registerToUseService.button=Accept and register
+registration.dashboard.button=Go to the dashboard
 #PhoneNumber
 registration.phoneNumber.caption=Register for the business rates valuation service
 registration.phoneNumber.heading=Enter phone number
@@ -89,12 +89,17 @@ registration.phoneNumber.invalidFormat.error=Enter a telephone number in the cor
 #Email
 registration.email.caption=Register for the business rates valuation service
 registration.email.heading=Enter email address
+registration.contactName.heading=Contact name
 registration.email.body.1=This will be the email we will contact regarding your business rates.
 registration.email.body.2=To confirm it is your email address we will send you a code.
 registration.email.body.3=Email address
 registration.email.hint=For international numbers include the country code
 registration.email.empty.error=Enter an email address
 registration.email.invalidFormat.error=Enter an email address in the correct format
+#ContactName
+registration.contactName.empty.error = Enter a contact name
+registration.contactName.invalidFormat.error = Enter a contact name in the correct format
+
 #Address
 registration.address.caption=Register for the business rates valuation service
 registration.address.heading=Enter email address
@@ -104,6 +109,17 @@ registration.address.body.3=Email address
 registration.address.hint=For international numbers include the country code
 registration.address.empty.error=Enter an email address
 registration.address.invalidFormat.error=Enter an email address in the correct format
+#AddressLookupFrontend
+
+addressLookupFrontend.contactDetails.lookupPageLabels.title = Find the contact address
+
+addressLookupFrontend.contactDetails.lookupPageLabels.postcodeLabel = Postcode
+addressLookupFrontend.contactDetails.editPageLabels.title = Find the contact address
+addressLookupFrontend.contactDetails.editPageLabels.line1Label = Address line 1
+addressLookupFrontend.contactDetails.editPageLabels.line2Label = Address line 2
+addressLookupFrontend.contactDetails.editPageLabels.line3Label = Address line 3 (optional)
+addressLookupFrontend.contactDetails.editPageLabels.townLabel = Address line 4 (optional)
+addressLookupFrontend.contactDetails.editPageLabels.postcodeLabel = Postcode
 
 #Provide Tax Reference
 registration.provideTaxRef.caption=Register for the business rates valuation service
@@ -120,6 +136,19 @@ registration.provideTaxRef.bullet.4=Partnership UTR
 registration.provideTaxRef.bullet.5=VAT registration number
 registration.provideTaxRef.body.5=It is a legal requirement to provide a TRN. While you can provide one later, we advise you to do so as soon as possible.
 registration.provideTaxRef.continue=Continue
+
+#ConfirmContactDetails
+registration.confirmContactDetails.caption=Register for the business rates valuation service
+registration.confirmContactDetails.heading=Confirm your contact details
+registration.confirmContactDetails.listTitle=The Valuation Office Agency (VOA) will use these details to:
+registration.confirmContactDetails.firstBullet=send you information related to the service and your account
+registration.confirmContactDetails.secondBullet=confirm your identity if you contact the VOA
+registration.confirmContactDetails.registeredTo=This account is registered to
+
+#ConfirmUTRDetails
+register.confirmUTRDetails.radioButtonOne = Yes, I want to provide this UTR
+register.confirmUTRDetails.radioButtonTwo = No, I want to provide my National Insurance number
+register.confirmUTRDetails.radioButtonThree = No, I will provide a tax reference number later
 
 #Are you an agent
 registration.areYouAnAgent.heading=Are you registering as a rating agent?
@@ -152,3 +181,8 @@ voa.dob.title = Date of birth
 voa.contactInformation.title = Contact Details
 voa.contactInformation.enterContact = Enter Contact Details
 voa.cardTitle.leadTenant = Lead Tenant
+
+selectChange.provideUtr = Yes, I want to provide this UTR
+selectChange.provideNino = No, I want to provide my national insurance number
+selectChange.provideUtrLater = No, I want to provide my tax reference later
+selectChange.errorMessage =

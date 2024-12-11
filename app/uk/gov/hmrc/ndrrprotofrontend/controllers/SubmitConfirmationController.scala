@@ -18,7 +18,7 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models._
+import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent, Reference, SubmissionDetails, _}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.SubmitConfirmation
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 

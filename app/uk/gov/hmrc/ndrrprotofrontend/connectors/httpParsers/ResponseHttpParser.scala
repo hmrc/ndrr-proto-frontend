@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ndrrprotofrontend.models
+package uk.gov.hmrc.ndrrprotofrontend.connectors.httpParsers
 
-final case class Links (classes: String, links: Seq[Link])
+import uk.gov.hmrc.ndrrprotofrontend.models.core.ErrorModel
+
+object ResponseHttpParser {
+  type HttpResult[T] = Either[ErrorModel, T]
+}
