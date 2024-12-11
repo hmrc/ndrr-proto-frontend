@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models._
+import uk.gov.hmrc.ndrrprotofrontend.models.{ContactDetails, PhoneNumber, Postcode, Reference, SubmissionDetails, VoaAddress, _}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.RegistrationCheckAnswersView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 

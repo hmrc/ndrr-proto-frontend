@@ -20,8 +20,9 @@ import play.api.i18n.Messages
 import play.api.mvc.Call
 import uk.gov.hmrc.govukfrontend.views.Aliases
 import uk.gov.hmrc.govukfrontend.views.Aliases.Table
+import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.Radios
+import uk.gov.hmrc.ndrrprotofrontend.models.{DateOfBirth, FullName, Link, MessageKey, PhoneNumber, Postcode, Reference, TrnNumber, VoaAddress, VoaCard, VoaRadioName, VoaRow, VoaSummaryListRow, VoaTable}
 import uk.gov.hmrc.ndrrprotofrontend.models.VoaSummaryListRow.buildSummaryList
-import uk.gov.hmrc.ndrrprotofrontend.models._
 
 trait Common {
 
@@ -63,19 +64,15 @@ trait Common {
     county = Some("Kent"),
     postcode = Postcode("HY270AA")
   )
-  val fullName: FullName = FullName("Sarah",None,"Philips")
+  val fullName: FullName = FullName("Olivia Jane Cunningham")
   val email:String = "olivia@thecornershop.co.uk."
   val dateOfBirth: DateOfBirth = DateOfBirth(5,"January", 1978)
-  val row1: VoaSummaryListRow = VoaSummaryListRow("voa.name.title",Seq(fullName.toString),Some(Link(Call(method = "GET",url = "some-href"), linkId =  "linkId", messageKey ="voa.change.link")))
-  val row2 = VoaSummaryListRow("voa.dob.title",Seq(dateOfBirth.toString),Some(Link(Call(method = "GET",url = "some-href"), linkId ="linkId", messageKey ="voa.change.link")))
-  val row3 = VoaSummaryListRow("voa.address.title",Seq(address1.line1,address1.town,address1.postcode.toString),Some(Link(Call(method = "GET",url = "some-href"), linkId ="linkId", messageKey ="voa.change.link")))
-  val row4 = VoaSummaryListRow("voa.contactInformation.title",Seq.empty,Some(Link(Call(method = "GET",url = "some-href"), linkId = "linkId", messageKey ="voa.contactInformation.enterContact")))
   val card = VoaCard("Contact Info",Some(Seq(link1,link2)))
+  def createUtrRow(utr: String) = VoaSummaryListRow("Self Assessment Unique Taxpayer Reference",Seq(utr),None)
   private lazy val link1 = Link(Call(method = "GET",url = "some-href"), linkId =  "linkId", messageKey ="voa.contactInformation.enterContact")
   private lazy val link2: Link = Link(Call(method = "GET",url = "some-href"), linkId =  "linkId", messageKey ="voa.contactInformation.enterContact")
-
+  val mobileNumber: PhoneNumber = PhoneNumber("07943009506")
   def makeAVisibleTable()(implicit messages: Messages): Table = createVoaTable().buildTable()
-
   def makeSummaryListRow(row: Seq[VoaSummaryListRow])(implicit messages: Messages): Aliases.SummaryList = buildSummaryList(row,None)
   def contactName (name: String)    =  VoaSummaryListRow("registration.checkAnswers.contactDetails.table.name",Seq(name),Some(Link(Call(method = "GET",url = "uk.gov.hmrc.ndrrprotofrontend.controllers.DashboardController.show.url"),messageKey = "voa.change.link", linkId = "name-Id")))
   def emailAddress(email:String)    =  VoaSummaryListRow("registration.checkAnswers.contactDetails.table.emailAddress",Seq(email),Some(Link(Call(method = "GET",url = uk.gov.hmrc.ndrrprotofrontend.controllers.routes.EmailController.onPageLoad.url),messageKey = "voa.change.link", linkId = "email-Id")))

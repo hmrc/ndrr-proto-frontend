@@ -16,6 +16,29 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-final case class FullName (firstName: String,middleName: Option[String] = None, lastName: String) {
-  override def toString: String = Seq(firstName,middleName.getOrElse(""), lastName).mkString(" ")
+import play.api.data.Form
+import play.api.data.Forms.{mapping, text}
+import play.api.libs.json.{Json, OFormat}
+
+final case class FullName (value: String)
+
+object FullName extends CommonFormValidators {
+
+  implicit val format: OFormat[FullName] = Json.format[FullName]
+  lazy val contactNameEmptyError = "registration.contactName.empty.error"
+  lazy val contactNameInvalidFormat = "registration.contactName.invalidFormat.error"
+  val maxLength = 24
+  val fullName = "FullName.value"
+
+  def form(): Form[FullName] =
+    Form(
+      mapping(
+        fullName -> text()
+          .verifying(contactNameEmptyError, isNonEmpty)
+          .verifying(contactNameInvalidFormat, isValidFullName)
+      )(FullName.apply)(FullName.unapply)
+    )
+
+
+
 }
