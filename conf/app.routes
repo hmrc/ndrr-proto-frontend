@@ -27,5 +27,7 @@ GET        /registration/confirm-your-self-assessment-unique-taxpayer-reference 
 POST       /registration/confirm-your-self-assessment-unique-taxpayer-reference  uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmUTRController.submit
 GET        /address-lookup                                 uk.gov.hmrc.ndrrprotofrontend.controllers.addressLookupFrontend.AddressLookupController.startAddressLookup()
 GET        /off-ramp/contact-address/:ngrId                uk.gov.hmrc.ndrrprotofrontend.controllers.addressLookupFrontend.RampOffController.contactAddressOffRamp(ngrId: String, id: String)
+GET        /registration/provide-your-national-insurance-number     uk.gov.hmrc.ndrrprotofrontend.controllers.NationalInsuranceNumberController.onPageLoad
+POST       /registration/provide-your-national-insurance-number     uk.gov.hmrc.ndrrprotofrontend.controllers.NationalInsuranceNumberController.submit
 GET        /registration/are-you-a-business-rates-agent    uk.gov.hmrc.ndrrprotofrontend.controllers.AreYouAnAgentController.show
 POST       /registration/are-you-a-business-rates-agent    uk.gov.hmrc.ndrrprotofrontend.controllers.AreYouAnAgentController.submit

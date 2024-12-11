@@ -32,6 +32,9 @@ trait CommonFormValidators {
   val emailPattern: Pattern =
     Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")
 
+  val ninoPattern: Pattern =
+    Pattern.compile("^((?!(BG|GB|KN|NK|NT|TN|ZZ)|(D|F|I|Q|U|V)[A-Z]|[A-Z](D|F|I|O|Q|U|V))[A-Z]{2})[0-9]{6}[A-D]?$")
+
   val postcodeRegexPattern: Pattern =
     Pattern.compile("^[A-Z]{1,2}[0-9][0-9A-Z]?\\s?[0-9][A-Z]{2}|BFPO\\s?[0-9]{1,10}$")
 
@@ -64,6 +67,8 @@ trait CommonFormValidators {
     isValidAnyName(nameRegexPattern, 35)
 
   val isValidEmail: String => Boolean = (email: String) => email.isEmpty || isMatchingPattern(email, emailPattern)
+
+  val isValidNino: String => Boolean = (nino:String) => nino.isEmpty || isMatchingPattern(nino, ninoPattern)
 
   val isValidTelephoneNumber: String => Boolean = (value: String) =>
     value.isEmpty || isMatchingPattern(value, phoneNumberRegexPattern)
