@@ -19,7 +19,4 @@ package uk.gov.hmrc.ndrrprotofrontend.models
 import play.api.libs.json.{Json, OFormat}
 
 
-final case class ContactDetails(contactName: String, emailAddress: String, phoneNumber: PhoneNumber, address: VoaAddress, utr: String) extends ColumnEntry
-object ContactDetails {
-  implicit val format: OFormat[ContactDetails] = Json.format[ContactDetails]
-}
+final case class ContactDetails(contactName: String, emailAddress: String, phoneNumber: PhoneNumber, address: VoaAddress, utr: String, voaClientCode: String) extends ColumnEntry

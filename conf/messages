@@ -13,10 +13,23 @@ nav.messages=Messages
 nav.actionNeeded=Action needed
 nav.profileAndSettings=Profile and settings
 
+#AddpropertyToYourAccount
+addpropertyToYourAccount.title=Add a property to your account
+addpropertyToYourAccount.p1=From 1 April 2026, you must tell us within 60 days if you become the ratepayer of a property. You can do this by adding the property to your account.
+addpropertyToYourAccount.p2=If you were the ratepayer before 1 April 2026, you need to add your property so you can report changes to your property, rent or lease.
+addpropertyToYourAccount.p3.inset=You must be the current ratepayer for any property you want to add.
+addpropertyToYourAccount.p4=You are the current ratepayer if you get a business rates bill and (either of these apply):
+addpropertyToYourAccount.p5.bullet=you pay business rates for all or part of the property
+addpropertyToYourAccount.p6.bullet=you do not pay business rates because you get relief such as small business rates relief
+addpropertyToYourAccount.p7=You are not the current ratepayer if someone else pays the business rates. For example, you own the property and a tenant pays the business rates.
+addpropertyToYourAccount.p8.heading=What you need
+addpropertyToYourAccount.p9=You need your most recent business rates bill to prove you are the current ratepayer. Your council will send you a business rates bill even if you get relief such as small business rates relief.
+addpropertyToYourAccount.p10.heading=If you became the ratepayer on or after the 1 April 2026, you need to give us the exact date you became the ratepayer.
+addpropertyToYourAccount.p11=You need your most recent business rates bill to prove you are the current ratepayer. Your council will send you a business rates bill even if you get relief such as small business rates relief.
+
 #Dashboard
 home.heading=Your business rates valuation account
 home.caption=Account home
-
 #propertiesCard
 home.propertiesCard.title=Properties
 home.propertiesCard.caption=Add and manage properties you have a connection with.
@@ -24,14 +37,19 @@ home.propertiesCard.caption2=You must tell us within 60 days of becoming the rat
 home.propertiesCard.tag=Action needed
 home.propertiesCard.addProperty=Add a property
 home.propertiesCard.manageProperties=Manage your properties
-
+#yourAccountCard
+home.yourAccountCard.title=Your account
+home.yourAccountCard.caption=Add and manage rating agents.
+home.yourAccountCard.caption2=Rating agents can deal with the VOA and your business rates on your behalf.
+home.yourAccountCard.caption3=Your client code is:
+home.yourAccountCard.tag=Action needed
+home.yourAccountCard.link1=Add and manage rating agents
 #ReportChangeCard
 home.reportChangeCard.title=Report a change
 home.reportChangeCard.caption=Tell us about changes to your property, rent or lease.
 home.reportChangeCard.caption2=You must tell us within 60 days of a change.
 home.reportChangeCard.link1=View change reports in progress
 home.reportChangeCard.link2=Report a change
-
 #messageCard
 home.messagesCard.title=Your messages
 home.messagesCard.caption=Read secure messages from us.
@@ -39,7 +57,6 @@ home.messagesCard.none=You have no new messages
 home.messagesCard.single=You have {0} new message
 home.messagesCard.multiple=You have {0} new messages
 home.messagesCard.viewAllMessages=Go to your messages
-
 #helpCard
 home.helpAndGuidanceCard.title=Help
 home.helpAndGuidanceCard.link1=Help with adding and managing properties
@@ -79,19 +96,22 @@ registration.checkAnswers.registerToUseService.button=Accept and register
 registration.dashboard.button=Go to the dashboard
 #PhoneNumber
 registration.phoneNumber.caption=Register for the business rates valuation service
-registration.phoneNumber.heading=Enter phone number
-registration.phoneNumber.body.1=We will send an access code to this phone by text message.
-registration.phoneNumber.body.2=Phone number
+registration.phoneNumber.heading=Phone number
 registration.phoneNumber.hint=For international numbers include the country code
 registration.phoneNumber.empty.error=Enter the telephone number of the main contact
 registration.phoneNumber.tooLong.error=Telephone number must be 24 numbers or fewer
 registration.phoneNumber.invalidFormat.error=Enter a telephone number in the correct format
+#Nino
+registration.NationalInsuranceNumber.heading =Provide your National Insurance number
+registration.NationalInsuranceNumber.label=National Insurance number
+registration.NationalInsuranceNumber.hint=It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’.
+registration.nino.empty.error=Enter your National Insurance number
+registration.nino.invalidFormat.error=Enter a National Insurance number in the correct format
 #Email
 registration.email.caption=Register for the business rates valuation service
 registration.email.heading=Enter email address
 registration.contactName.heading=Contact name
 registration.email.body.1=This will be the email we will contact regarding your business rates.
-registration.email.body.2=To confirm it is your email address we will send you a code.
 registration.email.body.3=Email address
 registration.email.hint=For international numbers include the country code
 registration.email.empty.error=Enter an email address

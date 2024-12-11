@@ -45,7 +45,7 @@ class ConfirmUTRController @Inject()(mcc: MessagesControllerComponents, view: Co
           utrOption =>  {
             utrOption.value match {
               case Some(provideUtr) if provideUtr == UTROptions.PROVIDE_UTR => Future.successful(Redirect(routes.RegistrationCheckAnswersController.show.url))
-              case Some(provideNino) if provideNino == UTROptions.PROVIDE_NINO => Future.successful(Redirect(routes.RegistrationCheckAnswersController.show.url))
+              case Some(provideNino) if provideNino == UTROptions.PROVIDE_NINO => Future.successful(Redirect(routes.NationalInsuranceNumberController.onPageLoad.url))
               case Some(noUtr) if noUtr == UTROptions.NO_UTR => Future.successful(Redirect(routes.RegistrationCheckAnswersController.show.url))
               case _ => Future.successful(Redirect(routes.RegistrationCheckAnswersController.show.url))
             }

@@ -19,13 +19,13 @@
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.Aliases._
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLink
 
 
 @this(
  layout: Layout,
  govukTable : GovukTable,
- printLinkWithJs: printLinkWithJs
+ printLink: printLink
 )
 
 @(navigationBarContent: NavigationBarContent, submissionDetails: SubmissionDetails, propertiesTable: Table)(implicit request: RequestHeader, messages: Messages)
@@ -34,6 +34,6 @@
 @layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  Some(navigationBarContent)) {
 
  @SubmissionPanelComponent(submissionDetails)
- @printLinkWithJs(messages("printOrSave"))
+ @printLink(messages("printOrSave"))
  @govukTable(propertiesTable)
 }

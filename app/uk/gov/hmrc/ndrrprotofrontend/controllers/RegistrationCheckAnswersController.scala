@@ -37,19 +37,6 @@ class RegistrationCheckAnswersController @Inject()(
         reference = Reference("1ZDBB57"))
     }
 
-    val userAnswers: ContactDetails = ContactDetails(
-      contactName = fullName.toString,
-      emailAddress = "Rob.Best@hotmail.co.uk",
-      phoneNumber = PhoneNumber("07943009506"),
-      address = VoaAddress(
-        line1 = "99",
-        line2 = Some("Wibble Rd"),
-        town = "Worthing",
-        county = Some("West Sussex"),
-        postcode = Postcode("BN110AA")),
-      utr = "Not provided"
-    )
-
     Future.successful(
       Ok(
         registrationCheckAnswersView(

@@ -16,28 +16,24 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
+import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent}
-import uk.gov.hmrc.ndrrprotofrontend.views.html.WhatYouWillNeedView
+import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+import uk.gov.hmrc.ndrrprotofrontend.views.html.AddPropertyToYourAccountView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import javax.inject.{Inject, Singleton}
+import javax.inject.Inject
 import scala.concurrent.Future
 
-@Singleton
-class WhatYouWillNeedController @Inject()(
-                                          mcc: MessagesControllerComponents,
-                                          whatYouWillNeedView: WhatYouWillNeedView)
-  extends FrontendController(mcc){
-
-  private def testNavBar: NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(Call(method = "GET",url = "controllers.routes.registration.email.url"), messageKey = "nav.home", linkId = "")),
-    NavigationButtons = Some(Seq(Link(Call(method = "GET",url = "controllers.routes.registration.email.url"),messageKey =  "nav.home", linkId = ""))))
+class AddPropertyToYourAccountController @Inject()(
+                                                    mcc: MessagesControllerComponents,
+                                                    addPropertyToYourAccountView: AddPropertyToYourAccountView)
+  extends FrontendController(mcc) with Common{
 
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        whatYouWillNeedView(navigationBarContent = testNavBar)
+        addPropertyToYourAccountView(navigationBarContent = testNavBar)
       )
     )
   }

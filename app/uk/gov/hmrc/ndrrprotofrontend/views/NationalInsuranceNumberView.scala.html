@@ -15,58 +15,47 @@
  *@
 
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
-@import uk.gov.hmrc.ndrrprotofrontend.models.Postcode
+@import uk.gov.hmrc.ndrrprotofrontend.models.NationalInsuranceNumber
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.Aliases._
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
 @import uk.gov.hmrc.ndrrprotofrontend.viewmodels.govuk.all._
 
 
 @this(
 layout: Layout,
 govukSummaryList : GovukSummaryList,
-printLinkWithJs: printLinkWithJs,
 formHelper: FormWithCSRF,
 govukErrorSummary: GovukErrorSummary,
 govukFieldset: GovukFieldset,
 saveAndContinueButton: saveAndContinueButton
 )
 
-@(form: Form[Postcode])(implicit request: RequestHeader, messages: Messages)
+@(form: Form[NationalInsuranceNumber])(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
 @layout(pageTitle = Some(heading), showBackLink = true) {
-  @formHelper(action = uk.gov.hmrc.ndrrprotofrontend.controllers.routes.AddressController.submit, Symbol("autoComplete") -> "off") {
+@formHelper(action = uk.gov.hmrc.ndrrprotofrontend.controllers.routes.NationalInsuranceNumberController.submit, Symbol("autoComplete") -> "off") {
 
-  @if(form.errors.nonEmpty) {
-   @govukErrorSummary(ErrorSummaryViewModel(form))
-  }
-   <span class="govuk-caption-l">@messages("registration.checkAnswers.caption")</span>
-   <h1 class="govuk-heading-l">
-    @messages("registration.address.heading")
-   </h1>
-   <p class="govuk-body">@messages("registration.address.body.1")</p>
-   <p class="govuk-body">@messages("registration.address.body.2")</p>
+@if(form.errors.nonEmpty) {
+@govukErrorSummary(ErrorSummaryViewModel(form))
+}
 
-   @components.InputText(
-    field = form("postcode.value"),
-    label = Some(messages("registration.postcode.body.3")),
-    inputPurpose=Some("postcode"),
-    autocomplete = true,
-    inputType = "postcode"
-   )
+<span class="govuk-caption-l">@messages("registration.checkAnswers.caption")</span>
+<h1 class="govuk-heading-l">
+    @messages("registration.NationalInsuranceNumber.heading")
+</h1>
 
-   @components.InputText(
-    field = form("address.value"),
-    label = Some(messages("registration.address.body.3")),
-    inputPurpose=Some("address"),
-    autocomplete = true,
-    inputType = "address"
-   )
-   @saveAndContinueButton("continue")
-  }
+@components.InputText(
+field = form("nino.value"),
+label = Some(messages("registration.NationalInsuranceNumber.label")),
+hint = Some(messages("registration.NationalInsuranceNumber.hint")),
+inputPurpose=Some("tel"),
+autocomplete = true,
+inputType = "tel"
+)
+@saveAndContinueButton("continue")
+}
 }

@@ -17,19 +17,14 @@
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
-@import uk.gov.hmrc.ndrrprotofrontend.models.Link
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.ContinueButton
-
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.Aliases._
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
 
 
 @this(
     layout: Layout,
-    govukSummaryList : GovukSummaryList,
-    printLinkWithJs: printLinkWithJs
+    govukSummaryList : GovukSummaryList
 )
 
 @(userAnswers: ContactDetails, contactSummaryTable: SummaryList, taxpayerReferenceSummary: SummaryList)(implicit request: RequestHeader, messages: Messages)
@@ -45,5 +40,5 @@
     @govukSummaryList(taxpayerReferenceSummary)
     <h2 class="govuk-heading-m">@messages("registration.checkAnswers.registerToUseService.title")</h2>
     <p class="govuk-body">@messages("registration.checkAnswers.registerToUseService.body")</p>
-    <a href="http://localhost:9001/ndrr-proto-frontend/dashboard" role="button" class="govuk-button">@messages("submit.registration.button")</a>
+    <a href="http://localhost:9001/ndrr-proto-frontend/dashboard" role="button" class="govuk-button">@messages("registration.dashboard.button")</a>
 }

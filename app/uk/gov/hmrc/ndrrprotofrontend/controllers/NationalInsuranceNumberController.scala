@@ -17,31 +17,30 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.controllers.routes
-import uk.gov.hmrc.ndrrprotofrontend.models.Postcode
-import Postcode.form
-import uk.gov.hmrc.ndrrprotofrontend.views.html.AddressView
+import uk.gov.hmrc.ndrrprotofrontend.models.NationalInsuranceNumber
+import uk.gov.hmrc.ndrrprotofrontend.models.NationalInsuranceNumber.form
+import uk.gov.hmrc.ndrrprotofrontend.views.html.NationalInsuranceNumberView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.Inject
 import scala.concurrent.Future
 
-class AddressController @Inject()(
-                                       mcc: MessagesControllerComponents,
-                                       addressView: AddressView)
+class NationalInsuranceNumberController @Inject()(
+                                         mcc: MessagesControllerComponents,
+                                         nationalInsuranceNumberView: NationalInsuranceNumberView)
   extends FrontendController(mcc) {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-      Ok(addressView(form))
+    Ok(nationalInsuranceNumberView(form))
   }
 
   def submit(): Action[AnyContent] =
     Action.async { implicit request =>
-      Postcode.form()
+      NationalInsuranceNumber.form()
         .bindFromRequest()
         .fold(
-          formWithErrors => Future.successful(BadRequest(addressView(formWithErrors))),
-          email => {
+          formWithErrors => Future.successful(BadRequest(nationalInsuranceNumberView(formWithErrors))),
+          nationalInsuranceNumber => {
             Future.successful(Redirect(routes.RegistrationCheckAnswersController.show))
           }
         )
