@@ -27,11 +27,11 @@ import uk.gov.hmrc.ndrrprotofrontend.BaseSpec
 
 
 class VoaTableSpec extends BaseSpec{
-  def messagesApi: MessagesApi = app.injector.instanceOf[MessagesApi]
+
   val fakeGetRequest: FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "/your-properties")
   "Voa table" - {
     "will generate a minimum table from a minimum VoaTable" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
 
       val voaTable : VoaTable = VoaTable(
         Seq.empty, Seq.empty
@@ -40,7 +40,7 @@ class VoaTableSpec extends BaseSpec{
       voaTable.buildTable() shouldBe  Table(List(), None, None, "", firstCellIsHeader = false, "", Map())
     }
     "will generate a minimum table with a header from the english messages if the key is set in the voa table" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
       val voaTable : VoaTable = VoaTable(
         Seq(MessageKey("voa.address.title")), Seq.empty
       )
@@ -49,7 +49,7 @@ class VoaTableSpec extends BaseSpec{
     }
 
     "will generate a Table with a header and row value if set in the voa table" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
       val address0 = VoaAddress(
         line1 = "99",
         line2 = Some("Wibble Rd"),
@@ -65,7 +65,7 @@ class VoaTableSpec extends BaseSpec{
     }
 
     "will generate a Table with two headers and two row values if set in the voa table" in {
-      implicit val messages: Messages = messagesApi.preferred(fakeGetRequest)
+      implicit val messages: Messages = messagesAPI.preferred(fakeGetRequest)
       val address0 = VoaAddress(
         line1 = "99",
         line2 = Some("Wibble Rd"),

@@ -1,9 +1,9 @@
 # microservice specific routes
 
-->         /hmrc-frontend           hmrcfrontend.Routes
-GET        /your-properties         uk.gov.hmrc.ndrrprotofrontend.controllers.YourPropertiesController.yourProperties
-GET        /confirm-your-contact-details        uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmContactDetailsController.confirmYourContactDetails
-GET        /assets/*file            controllers.Assets.versioned(path = "/public", file: Asset)
+->         /hmrc-frontend                                  hmrcfrontend.Routes
+GET        /your-properties                                uk.gov.hmrc.ndrrprotofrontend.controllers.YourPropertiesController.yourProperties
+GET        /confirm-your-contact-details                    uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmContactDetailsController.confirmYourContactDetails
+GET        /assets/*file                                    controllers.Assets.versioned(path = "/public", file: Asset)
 
 GET        /dashboard                                      uk.gov.hmrc.ndrrprotofrontend.controllers.DashboardController.show
 GET        /what-you-will-need                             uk.gov.hmrc.ndrrprotofrontend.controllers.WhatYouWillNeedController.show
@@ -20,3 +20,6 @@ GET        /registration/address                           uk.gov.hmrc.ndrrproto
 POST       /registration/address                           uk.gov.hmrc.ndrrprotofrontend.controllers.AddressController.submit
 GET        /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationCheckAnswersController.show
 GET        /registration/provide-tax-reference             uk.gov.hmrc.ndrrprotofrontend.controllers.ProvideTaxReferenceController.show
+
+GET       /address-lookup                                 uk.gov.hmrc.ndrrprotofrontend.controllers.addressLookupFrontend.AddressLookupController.startAddressLookup()
+GET       /off-ramp/contact-address/:ngrId                uk.gov.hmrc.ndrrprotofrontend.controllers.addressLookupFrontend.RampOffController.contactAddressOffRamp(ngrId: String, id: String)

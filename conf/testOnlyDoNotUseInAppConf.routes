@@ -11,3 +11,7 @@
 
 # Add all the application routes to the prod.routes file
 ->         /                          prod.Routes
+
++nocsrf
+POST /ngr-proto-frontend/test-only/api/init      uk.gov.hmrc.ndrrprotofrontend.controllers.test.AddressFrontendStubController.initialise()
+GET  /ngr-proto-frontend/test-only/api/confirmed  uk.gov.hmrc.ndrrprotofrontend.controllers.test.AddressFrontendStubController.addresses(id: String)
