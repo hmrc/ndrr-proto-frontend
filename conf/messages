@@ -96,7 +96,7 @@ registration.checkAnswers.registerToUseService.button=Accept and register
 registration.dashboard.button=Go to the dashboard
 #PhoneNumber
 registration.phoneNumber.caption=Register for the business rates valuation service
-registration.phoneNumber.heading=phone number
+registration.phoneNumber.heading=Phone number
 registration.phoneNumber.hint=For international numbers include the country code
 registration.phoneNumber.empty.error=Enter the telephone number of the main contact
 registration.phoneNumber.tooLong.error=Telephone number must be 24 numbers or fewer
