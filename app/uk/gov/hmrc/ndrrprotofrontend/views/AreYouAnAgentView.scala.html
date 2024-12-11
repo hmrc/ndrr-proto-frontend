@@ -16,12 +16,12 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.Text
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
-@import uk.gov.hmrc.ndrrprotofrontend.models.RadioBoolean
+@import uk.gov.hmrc.ndrrprotofrontend.models.YesNoValidator
+@import uk.gov.hmrc.ndrrprotofrontend.models.YesNoOptions
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.govukfrontend.views.Aliases._
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
 @import uk.gov.hmrc.ndrrprotofrontend.viewmodels.govuk.all._
@@ -33,12 +33,15 @@ printLinkWithJs: printLinkWithJs,
 formHelper: FormWithCSRF,
 govukErrorSummary: GovukErrorSummary,
 govukFieldset: GovukFieldset,
-saveAndContinueButton: saveAndContinueButton
+saveAndContinueButton: saveAndContinueButton,
+govukRadios : GovukRadios
 )
 
-@(form: Form[RadioBoolean])(implicit request: RequestHeader, messages: Messages)
+@(form: Form[YesNoValidator])(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
+
+@formValues = @{form("value")}
 
 @layout(pageTitle = Some(heading)) {
 
@@ -48,6 +51,26 @@ saveAndContinueButton: saveAndContinueButton
   }
   <h1 class="govuk-heading-l">@messages("registration.areYouAnAgent.heading")</h1>
   <div class="govuk-hint">@messages("registration.areYouAnAgent.hint")</div>
-  <a href="" id="submit" role="button" class="govuk-button">@messages("registration.areYouAnAgent.continue")</a>
+
+    @govukRadios(Radios(
+        name = "value",
+        items = Seq(
+        RadioItem(
+        content = Text("Yes"),
+        value = Some(YesNoOptions.YES.toString),
+        checked = formValues.value.contains(YesNoOptions.YES.toString)
+        ),
+        RadioItem(
+        content = Text("No"),
+        value = Some(YesNoOptions.NO.toString),
+        checked = formValues.value.contains(YesNoOptions.NO.toString)
+        )
+        ),
+        classes = "govuk-radios",
+        errorMessage = formValues.error.map(err => ErrorMessage(content = Text(messages(err.message)))),
+    ))
+
+    @saveAndContinueButton("continue")
+
  }
 }

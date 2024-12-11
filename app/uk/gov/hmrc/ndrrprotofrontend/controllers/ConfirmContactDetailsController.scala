@@ -33,7 +33,7 @@ class ConfirmContactDetailsController @Inject()(
                                                )
   extends FrontendController(mcc) with Common {
 
-  def confirmYourContactDetails: Action[AnyContent] = Action.async { implicit request =>
+  def show: Action[AnyContent] = Action.async { implicit request =>
 
     Future.successful(Ok(view(makeSummaryList(Seq(
       contactName(fullName.value),

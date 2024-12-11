@@ -21,8 +21,8 @@ import play.api.data.Forms.{boolean, mapping}
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 import uk.gov.hmrc.ndrrprotofrontend.views.html.AreYouAnAgentView
-import uk.gov.hmrc.ndrrprotofrontend.models.RadioBoolean
-import uk.gov.hmrc.ndrrprotofrontend.models.RadioBoolean.form
+import uk.gov.hmrc.ndrrprotofrontend.models.YesNoValidator.form
+import uk.gov.hmrc.ndrrprotofrontend.models.{YesNoOptions, YesNoValidator}
 
 import javax.inject.Inject
 import scala.concurrent.Future
@@ -42,12 +42,16 @@ class AreYouAnAgentController @Inject()(
 
       def submit(): Action[AnyContent] = {
         Action.async { implicit request =>
-          RadioBoolean.form()
+          YesNoValidator.form()
             .bindFromRequest()
             .fold(
               formWithErrors => Future.successful(BadRequest(areYouAnAgentView(formWithErrors))),
               isAgent => {
-                Future.successful(Redirect(routes.RegistrationCheckAnswersController.show))
+                isAgent.value match {
+                  case _ =>
+                    Future.successful(Redirect(routes.ConfirmContactDetailsController.show))
+                }
+
               }
             )
         }
