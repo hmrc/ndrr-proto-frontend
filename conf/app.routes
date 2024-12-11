@@ -1,14 +1,17 @@
 # microservice specific routes
 
 ->         /hmrc-frontend           hmrcfrontend.Routes
+GET        /your-properties         uk.gov.hmrc.ndrrprotofrontend.controllers.YourPropertiesController.yourProperties
 GET        /assets/*file            controllers.Assets.versioned(path = "/public", file: Asset)
+
+GET        /add-a-property/add-a-property-to-your-account  uk.gov.hmrc.ndrrprotofrontend.controllers.AddPropertyToYourAccountController.show
 
 GET        /dashboard                                      uk.gov.hmrc.ndrrprotofrontend.controllers.DashboardController.show
 GET        /what-you-will-need                             uk.gov.hmrc.ndrrprotofrontend.controllers.WhatYouWillNeedController.show
 GET        /ratepayer-properties                           uk.gov.hmrc.ndrrprotofrontend.controllers.RatepayerPropertiesController.show
 GET        /remove-property/submit                         uk.gov.hmrc.ndrrprotofrontend.controllers.SubmitConfirmationController.show
 GET        /remove-property/decleration                    uk.gov.hmrc.ndrrprotofrontend.controllers.RemovePropertyDeclarationController.show
-GET        /registration/confirmation                      uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationConfirmationController.show
+GET        /registration/confirmation                       uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationConfirmationController.show
 GET        /registration/phone-number                      uk.gov.hmrc.ndrrprotofrontend.controllers.PhoneNumberController.onPageLoad
 POST       /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.PhoneNumberController.submit
 GET        /registration/email                             uk.gov.hmrc.ndrrprotofrontend.controllers.EmailController.onPageLoad

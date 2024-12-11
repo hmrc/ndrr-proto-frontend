@@ -32,13 +32,14 @@ package uk.gov.hmrc.ndrrprotofrontend.models
  * limitations under the License.
  */
 
-import play.api.libs.json.{Json, OFormat}
-import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, CardTitle, Tag}
+import uk.gov.hmrc.govukfrontend.views.Aliases.{CardTitle, Tag}
 
-case class Card(
+final case class Card(
                  titleKey: Option[CardTitle] = None,
                  captionKey: Option[CardCaption] = None,
                  captionKey2: Option[CardCaption] = None,
+                 captionKey3: Option[CardCaption] = None,
+                 voaReference: Option[CardCaption] = None,
                  tag: Option[Tag] = None,
                  links: Option[Links] = None,
                  classes: String = ""

@@ -17,19 +17,14 @@
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
-@import uk.gov.hmrc.ndrrprotofrontend.models.Link
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.ContinueButton
-
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.Aliases._
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
 
 
 @this(
     layout: Layout,
-    govukSummaryList : GovukSummaryList,
-    printLinkWithJs: printLinkWithJs
+    govukSummaryList : GovukSummaryList
 )
 
 @(userAnswers: ContactDetails, contactSummaryTable: SummaryList, taxpayerReferenceSummary: SummaryList)(implicit request: RequestHeader, messages: Messages)

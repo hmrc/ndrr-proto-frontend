@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-import play.twirl.api.Html
 import uk.gov.hmrc.govukfrontend.views.Aliases.Value
 import uk.gov.hmrc.govukfrontend.views.viewmodels.content.HtmlContent
 
@@ -29,6 +28,4 @@ object VoaBullet {
       Value(HtmlContent(s"""<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6"><li>$bullet</li></ul>"""))
     }
   }
-
-
 }

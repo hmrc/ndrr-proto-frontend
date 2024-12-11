@@ -18,7 +18,7 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Link, MessageKey, NavigationBarContent, Reference, SubmissionDetails}
+import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent, Reference, SubmissionDetails}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.RemovePropertyDeclarationView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -29,18 +29,7 @@ import scala.concurrent.Future
 class RemovePropertyDeclarationController @Inject()(
                                                 mcc: MessagesControllerComponents,
                                                 removePropertyDeclarationView: RemovePropertyDeclarationView)
-extends FrontendController(mcc) {
-  private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = "")
-    ),
-    NavigationButtons = Some(Seq(
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.messages", linkId = "", notification = Some(3)),
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.profileAndSettings", linkId = ""),
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.signOut", linkId = ""),
-    ))
-  )
+extends FrontendController(mcc) with Common {
 
   val show: Action[AnyContent] = Action.async { implicit request =>
 

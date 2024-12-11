@@ -24,11 +24,3 @@ final case class CardCaption(
                       headingLevel: Option[Int] = None,
                       classes: String = ""
                     )
-object CardCaption {
-
-  def defaultObject: CardCaption = CardCaption()
-
-  implicit def jsonFormats: OFormat[CardCaption] =
-    Json.using[Json.WithDefaultValues].format[CardCaption]
-
-}

@@ -15,25 +15,25 @@
  *@
 
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
-@import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
-@import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.govukfrontend.views.Aliases._
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLink
-
+@import uk.gov.hmrc.govukfrontend.views.html.components.Text
 
 @this(
- layout: Layout,
- govukTable : GovukTable,
- printLink: printLink
+layout: Layout
 )
 
-@(navigationBarContent: NavigationBarContent, submissionDetails: SubmissionDetails, propertiesTable: Table)(implicit request: RequestHeader, messages: Messages)
+@(navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
 
-@heading = @{messages("home.heading")}
+@heading = @{messages("addpropertyToYourAccount.title")}
 @layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  Some(navigationBarContent)) {
+<h1 class="govuk-heading-l">@{Text(heading).asHtml}</h1>
+<p class="govuk-body">
+ @messages("addpropertyToYourAccount.p1")
+</p>
+<p class="govuk-body">
+ @messages("addpropertyToYourAccount.p2")
+</p>
+<div class="govuk-inset-text">
+ @messages("addpropertyToYourAccount.p2")
+</div>
 
- @SubmissionPanelComponent(submissionDetails)
- @printLink(messages("printOrSave"))
- @govukTable(propertiesTable)
 }

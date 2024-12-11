@@ -30,15 +30,6 @@ class SubmitConfirmationController @Inject()(
                                              mcc: MessagesControllerComponents,
                                              submitConfirmation: SubmitConfirmation)
 extends FrontendController(mcc) with Common {
-  private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home",linkId = "")),
-      NavigationButtons = Some(Seq(
-        Link(Call("GET","/ndrr-proto-frontend/dashboard"), messageKey = "nav.messages",linkId = "", notification = Some(3)),
-        Link(Call(method = "GET",url = "some-href"), messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
-        Link(Call(method = "GET",url = "some-href"), messageKey = "nav.profileAndSettings",linkId = ""),
-        Link(Call(method = "GET",url = "some-href"), messageKey = "nav.signOut",linkId = "")
-    ))
-  )
 
   val show: Action[AnyContent] = Action.async { implicit request =>
     def testSubmitData(): SubmissionDetails  = {

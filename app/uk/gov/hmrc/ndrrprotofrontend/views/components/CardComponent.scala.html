@@ -23,6 +23,14 @@
 <div id="" class="card">
 
     <div class="card-body active min-height">
+        <a href =@{
+           dashboardCard.links match {
+           case None => {}
+            case Some(cardAction) => {
+            cardAction.links.head.href.url
+            }
+            }
+            }>
         @dashboardCard.titleKey.map { cardTitle =>
             <h@{cardTitle.headingLevel.getOrElse(2)} class="@toClasses("govuk-heading-s card-heading", cardTitle.classes)">
             @cardTitle.content.asHtml
@@ -41,6 +49,18 @@
         </h@{cardCaption.headingLevel.getOrElse(2)}>
         }
 
+        @dashboardCard.captionKey3.map { cardCaption =>
+            <h@{cardCaption.headingLevel.getOrElse(2)} class="@toClasses("govuk-body", cardCaption.classes)">
+            @cardCaption.content.asHtml
+            </h@{cardCaption.headingLevel.getOrElse(2)}>
+            @dashboardCard.voaReference.map { voaReference =>
+                <h@{cardCaption.headingLevel.getOrElse(2)} class="@toClasses("govuk-body", cardCaption.classes)">
+                    @voaReference.content.asHtml
+                </h@{cardCaption.headingLevel.getOrElse(2)}>
+            }
+        }
+
+
         @dashboardCard.tag.map { tag =>
         <td class="govuk-table__cell">
             <strong class="govuk-tag govuk-tag--red">
@@ -48,6 +68,7 @@
             </strong>
         </td>
         }
+        </a>
     </div>
 
     <div class="card-action">

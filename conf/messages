@@ -13,10 +13,15 @@ nav.messages=Messages
 nav.actionNeeded=Action needed
 nav.profileAndSettings=Profile and settings
 
+#AddpropertyToYourAccount
+addpropertyToYourAccount.title=Add a property to your account
+addpropertyToYourAccount.p1=From 1 April 2026, you must tell us within 60 days if you become the ratepayer of a property. You can do this by adding the property to your account.
+addpropertyToYourAccount.p2=If you were the ratepayer before 1 April 2026, you need to add your property so you can report changes to your property, rent or lease.
+addpropertyToYourAccount.p3.inset=You must be the current ratepayer for any property you want to add.
+
 #Dashboard
 home.heading=Your business rates valuation account
 home.caption=Account home
-
 #propertiesCard
 home.propertiesCard.title=Properties
 home.propertiesCard.caption=Add and manage properties you have a connection with.
@@ -24,14 +29,19 @@ home.propertiesCard.caption2=You must tell us within 60 days of becoming the rat
 home.propertiesCard.tag=Action needed
 home.propertiesCard.addProperty=Add a property
 home.propertiesCard.manageProperties=Manage your properties
-
+#yourAccountCard
+home.yourAccountCard.title=Your account
+home.yourAccountCard.caption=Add and manage rating agents.
+home.yourAccountCard.caption2=Rating agents can deal with the VOA and your business rates on your behalf.
+home.yourAccountCard.caption3=Your client code is:
+home.yourAccountCard.tag=Action needed
+home.yourAccountCard.link1=Add and manage rating agents
 #ReportChangeCard
 home.reportChangeCard.title=Report a change
 home.reportChangeCard.caption=Tell us about changes to your property, rent or lease.
 home.reportChangeCard.caption2=You must tell us within 60 days of a change.
 home.reportChangeCard.link1=View change reports in progress
 home.reportChangeCard.link2=Report a change
-
 #messageCard
 home.messagesCard.title=Your messages
 home.messagesCard.caption=Read secure messages from us.
@@ -39,7 +49,6 @@ home.messagesCard.none=You have no new messages
 home.messagesCard.single=You have {0} new message
 home.messagesCard.multiple=You have {0} new messages
 home.messagesCard.viewAllMessages=Go to your messages
-
 #helpCard
 home.helpAndGuidanceCard.title=Help
 home.helpAndGuidanceCard.link1=Help with adding and managing properties
@@ -79,9 +88,7 @@ registration.checkAnswers.registerToUseService.button=Accept and register
 registration.dashboard.button=Go to the dashboard
 #PhoneNumber
 registration.phoneNumber.caption=Register for the business rates valuation service
-registration.phoneNumber.heading=Enter phone number
-registration.phoneNumber.body.1=We will send an access code to this phone by text message.
-registration.phoneNumber.body.2=Phone number
+registration.phoneNumber.heading=phone number
 registration.phoneNumber.hint=For international numbers include the country code
 registration.phoneNumber.empty.error=Enter the telephone number of the main contact
 registration.phoneNumber.tooLong.error=Telephone number must be 24 numbers or fewer
@@ -91,7 +98,6 @@ registration.email.caption=Register for the business rates valuation service
 registration.email.heading=Enter email address
 registration.contactName.heading=Contact name
 registration.email.body.1=This will be the email we will contact regarding your business rates.
-registration.email.body.2=To confirm it is your email address we will send you a code.
 registration.email.body.3=Email address
 registration.email.hint=For international numbers include the country code
 registration.email.empty.error=Enter an email address

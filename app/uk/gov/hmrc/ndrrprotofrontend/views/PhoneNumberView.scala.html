@@ -21,15 +21,12 @@
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.govukfrontend.views.Aliases._
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
 @import uk.gov.hmrc.ndrrprotofrontend.viewmodels.govuk.all._
 
 
 @this(
 layout: Layout,
 govukSummaryList : GovukSummaryList,
-printLinkWithJs: printLinkWithJs,
 formHelper: FormWithCSRF,
 govukErrorSummary: GovukErrorSummary,
 govukFieldset: GovukFieldset,
@@ -49,7 +46,6 @@ saveAndContinueButton: saveAndContinueButton
    <h1 class="govuk-heading-l">
    @messages("registration.phoneNumber.heading")
    </h1>
-   <p class="govuk-body">@messages("registration.phoneNumber.body.1")</p>
 
    @components.InputText(
     field = form("phoneNumber.value"),

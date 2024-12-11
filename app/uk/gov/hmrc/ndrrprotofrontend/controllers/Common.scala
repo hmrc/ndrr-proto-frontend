@@ -26,6 +26,142 @@ import uk.gov.hmrc.ndrrprotofrontend.models.VoaSummaryListRow.buildSummaryList
 
 trait Common {
 
+  val fullName: FullName = FullName("Sarah",None,"Philips")
+  //USER CONTACT DETAILS:
+  val userAnswers: ContactDetails = ContactDetails(
+    contactName = fullName.toString,
+    emailAddress = "Rob.Best@hotmail.co.uk",
+    phoneNumber = PhoneNumber("07943009506"),
+    address = VoaAddress(
+      line1 = "99",
+      line2 = Some("Wibble Rd"),
+      town = "Worthing",
+      county = Some("West Sussex"),
+      postcode = Postcode("BN110AA")),
+    utr = "Not provided",
+    voaClientCode = "VOA176292C"
+  )
+
+  //testNavBar
+
+   def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
+    AccountHome = Some(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = "")),
+    NavigationButtons = Some(Seq(
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.messages", linkId = "", notification = Some(3)),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.profileAndSettings", linkId = ""),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.signOut", linkId = ""),
+    )))
+
+
+  //DASHBOARD CARDS:
+  def yourAccountCard()(implicit  messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.yourAccountCard.title",
+    captionKey =  Some("home.yourAccountCard.caption"),
+    captionKey2 =  Some("home.yourAccountCard.caption2"),
+    captionKey3 =  Some("home.yourAccountCard.caption3"),
+    voaReference = Some(userAnswers.voaClientCode),
+    tag = None,
+    links = Some(
+      Seq(
+        Link(
+          href       = Call(method = "GET",url = "some-href"),
+          linkId     = "LinkId-Card",
+          messageKey = "home.yourAccountCard.link1",
+        )
+      )
+    )
+  )
+  }
+
+  def reportChangeCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.reportChangeCard.title",
+    captionKey =  Some("home.reportChangeCard.caption"),
+    captionKey2 =  Some("home.reportChangeCard.caption2"),
+    links = Some(Seq(
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.reportChangeCard.link1",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.reportChangeCard.link2",
+      ))
+    ))
+  }
+
+  def propertiesCard(link:Link, tag: Option[String] = None)(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.propertiesCard.title",
+    captionKey =  Some("home.propertiesCard.caption"),
+    captionKey2 =  Some("home.propertiesCard.caption2"),
+    tag = tag,
+    links = Some(Seq(
+      link
+    )
+    ))
+  }
+
+  def testDataMessageCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
+    captionKey =  Some("home.messagesCard.caption"),
+    links = Some(Seq(
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.single",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.viewAllMessages",
+      ))
+    ))
+  }
+  def testDataHelpCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = "home.helpAndGuidanceCard.title",
+    links = Some(Seq(
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link1",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link2",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link3",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link4",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.helpAndGuidanceCard.link5",
+      ))
+    ))
+  }
+
+  def testData()(implicit messages: Messages): DashboardCard = { DashboardCard(
+    titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
+    captionKey =  Some("home.messagesCard.caption"),
+    links = Some(Seq(
+      Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.single",
+      ),Link(
+        href       = Call(method = "GET",url = "some-href"),
+        linkId     = "LinkId-Card",
+        messageKey = "home.messagesCard.viewAllMessages",
+      ))
+    ))
+  }
+
+  //TABLE:
+
   def createVoaTable(): VoaTable = {
     val headers = Seq(MessageKey("voa.address.title"), MessageKey("voa.reference.title"), MessageKey("voa.trn.title"))
 
@@ -64,7 +200,7 @@ trait Common {
     county = Some("Kent"),
     postcode = Postcode("HY270AA")
   )
-  val fullName: FullName = FullName("Olivia Jane Cunningham")
+
   val email:String = "olivia@thecornershop.co.uk."
   val dateOfBirth: DateOfBirth = DateOfBirth(5,"January", 1978)
   val card = VoaCard("Contact Info",Some(Seq(link1,link2)))

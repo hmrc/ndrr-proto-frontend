@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
-import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.ProvideTaxReferenceView
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
 import javax.inject.Inject
 import scala.concurrent.Future

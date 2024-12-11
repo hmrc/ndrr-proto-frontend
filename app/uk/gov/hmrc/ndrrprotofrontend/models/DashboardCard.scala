@@ -27,101 +27,13 @@ final case class DashboardCard(
                                 titleKey: String,
                                 captionKey:  Option[String] = None,
                                 captionKey2: Option[String] = None,
+                                captionKey3: Option[String] = None,
+                                voaReference: Option[String] = None,
                                 tag: Option[String] = None,
                                 links: Option[Seq[Link]] = None
                               )(implicit messages: Messages)
 
 object DashboardCard {
-
-  def reportChangeCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
-    titleKey = "home.reportChangeCard.title",
-    captionKey =  Some("home.reportChangeCard.caption"),
-    captionKey2 =  Some("home.reportChangeCard.caption2"),
-    links = Some(Seq(
-      Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.reportChangeCard.link1",
-      ),Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.reportChangeCard.link2",
-      ))
-    ))
-  }
-
-  def propertiesCard(link:Link, tag: Option[String] = None)(implicit messages: Messages): DashboardCard = { DashboardCard(
-    titleKey = "home.propertiesCard.title",
-    captionKey =  Some("home.propertiesCard.caption"),
-    captionKey2 =  Some("home.propertiesCard.caption2"),
-    tag = tag,
-    links = Some(Seq(
-      Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = link.messageKey
-      ))
-    ))
-  }
-
-  def testDataMessageCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
-    titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
-    captionKey =  Some("home.messagesCard.caption"),
-    links = Some(Seq(
-      Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.messagesCard.single",
-    ),Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.messagesCard.viewAllMessages",
-    ))
-    ))
-  }
-  def testDataHelpCard()(implicit messages: Messages): DashboardCard = { DashboardCard(
-    titleKey = "home.helpAndGuidanceCard.title",
-    links = Some(Seq(
-      Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.helpAndGuidanceCard.link1",
-      ),Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.helpAndGuidanceCard.link2",
-      ),Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.helpAndGuidanceCard.link3",
-      ),Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.helpAndGuidanceCard.link4",
-      ),Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.helpAndGuidanceCard.link5",
-      ))
-    ))
-  }
-
-  def testData()(implicit messages: Messages): DashboardCard = { DashboardCard(
-    titleKey = YourMessages(hasMessages = true, unreadMessageCount = 1L).titleKey,
-    captionKey =  Some("home.messagesCard.caption"),
-    links = Some(Seq(
-      Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.messagesCard.single",
-      ),Link(
-        href       = Call(method = "GET",url = "some-href"),
-        linkId     = "LinkId-Card",
-        messageKey = "home.messagesCard.viewAllMessages",
-      ))
-    ))
-  }
-
   def card(dashboardCard: DashboardCard)(implicit messages: Messages): Card = {
     Card(
       titleKey = Some(CardTitle(content = Text(Messages(dashboardCard.titleKey)))),
@@ -131,6 +43,14 @@ object DashboardCard {
         },
       captionKey2 = dashboardCard.captionKey2 match{
         case Some(caption2) => Some(CardCaption(content = Text(Messages(caption2))))
+        case _ => None
+      },
+      captionKey3 = dashboardCard.captionKey3 match{
+        case Some(caption3) => Some(CardCaption(content = Text(Messages(caption3))))
+        case _ => None
+      },
+      voaReference = dashboardCard.voaReference match{
+        case Some(voaReference) => Some(CardCaption(content = Text(Messages(voaReference))))
         case _ => None
       },
       tag = dashboardCard.tag match{
@@ -143,5 +63,4 @@ object DashboardCard {
       }
     )
   }
-
 }
