@@ -17,12 +17,12 @@ GET        /registration/address                           uk.gov.hmrc.ndrrproto
 POST       /registration/address                           uk.gov.hmrc.ndrrprotofrontend.controllers.AddressController.submit
 GET        /registration/registration-check-answers        uk.gov.hmrc.ndrrprotofrontend.controllers.RegistrationCheckAnswersController.show
 GET        /registration/provide-tax-reference             uk.gov.hmrc.ndrrprotofrontend.controllers.ProvideTaxReferenceController.show
-GET        /registration/confirm-your-contact-details                            uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmContactDetailsController.confirmYourContactDetails
+GET        /registration/confirm-your-contact-details                            uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmContactDetailsController.show
 GET        /registration/registration-questions/change-contact-name              uk.gov.hmrc.ndrrprotofrontend.controllers.ContactNameController.onPageLoad
 POST       /registration/registration-questions/change-contact-name              uk.gov.hmrc.ndrrprotofrontend.controllers.ContactNameController.submit
 GET        /registration/confirm-your-self-assessment-unique-taxpayer-reference  uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmUTRController.show
 POST       /registration/confirm-your-self-assessment-unique-taxpayer-reference  uk.gov.hmrc.ndrrprotofrontend.controllers.ConfirmUTRController.submit
 GET        /address-lookup                                 uk.gov.hmrc.ndrrprotofrontend.controllers.addressLookupFrontend.AddressLookupController.startAddressLookup()
 GET        /off-ramp/contact-address/:ngrId                uk.gov.hmrc.ndrrprotofrontend.controllers.addressLookupFrontend.RampOffController.contactAddressOffRamp(ngrId: String, id: String)
-
-
+GET        /registration/are-you-a-business-rates-agent    uk.gov.hmrc.ndrrprotofrontend.controllers.AreYouAnAgentController.show
+POST       /registration/are-you-a-business-rates-agent    uk.gov.hmrc.ndrrprotofrontend.controllers.AreYouAnAgentController.submit

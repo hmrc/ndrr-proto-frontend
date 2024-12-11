@@ -37,7 +37,7 @@ class ContactNameController @Inject()(mcc: MessagesControllerComponents, contact
         .fold(
           formWithErrors => Future.successful(BadRequest(contactNameView(formWithErrors))),
           fullName => {
-            Future.successful(Redirect(routes.ConfirmContactDetailsController.confirmYourContactDetails))
+            Future.successful(Redirect(routes.ConfirmContactDetailsController.show))
           }
         )
     }

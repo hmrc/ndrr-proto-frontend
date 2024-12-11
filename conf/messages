@@ -150,6 +150,14 @@ register.confirmUTRDetails.radioButtonOne = Yes, I want to provide this UTR
 register.confirmUTRDetails.radioButtonTwo = No, I want to provide my National Insurance number
 register.confirmUTRDetails.radioButtonThree = No, I will provide a tax reference number later
 
+#Are you an agent
+registration.areYouAnAgent.heading=Are you registering as a rating agent?
+registration.areYouAnAgent.hint=A rating agent, such as professional surveyor, deals with the Valuation Office Agency (VOA) on behalf of the rating agent’s clients.
+registration.areYouAnAgent.yes=Yes
+registration.areYouAnAgent.no=No
+registration.areYouAnAgent.continue=Continue
+registration.areYouAnAgent.noSelection.error="No selection"
+
 #Decleration
 removeProperty.declaration=Declaration
 
