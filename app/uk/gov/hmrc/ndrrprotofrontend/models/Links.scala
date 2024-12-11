@@ -15,6 +15,5 @@
  */
 
 package uk.gov.hmrc.ndrrprotofrontend.models
-import uk.gov.hmrc.ndrrprotofrontend.models.Link
 
 final case class Links (classes: String, links: Seq[Link])

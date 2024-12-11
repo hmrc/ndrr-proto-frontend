@@ -17,10 +17,11 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.ndrrprotofrontend.controllers.routes
 import uk.gov.hmrc.ndrrprotofrontend.models.Email
-import uk.gov.hmrc.ndrrprotofrontend.models.Email.form
 import uk.gov.hmrc.ndrrprotofrontend.views.html.EmailView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import views.html.helper.form
 
 import javax.inject.Inject
 import scala.concurrent.Future
@@ -31,7 +32,7 @@ class EmailController @Inject()(
   extends FrontendController(mcc) {
 
   def onPageLoad: Action[AnyContent] = Action { implicit request =>
-      Ok(emailView(form))
+      Ok(emailView(Email.form()))
   }
 
   def submit(): Action[AnyContent] =

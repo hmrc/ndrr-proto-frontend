@@ -1,0 +1,78 @@
+@*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.govukfrontend.views.Aliases.SummaryList
+@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.FullName
+@import uk.gov.hmrc.ndrrprotofrontend.models.{UniqueTaxReferenceOption, UTROptions}
+@import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
+@import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components._
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
+@import uk.gov.hmrc.ndrrprotofrontend.viewmodels.govuk.all._
+
+@this(layout: Layout, govukSummaryList : GovukSummaryList, govukRadios : GovukRadios, govukErrorSummary: GovukErrorSummary, formHelper: FormWithCSRF, saveAndContinueButton: saveAndContinueButton)
+
+@(form: Form[UniqueTaxReferenceOption],utrSummaryList: SummaryList)(implicit request: RequestHeader, messages: Messages)
+
+@utrOptions = @{form("value")}
+
+@heading = @{messages("home.heading")}
+@layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  None) {
+
+    @if(form.errors.nonEmpty) {
+        @govukErrorSummary(ErrorSummaryViewModel(form))
+    }
+
+@formHelper(action = uk.gov.hmrc.ndrrprotofrontend.controllers.routes.ConfirmUTRController.submit, Symbol("autoComplete") -> "off") {
+<span class="govuk-caption-l">Register for the business rates valuation service</span>
+<h1 class="govuk-heading-l">Confirm your Self Assessment Unique Taxpayer Reference</h1>
+<p class="govuk-body">We will display the last 3 digits of your Unique Taxpayer Reference (UTR). You can provide this UTR to join up the accounts you use to pay tax.</p>
+
+@govukSummaryList(utrSummaryList)
+
+@govukRadios(Radios(
+     name = "value",
+     items = Seq(
+       RadioItem(
+         content = Text(Messages("selectChange.provideUtr")),
+         value = Some(UTROptions.PROVIDE_UTR.toString),
+         checked = utrOptions.value.contains(UTROptions.PROVIDE_UTR.toString)
+       ),
+       RadioItem(
+         content = Text(Messages("selectChange.provideNino")),
+         value = Some(UTROptions.PROVIDE_NINO.toString),
+         checked = utrOptions.value.contains(UTROptions.PROVIDE_NINO.toString)
+       ),
+       RadioItem(
+         content = Text(Messages("selectChange.provideUtrLater")),
+         value = Some(UTROptions.NO_UTR.toString),
+         checked = utrOptions.value.contains(UTROptions.NO_UTR.toString)
+       )
+     ),
+     classes = "govuk-radios",
+     errorMessage = form("value").error.map(err => ErrorMessage(content = Text(messages(err.message)))),
+))
+
+
+@saveAndContinueButton("continue")
+}
+}

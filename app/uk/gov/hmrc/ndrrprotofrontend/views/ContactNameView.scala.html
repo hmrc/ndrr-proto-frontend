@@ -14,11 +14,6 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.govukfrontend.views.Aliases._
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
-@import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
-@import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.ndrrprotofrontend.models.FullName
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
@@ -30,25 +25,39 @@
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.printLinkWithJs
 @import uk.gov.hmrc.ndrrprotofrontend.viewmodels.govuk.all._
 
-@this(layout: Layout, govukSummaryList : GovukSummaryList, saveAndContinueButton: saveAndContinueButton)
-@(summaryList: SummaryList, fullName: String)(implicit request: RequestHeader, messages: Messages)
+
+@this(
+layout: Layout,
+govukSummaryList : GovukSummaryList,
+printLinkWithJs: printLinkWithJs,
+formHelper: FormWithCSRF,
+govukErrorSummary: GovukErrorSummary,
+govukFieldset: GovukFieldset,
+saveAndContinueButton: saveAndContinueButton
+)
+
+@(form: Form[FullName])(implicit request: RequestHeader, messages: Messages)
+
 @heading = @{messages("home.heading")}
-@layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  None) {
-     <span class="govuk-caption-l">@Messages("registration.confirmContactDetails.caption")</span>
-     <h1 class="govuk-heading-l">@Messages("registration.confirmContactDetails.heading")</h1>
-     <p class="govuk-body">@Messages("registration.confirmContactDetails.listTitle")</p>
-<ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
- <li>
-  @Messages("registration.confirmContactDetails.firstBullet")
- </li>
- <li>
-  @Messages("registration.confirmContactDetails.secondBullet")
- </li>
-</ul>
+@layout(pageTitle = Some(heading), showBackLink = true) {
+@formHelper(action = uk.gov.hmrc.ndrrprotofrontend.controllers.routes.ContactNameController.submit, Symbol("autoComplete") -> "off") {
 
-<p class="govuk-body">@Messages("registration.confirmContactDetails.registeredTo") <strong>@fullName</strong></p>
- @govukSummaryList(summaryList)
+@if(form.errors.nonEmpty) {
+@govukErrorSummary(ErrorSummaryViewModel(form))
+}
 
+<span class="govuk-caption-l">@messages("registration.checkAnswers.caption")</span>
+<h1 class="govuk-heading-l">
+    @messages("registration.contactName.heading")
+</h1>
 
+@components.InputText(
+field = form("FullName.value"),
+inputPurpose=Some("tel"),
+autocomplete = true,
+inputType = "tel"
+)
+@saveAndContinueButton("continue")
+}
 
 }
