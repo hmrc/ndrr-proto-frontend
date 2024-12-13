@@ -16,19 +16,22 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
+import play.api.data.Form
 import play.api.i18n.Messages
 import uk.gov.hmrc.govukfrontend.views.Aliases.{Fieldset, Legend, RadioItem, Text}
+import uk.gov.hmrc.govukfrontend.views.viewmodels.errormessage.ErrorMessage
 import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.Radios
 
-case class VoaRadioName(name: String)
+case class VoaRadioName(key: String)
 case class VoaRadioHeader(title: String, classes: String , isPageHeading: Boolean)
-case class VoaRadioButtons(radioContent: String, radioValue: String)
+case class VoaRadioButtons(radioContent: String, radioValue: radioItem)
 
 case class VoaRadios(radioGroupName: VoaRadioName, voaRadionButtons: Seq[VoaRadioButtons], voaTitle: Option[VoaRadioHeader] = None)
 
 object VoaRadios {
 
-  def buildRadios(
+  def buildRadios[A](
+                  form:Form[A],
                   voaRadios: VoaRadios
                  )(implicit messages: Messages): Radios = {
     Radios(
@@ -41,13 +44,18 @@ object VoaRadios {
           ))
         )
       ),
-      name = voaRadios.radioGroupName.name,
+      idPrefix = Some(voaRadios.radioGroupName.key),
+      name = voaRadios.radioGroupName.key,
       items = voaRadios.voaRadionButtons.map { item =>
         RadioItem(
           content = Text(Messages(item.radioContent)),
-          value = Some(item.radioValue)
+          value = Some(item.radioValue.toString),
+          checked = form.data.values.toList.contains(item.radioValue)
         )
-      }
+      },
+      classes = "govuk-radios",
+      errorMessage = form(voaRadios.radioGroupName.key).error.map(err => ErrorMessage(content = Text(messages(err.message)))),
+
     )
   }
 }

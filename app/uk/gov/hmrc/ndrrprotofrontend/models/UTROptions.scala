@@ -16,45 +16,25 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-import play.api.data.Form
-import play.api.data.Forms.{mapping, optional, text}
-import play.api.libs.json.{Format, Reads, Writes}
-import uk.gov.hmrc.ndrrprotofrontend.models.UTROptions.UTROptions
+import enumeratum.{Enum, EnumEntry, EnumFormats, PlayEnum}
+import play.api.libs.json.Format
+import uk.gov.hmrc.ndrrprotofrontend.utils.{EnumFormat, Eq}
 
-trait selectOption extends Enumeration {
-  text
+import scala.collection.immutable
+
+sealed trait radioItem
+sealed trait UTROption extends EnumEntry with radioItem
+
+object UTROption {
+  implicit val format: Format[UTROption] = EnumFormat(UTROptions)
+  implicit val eq: Eq[UTROption] = Eq.fromUniversalEquals
 }
 
-object UTROptions extends Enumeration {
-  type UTROptions = Value
+object UTROptions extends Enum[UTROption] {
 
-  case object prodvide
-  val PROVIDE_UTR : Value = Value("Yes I want to provide my UTR")
-  val PROVIDE_NINO : Value = Value("No, I want to provide my National Insurance number")
-  val NO_UTR : Value = Value("No, I want provide a tax reference later")
+  case object ProvideUTR extends UTROption
+  case object ProvideNino extends UTROption
+  case object ProvideUTRLater extends UTROption
 
-  def withNameOpt(name: String): Option[Value] = values.find(_.toString == name)
-
-  implicit val format: Format[UTROptions] = Format(Reads.enumNameReads(UTROptions), Writes.enumNameWrites)
-
-}
-
-case class UniqueTaxReferenceOption(value: Option[UTROptions])
-
-object UniqueTaxReferenceOption extends CommonFormValidators {
-  val emptyError = "Select an option"
-
-  def form(): Form[UniqueTaxReferenceOption] =
-    Form(
-      mapping(
-        "value" -> optional(text())
-          .verifying(emptyError, _.isDefined)
-          .transform[String](_.get, Some.apply)
-          .verifying(emptyError, contains(UTROptions.values.toSeq.map(_.toString)))
-      )(UniqueTaxReferenceOption.apply)(UniqueTaxReferenceOption.unapply)
-    )
-
-  def apply(value: String): UniqueTaxReferenceOption = UniqueTaxReferenceOption(UTROptions.withNameOpt(value))
-  def unapply(registrationType: UniqueTaxReferenceOption): Option[String] =
-    registrationType.value.map(_.toString)
+  override val values: immutable.IndexedSeq[UTROption] = findValues
 }

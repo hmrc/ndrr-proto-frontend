@@ -205,4 +205,4 @@ voa.cardTitle.leadTenant = Lead Tenant
 selectChange.provideUtr = Yes, I want to provide this UTR
 selectChange.provideNino = No, I want to provide my national insurance number
 selectChange.provideUtrLater = No, I want to provide my tax reference later
-selectChange.errorMessage =
+selectChange.errorMessage = "Select an option"
