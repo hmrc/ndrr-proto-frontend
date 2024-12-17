@@ -12,6 +12,12 @@ lazy val microservice = Project("ndrr-proto-frontend", file("."))
     scalacOptions += "-Wconf:src=routes/.*:s",
     scalacOptions += "-Wconf:cat=unused-imports&src=html/.*:s",
     pipelineStages := Seq(gzip),
+    Concat.groups := Seq(
+      "javascripts/application.js" ->
+        group(Seq(
+          "javascripts/app.js"
+        ))
+    )
   )
   .settings(resolvers += Resolver.jcenterRepo)
   .settings(CodeCoverageSettings.settings: _*)

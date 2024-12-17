@@ -19,35 +19,59 @@
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
+@import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.hmrcfrontend.views.viewmodels.hmrcstandardpage._
-@import uk.gov.hmrc.govukfrontend.views.Aliases.BackLink
+@import uk.gov.hmrc.hmrcfrontend.views.html.helpers._
+@import uk.gov.hmrc.ndrrprotofrontend.viewmodels.govuk.all._
 @import uk.gov.hmrc.ndrrprotofrontend.config.AppConfig
 @import views.html.helper.CSPNonce
 @import resources._
 
 @this(
   appConfig: AppConfig,
+  govukBackLink: GovukBackLink,
+  hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
   standardBetaBanner: StandardBetaBanner,
+  hmrcScripts: HmrcScripts,
   hmrcStandardPage: HmrcStandardPage,
   stylesheets: Stylesheets,
-  fullWidthMainContent: FullWidthMainContentLayout,
+  fullWidthMainContent: FullWidthMainContentLayout
 )
 
 @(
     pageTitle: Option[String] = None,
     showBackLink: Boolean = true,
-    navigationBarContent: Option[NavigationBarContent] = None,
-    backLinkOverride: Option[BackLink] = None
+    navigationBarContent: Option[NavigationBarContent] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
 @headScripts = {
     @stylesheets()
 }
 
+@backLink = {
+    @govukBackLink(BackLink.mimicsBrowserBackButtonViaJavaScript)
+}
+
+@navBar = {
+    @navigationBarContent.map{ content =>
+        @navigationBarComponent(content)
+    }
+}
+
+@languageSelector = {
+    @hmrcLanguageSelectHelper()
+}
+
 @content = {
     <div id="content">
-        @navigationBarContent.map{ content =>
-            @navigationBarComponent(content)
+        @if(navigationBarContent!=None){
+            @navBar
+        }
+        @if(appConfig.welshLanguageSupportEnabled) {
+            @languageSelector
+        }
+        @if(showBackLink) {
+            @backLink
         }
         @contentBlock
     </div>
@@ -56,19 +80,12 @@
 @hmrcStandardPage(
     HmrcStandardPageParams(
         pageTitle = pageTitle,
-        isWelshTranslationAvailable = false,
         templateOverrides = TemplateOverrides(
             mainContentLayout = Some(fullWidthMainContent(_)),
             additionalHeadBlock = Some(headScripts)
         ),
         banners = Banners(
-        phaseBanner = Some(standardBetaBanner("appConfig.betaFeedbackUrl")),
+            phaseBanner = Some(standardBetaBanner("appConfig.betaFeedbackUrl")),
         ),
-        backLink = {
-            if (showBackLink) {
-                if (backLinkOverride.isDefined) backLinkOverride else Some(BackLink.mimicsBrowserBackButtonViaJavaScript)
-            }
-            else None
-        }
     )
 )(content)

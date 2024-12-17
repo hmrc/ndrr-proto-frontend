@@ -42,7 +42,7 @@ extends FrontendController(mcc) with Common {
   Future.successful(
     Ok(
       removePropertyDeclarationView(
-      navigationBarContent = testNavBar
+      navigationBarContent = testNavBar("")
       )
     )
   )

@@ -40,7 +40,7 @@ extends FrontendController(mcc) with Common {
     Future.successful(
       Ok(
           submitConfirmation(
-          navigationBarContent = testNavBar,
+          navigationBarContent = testNavBar(""),
           submissionDetails = testSubmitData,
           propertiesTable = makeAVisibleTable()
         )

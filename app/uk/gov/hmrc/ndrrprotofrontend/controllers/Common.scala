@@ -24,7 +24,6 @@ import uk.gov.hmrc.ndrrprotofrontend.models.{ContactDetails, DashboardCard, Date
 import uk.gov.hmrc.ndrrprotofrontend.models.VoaSummaryListRow.buildSummaryList
 
 trait Common {
-
   val fullName: FullName = FullName("Sarah Philips")
   //USER CONTACT DETAILS:
   val userAnswers: ContactDetails = ContactDetails(
@@ -43,13 +42,21 @@ trait Common {
 
   //testNavBar
 
-   def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = "")),
+   def testNavBar(page: String) (implicit messages: Messages): NavigationBarContent = NavigationBarContent(
+    AccountHome = Some(Link(Call(method = "GET",url = routes.DashboardController.show.url), messageKey = "nav.home", linkId = "",
+      selected = if(page == "home"){Some(true)}else None
+    )),
     NavigationButtons = Some(Seq(
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.messages", linkId = "", notification = Some(3)),
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.actionNeeded", linkId = "", notification = Some(1)),
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.profileAndSettings", linkId = ""),
-      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.signOut", linkId = ""),
+
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.messages", linkId = "", notification = Some(3),
+        selected = if(page == "messages"){Some(true)}else None),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.actionNeeded", linkId = "", notification = Some(1),
+        selected = if(page == "actionNeeded"){Some(true)}else None),
+      Link(Call(method = "GET",url = routes.ProfileAndSettingsController.show.url), messageKey = "nav.profileAndSettings", linkId = "", notification = Some(1),
+        selected = if(page == "profileAndSettings"){Some(true)}else None),
+      Link(Call(method = "GET",url = "some-href"), messageKey = "nav.signOut", linkId = "",
+        selected = if(page == "signOut"){Some(true)}else None),
+
     )))
 
 

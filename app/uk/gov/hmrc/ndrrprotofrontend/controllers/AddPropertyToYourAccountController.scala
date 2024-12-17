@@ -33,7 +33,7 @@ class AddPropertyToYourAccountController @Inject()(
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        addPropertyToYourAccountView(navigationBarContent = testNavBar)
+        addPropertyToYourAccountView(navigationBarContent = testNavBar(""))
       )
     )
   }
