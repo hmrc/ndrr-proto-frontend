@@ -15,13 +15,14 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
-@import uk.gov.hmrc.govukfrontend.views.Aliases.SummaryList
+@import uk.gov.hmrc.govukfrontend.views.Aliases._
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.ndrrprotofrontend.models.FullName
-@import uk.gov.hmrc.ndrrprotofrontend.models.{UniqueTaxReferenceOption, UTROptions}
+@import uk.gov.hmrc.ndrrprotofrontend.models.UTROptions
+@import uk.gov.hmrc.ndrrprotofrontend.models.enumsforforms.UtrOptionFormValue
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components._
@@ -29,9 +30,12 @@
 
 @this(layout: Layout, govukSummaryList : GovukSummaryList, govukRadios : GovukRadios, govukErrorSummary: GovukErrorSummary, formHelper: FormWithCSRF, saveAndContinueButton: saveAndContinueButton)
 
-@(form: Form[UniqueTaxReferenceOption],utrSummaryList: SummaryList)(implicit request: RequestHeader, messages: Messages)
+@(form: Form[UtrOptionFormValue],utrSummaryList: SummaryList, utrRadios: Radios)(implicit request: RequestHeader, messages: Messages)
 
 @utrOptions = @{form("value")}
+@key = @{
+    "utrOption"
+}
 
 @heading = @{messages("home.heading")}
 @layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  None) {
@@ -47,28 +51,7 @@
 
 @govukSummaryList(utrSummaryList)
 
-@govukRadios(Radios(
-     name = "value",
-     items = Seq(
-       RadioItem(
-         content = Text(Messages("selectChange.provideUtr")),
-         value = Some(UTROptions.PROVIDE_UTR.toString),
-         checked = utrOptions.value.contains(UTROptions.PROVIDE_UTR.toString)
-       ),
-       RadioItem(
-         content = Text(Messages("selectChange.provideNino")),
-         value = Some(UTROptions.PROVIDE_NINO.toString),
-         checked = utrOptions.value.contains(UTROptions.PROVIDE_NINO.toString)
-       ),
-       RadioItem(
-         content = Text(Messages("selectChange.provideUtrLater")),
-         value = Some(UTROptions.NO_UTR.toString),
-         checked = utrOptions.value.contains(UTROptions.NO_UTR.toString)
-       )
-     ),
-     classes = "govuk-radios",
-     errorMessage = form("value").error.map(err => ErrorMessage(content = Text(messages(err.message)))),
-))
+@govukRadios(utrRadios)
 
 
 @saveAndContinueButton("continue")
