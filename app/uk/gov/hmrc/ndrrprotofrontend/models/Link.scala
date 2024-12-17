@@ -23,5 +23,6 @@ final case class Link(
                        messageKey: String,
                        linkId: String,
                        visuallyHiddenMessageKey: Option[String] = None,
-                       notification: Option[Int] = None
+                       notification: Option[Int] = None,
+                       selected: Option[Boolean] = None
                      )

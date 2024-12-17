@@ -15,48 +15,54 @@
  *@
 
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
-@import uk.gov.hmrc.govukfrontend.views.html.components.Text
+@import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.ndrrprotofrontend.views.html.components._
+@import uk.gov.hmrc.ndrrprotofrontend.models.Link
 
 @this(
-layout: Layout
+ layout: Layout
 )
 
 @(navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("addpropertyToYourAccount.title")}
-@layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  Some(navigationBarContent)) {
-<h1 class="govuk-heading-l">@{Text(heading).asHtml}</h1>
-<p class="govuk-body">
- @messages("addpropertyToYourAccount.p1")
-</p>
-<p class="govuk-body">
- @messages("addpropertyToYourAccount.p2")
-</p>
-<div class="govuk-inset-text">
- @messages("addpropertyToYourAccount.p3.inset")
-</div>
-<p class="govuk-body">
- @messages("addpropertyToYourAccount.p4")
-</p>
-<ul class="govuk-list govuk-list--bullet">
- <li>
-  @messages("addpropertyToYourAccount.p5.bullet")
- </li>
- <li>
-  @messages("addpropertyToYourAccount.p6.bullet")
- </li>
-</ul>
-<p class="govuk-body">
- @messages("addpropertyToYourAccount.p7")
-</p>
-<h2 class="govuk-heading-m">@messages("addpropertyToYourAccount.p8.heading")</h2>
-<p class="govuk-body">
- @messages("addpropertyToYourAccount.p9")
-</p>
-<p class="govuk-body">
- @messages("addpropertyToYourAccount.p9")
-</p>
-<p class="govuk-body">
- @messages("addpropertyToYourAccount.p9")
-</p>
+@layout(pageTitle = Some(heading), showBackLink = true, navigationBarContent =  Some(navigationBarContent)) {
+  <h1 class="govuk-heading-l">@{Text(heading).asHtml}</h1>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p1")
+  </p>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p2")
+  </p>
+  <div class="govuk-inset-text">
+    @messages("addpropertyToYourAccount.p3.inset")
+  </div>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p4")
+  </p>
+  <ul class="govuk-list govuk-list--bullet">
+   <li>
+     @messages("addpropertyToYourAccount.p5.bullet")
+   </li>
+   <li>
+     @messages("addpropertyToYourAccount.p6.bullet")
+   </li>
+  </ul>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p7")
+  </p>
+  <h2 class="govuk-heading-m">@messages("addpropertyToYourAccount.p8.heading")</h2>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p9")
+  </p>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p10")
+   <a href="#" class="govuk-link">@messages("addpropertyToYourAccount.p10.link")</a>
+  </p>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p11")
+  </p>
+  <p class="govuk-body">
+    @messages("addpropertyToYourAccount.p12")
+  </p>
 }

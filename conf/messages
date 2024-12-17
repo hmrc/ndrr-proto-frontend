@@ -3,8 +3,9 @@ service.text = This is your new service
 
 #common
 acceptAndSend=Accept and send
-continue=Continue
+site.continue=Continue
 printOrSave=Print or save this page
+site.back=Back
 
 #NavigationBar
 nav.home=Account home
@@ -24,8 +25,10 @@ addpropertyToYourAccount.p6.bullet=you do not pay business rates because you get
 addpropertyToYourAccount.p7=You are not the current ratepayer if someone else pays the business rates. For example, you own the property and a tenant pays the business rates.
 addpropertyToYourAccount.p8.heading=What you need
 addpropertyToYourAccount.p9=You need your most recent business rates bill to prove you are the current ratepayer. Your council will send you a business rates bill even if you get relief such as small business rates relief.
-addpropertyToYourAccount.p10.heading=If you became the ratepayer on or after the 1 April 2026, you need to give us the exact date you became the ratepayer.
-addpropertyToYourAccount.p11=You need your most recent business rates bill to prove you are the current ratepayer. Your council will send you a business rates bill even if you get relief such as small business rates relief.
+addpropertyToYourAccount.p10=If you have lost or cannot find your bill,
+addpropertyToYourAccount.p10.link=contact your local council (opens in new tab)
+addpropertyToYourAccount.p11=If you became the ratepayer on or after the 1 April 2026, you need to give us the exact date you became the ratepayer.
+addpropertyToYourAccount.p12=We can usually give you a decision on your request to add a property within 15 working days.
 
 #Dashboard
 home.heading=Your business rates valuation account

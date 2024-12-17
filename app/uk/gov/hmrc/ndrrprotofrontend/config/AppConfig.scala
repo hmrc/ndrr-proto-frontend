@@ -24,6 +24,7 @@ import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 @Singleton
 class AppConfig @Inject()(servicesConfig: ServicesConfig, config: Configuration) {
+  val ngrHomeUrl: String = servicesConfig.getString("ngrHomeUrl")
   val welshLanguageSupportEnabled: Boolean = config.getOptional[Boolean]("features.welsh-language-support").getOrElse(false)
   val registrationBaseUrl: String = servicesConfig.baseUrl("ndrr-proto-frontend")
   private val accessibilityHost: String = servicesConfig.getConfString(
