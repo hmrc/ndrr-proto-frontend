@@ -14,7 +14,6 @@
  * limitations under the License.
  *@
 
-@import views.html.helper.CSPNonce
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBarComponent
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
 @import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
@@ -24,7 +23,6 @@
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers._
 @import uk.gov.hmrc.ndrrprotofrontend.viewmodels.govuk.all._
 @import uk.gov.hmrc.ndrrprotofrontend.config.AppConfig
-@import views.html.helper.CSPNonce
 @import resources._
 
 @this(
@@ -32,7 +30,6 @@
   govukBackLink: GovukBackLink,
   hmrcLanguageSelectHelper: HmrcLanguageSelectHelper,
   standardBetaBanner: StandardBetaBanner,
-  hmrcScripts: HmrcScripts,
   hmrcStandardPage: HmrcStandardPage,
   stylesheets: Stylesheets,
   fullWidthMainContent: FullWidthMainContentLayout
@@ -48,14 +45,14 @@
     @stylesheets()
 }
 
-@backLink = {
-    @govukBackLink(BackLink.mimicsBrowserBackButtonViaJavaScript)
-}
-
 @navBar = {
     @navigationBarContent.map{ content =>
         @navigationBarComponent(content)
     }
+}
+
+@backLink = {
+    @govukBackLink(BackLink.mimicsBrowserBackButtonViaJavaScript)
 }
 
 @languageSelector = {
