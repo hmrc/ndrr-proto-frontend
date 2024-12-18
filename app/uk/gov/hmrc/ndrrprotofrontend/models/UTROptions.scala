@@ -22,7 +22,7 @@ import uk.gov.hmrc.ndrrprotofrontend.utils.{EnumFormat, Eq}
 
 import scala.collection.immutable
 
-sealed trait radioItem
+trait radioItem
 sealed trait UTROption extends EnumEntry with radioItem
 
 object UTROption {

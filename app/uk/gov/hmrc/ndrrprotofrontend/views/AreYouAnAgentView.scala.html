@@ -16,7 +16,7 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.Text
 @import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
-@import uk.gov.hmrc.ndrrprotofrontend.models.YesNoValidator
+@import uk.gov.hmrc.ndrrprotofrontend.models.enumsforforms.YesNoFormValue
 @import uk.gov.hmrc.ndrrprotofrontend.models.YesNoOptions
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
@@ -34,11 +34,9 @@ saveAndContinueButton: saveAndContinueButton,
 govukRadios : GovukRadios
 )
 
-@(form: Form[YesNoValidator])(implicit request: RequestHeader, messages: Messages)
+@(form: Form[YesNoFormValue], yesNoRadios: Radios)(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
-
-@formValues = @{form("value")}
 
 @layout(pageTitle = Some(heading)) {
 
@@ -49,25 +47,9 @@ govukRadios : GovukRadios
   <h1 class="govuk-heading-l">@messages("registration.areYouAnAgent.heading")</h1>
   <div class="govuk-hint">@messages("registration.areYouAnAgent.hint")</div>
 
-    @govukRadios(Radios(
-        name = "value",
-        items = Seq(
-        RadioItem(
-        content = Text("Yes"),
-        value = Some(YesNoOptions.YES.toString),
-        checked = formValues.value.contains(YesNoOptions.YES.toString)
-        ),
-        RadioItem(
-        content = Text("No"),
-        value = Some(YesNoOptions.NO.toString),
-        checked = formValues.value.contains(YesNoOptions.NO.toString)
-        )
-        ),
-        classes = "govuk-radios",
-        errorMessage = formValues.error.map(err => ErrorMessage(content = Text(messages(err.message)))),
-    ))
+  @govukRadios(yesNoRadios)
 
-    @saveAndContinueButton("continue")
+  @saveAndContinueButton("continue")
 
  }
 }
