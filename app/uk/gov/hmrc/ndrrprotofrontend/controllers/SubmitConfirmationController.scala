@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
-import play.api.i18n.Messages
-import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent, Reference, SubmissionDetails, _}
+import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
+import uk.gov.hmrc.ndrrprotofrontend.models.NavBarPageContents.CreateNavBar
+import uk.gov.hmrc.ndrrprotofrontend.models.{Link, Reference, SubmissionDetails, _}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.SubmitConfirmation
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -40,8 +40,8 @@ extends FrontendController(mcc) with Common {
     Future.successful(
       Ok(
           submitConfirmation(
-          navigationBarContent = testNavBar(""),
-          submissionDetails = testSubmitData,
+            navigationBarContent = CreateNavBar(contents = NavBarContents(homePage = Some(true), profileAndSettingsPage=  Some(false), signOutPage = Some(true)), currentPage = (NavBarCurrentPage(homePage = true)), notifications = Some(1)),
+            submissionDetails = testSubmitData,
           propertiesTable = makeAVisibleTable()
         )
       )

@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NewNavigationBarContent
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
 
@@ -22,7 +22,7 @@
 layout: Layout
 )
 
-@(navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
+@(navigationBarContent: NewNavigationBarContent)(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
 @layout(pageTitle = Some(heading), showBackLink = true,navigationBarContent =  Some(navigationBarContent)) {

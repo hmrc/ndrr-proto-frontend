@@ -46,7 +46,7 @@ class RegistrationCheckAnswersController @Inject()(
               contactName(userAnswers.contactName),
               emailAddress(userAnswers.emailAddress),
               phoneNumber(userAnswers.phoneNumber.value),
-              address(userAnswers.address.line1))),
+              address(userAnswers.address.toString))),
           taxpayerReferenceSummary =
             makeSummaryListRow(Seq(
               utr(userAnswers.utr),

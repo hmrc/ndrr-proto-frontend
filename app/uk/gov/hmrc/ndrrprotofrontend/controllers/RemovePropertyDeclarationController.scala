@@ -18,7 +18,8 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent, Reference, SubmissionDetails}
+import uk.gov.hmrc.ndrrprotofrontend.models.NavBarPageContents.CreateNavBar
+import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavBarContents, NavBarCurrentPage, NavigationBarContent, Reference, SubmissionDetails}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.RemovePropertyDeclarationView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -42,7 +43,7 @@ extends FrontendController(mcc) with Common {
   Future.successful(
     Ok(
       removePropertyDeclarationView(
-      navigationBarContent = testNavBar("")
+        navigationBarContent = CreateNavBar(contents = NavBarContents(homePage = Some(true), profileAndSettingsPage=  Some(false), signOutPage = Some(true)), currentPage = (NavBarCurrentPage(homePage = true)), notifications = Some(1)),
       )
     )
   )

@@ -15,7 +15,7 @@
  *@
 
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.navigationBarComponent
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NewNavigationBarContent
 @import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcStandardPage
 @import uk.gov.hmrc.govukfrontend.views.html.components._
@@ -38,7 +38,7 @@
 @(
     pageTitle: Option[String] = None,
     showBackLink: Boolean = true,
-    navigationBarContent: Option[NavigationBarContent] = None
+    navigationBarContent: Option[NewNavigationBarContent] = None
 )(contentBlock: Html)(implicit request: RequestHeader, messages: Messages)
 
 @headScripts = {
