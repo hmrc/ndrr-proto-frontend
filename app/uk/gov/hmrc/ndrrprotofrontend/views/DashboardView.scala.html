@@ -16,14 +16,14 @@
 
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.CardComponent
 @import uk.gov.hmrc.ndrrprotofrontend.models.Card
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NewNavigationBarContent
 
 
 @this(
  layout: Layout
 )
 
-@(user:String, cards:Seq[Card], navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
+@(user:String, cards:Seq[Card], navigationBarContent: NewNavigationBarContent)(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
 @layout(pageTitle = Some(heading), showBackLink = false, Some(navigationBarContent)) {

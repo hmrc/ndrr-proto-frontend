@@ -17,7 +17,8 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{ContactDetails, Reference, SubmissionDetails}
+import uk.gov.hmrc.ndrrprotofrontend.models.NavBarPageContents.CreateNavBar
+import uk.gov.hmrc.ndrrprotofrontend.models.{ContactDetails, NavBarContents, NavBarCurrentPage, Reference, SubmissionDetails}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.ProfileAndSettingsView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -40,14 +41,21 @@ class ProfileAndSettingsController @Inject()(
     Future.successful(
       Ok(
         profileAndSettingsView(
-          navigationBarContent = testNavBar("profileAndSettings"),
+          navigationBarContent = CreateNavBar(
+            contents = NavBarContents(
+              homePage = Some(true),
+              profileAndSettingsPage=  Some(true),
+              signOutPage = Some(true)),
+            currentPage = NavBarCurrentPage(profileAndSettingsPage = true),
+            notifications = Some(1)
+          ),
           userAnswers:ContactDetails,
           contactSummaryTable =
             makeSummaryList(Seq(
               contactName(userAnswers.contactName),
               emailAddress(userAnswers.emailAddress),
               phoneNumber(userAnswers.phoneNumber.value),
-              address(userAnswers.address.line1))),
+              address(userAnswers.address.toString))),
           taxpayerReferenceSummary =
             makeSummaryListRow(Seq(
               utr(userAnswers.utr),

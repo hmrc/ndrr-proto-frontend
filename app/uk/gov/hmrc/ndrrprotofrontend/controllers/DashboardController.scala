@@ -18,8 +18,8 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.hmrcfrontend.views.Aliases.AccountHome
-import uk.gov.hmrc.ndrrprotofrontend.models.{Card, DashboardCard, Link, NavigationBarContent}
+import uk.gov.hmrc.ndrrprotofrontend.models.NavBarPageContents.CreateNavBar
+import uk.gov.hmrc.ndrrprotofrontend.models.{Card, DashboardCard, Link, NavBarContents, NavBarCurrentPage, NavigationBarContent}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.DashboardView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -77,7 +77,17 @@ import scala.concurrent.Future
           dashboardView(
             user = testUser,
             cards = hasPropertyCheck(None),
-            navigationBarContent = testNavBar("home")
+            navigationBarContent = CreateNavBar(
+              contents = NavBarContents(
+                homePage = Some(true),
+                messagesPage = Some(true),
+                profileAndSettingsPage=  Some(true),
+                signOutPage = Some(true)
+              ),
+              currentPage = NavBarCurrentPage(homePage = true),
+              notifications = Some(1)
+            ),
+            // testNavBar(NavBarPage(HomePage = NavBarPage.Selected))
           )
         )
       )

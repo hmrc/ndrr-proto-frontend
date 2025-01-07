@@ -17,7 +17,8 @@
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent}
+import uk.gov.hmrc.ndrrprotofrontend.models.NavBarPageContents.CreateNavBar
+import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavBarContents, NavBarCurrentPage}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.WhatYouWillNeedView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -30,14 +31,11 @@ class WhatYouWillNeedController @Inject()(
                                           whatYouWillNeedView: WhatYouWillNeedView)
   extends FrontendController(mcc){
 
-  private def testNavBar: NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(Call(method = "GET",url = "controllers.routes.registration.email.url"), messageKey = "nav.home", linkId = "")),
-    NavigationButtons = Some(Seq(Link(Call(method = "GET",url = "controllers.routes.registration.email.url"),messageKey =  "nav.home", linkId = ""))))
-
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        whatYouWillNeedView(navigationBarContent = testNavBar)
+        whatYouWillNeedView(navigationBarContent = CreateNavBar(contents = NavBarContents(homePage = Some(true), profileAndSettingsPage=  Some(false), signOutPage = Some(true)), currentPage = (NavBarCurrentPage(homePage = true)), notifications = Some(1)),
+        )
       )
     )
   }

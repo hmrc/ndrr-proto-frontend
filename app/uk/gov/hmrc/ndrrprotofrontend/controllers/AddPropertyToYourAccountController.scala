@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.controllers
 
-import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+import uk.gov.hmrc.ndrrprotofrontend.models.NavBarPageContents.CreateNavBar
 import uk.gov.hmrc.ndrrprotofrontend.views.html.AddPropertyToYourAccountView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
+import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavBarContents, NavBarCurrentPage}
 
 import javax.inject.Inject
 import scala.concurrent.Future
@@ -33,7 +33,18 @@ class AddPropertyToYourAccountController @Inject()(
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        addPropertyToYourAccountView(navigationBarContent = testNavBar(""))
+        addPropertyToYourAccountView(
+          navigationBarContent = CreateNavBar(
+            contents = NavBarContents(
+              homePage = Some(true),
+              profileAndSettingsPage=  Some(false),
+              signOutPage = Some(true)
+            ),
+            currentPage = NavBarCurrentPage(),
+            notifications = Some(1)
+          ),
+          continueDetails =  Link(href = Call(method = "GET", url = routes.DashboardController.show.url), messageKey = "site.continue", linkId = "continue")
+        )
       )
     )
   }

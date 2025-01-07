@@ -14,13 +14,13 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NewNavigationBarContent
 
-@(navigationBar: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
+@(navigationBar: NewNavigationBarContent)(implicit request: RequestHeader, messages: Messages)
 
 <nav id="secondary-nav" class="hmrc-account-menu">
-    @navigationBar.AccountHome.map{ Home =>
-        <a href=@Home.href.url class="hmrc-account-menu__link hmrc-account-menu__link@if(Home.selected != None){--active}  hmrc-account-menu__link--home">
+    @navigationBar.accountHome.map{ Home =>
+        <a href=@Home.call.url class="hmrc-account-menu__link hmrc-account-menu__link@if(Home.selected != false){--active}  hmrc-account-menu__link--home">
             <span class="hmrc-account-icon hmrc-account-icon--home">
                 @messages(Home.messageKey)
             </span>
@@ -28,10 +28,10 @@
     }
 
     <ul class="hmrc-account-menu__main">
-        @navigationBar.NavigationButtons.map{ buttons =>
+        @navigationBar.navigationButtons.map{ buttons =>
             @buttons.map{ button =>
                 <li>
-                    <a href=@button.href.url class="hmrc-account-menu__link hmrc-account-menu__link@if(button.selected != None){--active}">
+                    <a href=@button.call.url class="hmrc-account-menu__link hmrc-account-menu__link@if(button.selected != false){--active}">
                         @button.notification.map{ notification =>
                             <span class="hmrc-notification-badge">@notification</span>
                         }

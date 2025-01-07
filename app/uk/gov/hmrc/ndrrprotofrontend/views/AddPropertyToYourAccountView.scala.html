@@ -14,16 +14,16 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NewNavigationBarContent
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components._
 @import uk.gov.hmrc.ndrrprotofrontend.models.Link
 
 @this(
- layout: Layout
+ layout: Layout,
 )
 
-@(navigationBarContent: NavigationBarContent)(implicit request: RequestHeader, messages: Messages)
+@(navigationBarContent: NewNavigationBarContent, continueDetails:Link)(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("addpropertyToYourAccount.title")}
 @layout(pageTitle = Some(heading), showBackLink = true, navigationBarContent =  Some(navigationBarContent)) {
@@ -65,4 +65,5 @@
   <p class="govuk-body">
     @messages("addpropertyToYourAccount.p12")
   </p>
+    @components.ContinueButton(continueDetails)
 }

@@ -18,7 +18,8 @@ package uk.gov.hmrc.ndrrprotofrontend.controllers
 
 import play.api.i18n.Messages
 import play.api.mvc.{Action, AnyContent, Call, MessagesControllerComponents}
-import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavigationBarContent}
+import uk.gov.hmrc.ndrrprotofrontend.models.NavBarPageContents.CreateNavBar
+import uk.gov.hmrc.ndrrprotofrontend.models.{Link, NavBarContents, NavBarCurrentPage}
 import uk.gov.hmrc.ndrrprotofrontend.views.html.RatepayerPropertiesView
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
@@ -30,15 +31,12 @@ class RatepayerPropertiesController @Inject()(
                                            mcc: MessagesControllerComponents,
                                            ratepayerPropertiesView: RatepayerPropertiesView)
   extends FrontendController(mcc) {
-  private def testNavBar()(implicit messages: Messages): NavigationBarContent = NavigationBarContent(
-    AccountHome = Some(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = "")),
-    NavigationButtons = Some(Seq(Link(Call(method = "GET",url = "some-href"), messageKey = "nav.home", linkId = "")))
-  )
 
   val show: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(
       Ok(
-        ratepayerPropertiesView(navigationBarContent = testNavBar)
+        ratepayerPropertiesView(navigationBarContent = CreateNavBar(contents = NavBarContents(homePage = Some(true), profileAndSettingsPage=  Some(false), signOutPage = Some(true)), currentPage = (NavBarCurrentPage(homePage = true)), notifications = Some(1)),
+        )
       )
     )
   }

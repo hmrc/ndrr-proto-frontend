@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.ndrrprotofrontend.models.NavigationBarContent
+@import uk.gov.hmrc.ndrrprotofrontend.models.NewNavigationBarContent
 @import uk.gov.hmrc.ndrrprotofrontend.models.SubmissionDetails
 @import uk.gov.hmrc.ndrrprotofrontend.models.ContactDetails
 @import uk.gov.hmrc.ndrrprotofrontend.views.html.components.SubmissionPanelComponent
@@ -26,7 +26,7 @@
     govukSummaryList : GovukSummaryList
 )
 
-@(navigationBarContent: NavigationBarContent, userAnswers: ContactDetails, contactSummaryTable: SummaryList, taxpayerReferenceSummary: SummaryList)(implicit request: RequestHeader, messages: Messages)
+@(navigationBarContent: NewNavigationBarContent, userAnswers: ContactDetails, contactSummaryTable: SummaryList, taxpayerReferenceSummary: SummaryList)(implicit request: RequestHeader, messages: Messages)
 
 @heading = @{messages("home.heading")}
 @layout(pageTitle = Some(heading), showBackLink = true, Some(navigationBarContent)) {
