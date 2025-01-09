@@ -51,7 +51,7 @@ class AreYouAnAgentController @Inject()(
     form
       .bindFromRequest()
       .fold(
-        formWithErrors => Future.successful(BadRequest(areYouAnAgentView(formWithErrors, buildRadios(form,radios)))),
+        formWithErrors => Future.successful(BadRequest(areYouAnAgentView(formWithErrors, buildRadios(formWithErrors,radios)))),
         yesNoOption => {
           YesNoOptionsFromFormValue(yesNoOption) match {
             case _ => Future.successful(Redirect(routes.ConfirmContactDetailsController.show))
