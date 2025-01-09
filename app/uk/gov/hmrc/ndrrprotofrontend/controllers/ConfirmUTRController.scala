@@ -47,7 +47,7 @@ class ConfirmUTRController @Inject()(mcc: MessagesControllerComponents, view: Co
      form
        .bindFromRequest()
        .fold(
-         formWithErrors => Future.successful(BadRequest(view(formWithErrors, makeSummaryList(Seq(createUtrRow("******890"))),buildRadios(form,radios)))),
+         formWithErrors => Future.successful(BadRequest(view(formWithErrors, makeSummaryList(Seq(createUtrRow("******890"))),buildRadios(formWithErrors,radios)))),
          utrOption => {
            UTROptionsFromFormValue(utrOption) match {
              case UTROptions.ProvideUTR => Future.successful(Redirect(routes.RegistrationCheckAnswersController.show))
