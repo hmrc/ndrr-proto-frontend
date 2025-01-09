@@ -16,40 +16,23 @@
 
 package uk.gov.hmrc.ndrrprotofrontend.models
 
-import play.api.data.Form
-import play.api.data.Forms.{mapping, optional, text}
-import play.api.libs.json.{Format, Reads, Writes}
-import uk.gov.hmrc.ndrrprotofrontend.models.YesNoOptions.YesNoOptions
+import enumeratum.{Enum, EnumEntry}
+import play.api.libs.json.Format
+import uk.gov.hmrc.ndrrprotofrontend.utils.{EnumFormat, Eq}
 
-object YesNoOptions extends Enumeration {
-  type YesNoOptions = Value
+import scala.collection.immutable
 
-  case object prodvide
-  val YES : Value = Value("Yes")
-  val NO : Value = Value("No")
+sealed trait YesNoOption extends EnumEntry with radioItem
 
-  def withNameOpt(name: String): Option[Value] = values.find(_.toString == name)
-
-  implicit val format: Format[YesNoOptions] = Format(Reads.enumNameReads(YesNoOptions), Writes.enumNameWrites)
-
+object YesNoOption {
+  implicit val format: Format[YesNoOption] = EnumFormat(YesNoOptions)
+  implicit val eq: Eq[YesNoOption] = Eq.fromUniversalEquals
 }
 
-case class YesNoValidator(value: Option[YesNoOptions])
+object YesNoOptions extends Enum[YesNoOption] {
 
-object YesNoValidator extends CommonFormValidators {
-  val emptyError = "Select an option"
+  case object Yes extends YesNoOption
+  case object No extends YesNoOption
 
-  def form(): Form[YesNoValidator] =
-    Form(
-      mapping(
-        "value" -> optional(text())
-          .verifying(emptyError, _.isDefined)
-          .transform[String](_.get, Some.apply)
-          .verifying(emptyError, contains(YesNoOptions.values.toSeq.map(_.toString)))
-      )(YesNoValidator.apply)(YesNoValidator.unapply)
-    )
-
-  def apply(value: String): YesNoValidator = YesNoValidator(YesNoOptions.withNameOpt(value))
-  def unapply(registrationType: YesNoValidator): Option[String] =
-    registrationType.value.map(_.toString)
+  override val values: immutable.IndexedSeq[YesNoOption] = findValues
 }
