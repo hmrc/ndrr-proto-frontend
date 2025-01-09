@@ -18,13 +18,13 @@ package uk.gov.hmrc.ndrrprotofrontend.models
 
 import play.api.data.Form
 import play.api.i18n.Messages
-import uk.gov.hmrc.govukfrontend.views.Aliases.{Fieldset, Legend, RadioItem, Text}
+import uk.gov.hmrc.govukfrontend.views.Aliases.{Fieldset, Legend, Text, RadioItem}
 import uk.gov.hmrc.govukfrontend.views.viewmodels.errormessage.ErrorMessage
 import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.Radios
 
 case class VoaRadioName(key: String)
 case class VoaRadioHeader(title: String, classes: String , isPageHeading: Boolean)
-case class VoaRadioButtons(radioContent: String, radioValue: radioItem)
+case class VoaRadioButtons(radioContent: String, radioValue: RadioEntry)
 
 case class VoaRadios(radioGroupName: VoaRadioName, voaRadionButtons: Seq[VoaRadioButtons], voaTitle: Option[VoaRadioHeader] = None)
 
